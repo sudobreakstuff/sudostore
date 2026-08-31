@@ -1,0 +1,61 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE, contactLink } from "../lib/site";
+
+const channels = [
+  { icon: "lucide:message-circle", title: "WhatsApp", value: SITE.whatsappDisplay, hint: "Fastest for orders and questions", href: contactLink(), cta: "Open chat", accent: true },
+  { icon: "lucide:mail", title: "Email", value: SITE.email, hint: "For longer briefs and quotes", href: `mailto:${SITE.email}`, cta: "Write an email", accent: false },
+  { icon: "lucide:github", title: "GitHub", value: "github.com/sudobreakstuff", hint: "For issues, PRs and project chat", href: SITE.github, cta: "Open GitHub", accent: false },
+  { icon: "lucide:map-pin", title: "Location", value: SITE.location, hint: "Local pickup and delivery by arrangement", href: null, cta: null, accent: false },
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch — orders, custom builds, support and everything in between."
+>
+  <section class="grid-bg border-b border-edge">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <p class="font-mono text-sm text-phosphor-dim">
+        <span class="text-poke">~/</span>contact<span class="cursor ml-1"></span>
+      </p>
+      <h1 class="mt-3 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">Contact</h1>
+      <p class="mt-4 max-w-2xl text-ink-dim">
+        Order something, ask about a custom build, or just say hi. WhatsApp is
+        the fastest way to reach me.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div class="grid gap-5 sm:grid-cols-2">
+      {channels.map((c) => {
+        const inner = (
+          <>
+            <span class={`inline-flex h-11 w-11 items-center justify-center rounded-md border ${c.accent ? "border-poke bg-poke/10 text-poke-bright" : "border-edge bg-panel text-phosphor"}`}>
+              <Icon name={c.icon} class="h-5 w-5" />
+            </span>
+            <div class="flex-1">
+              <h2 class="font-display font-semibold text-ink">{c.title}</h2>
+              <p class="mt-0.5 font-mono text-sm text-ink-dim">{c.value}</p>
+              <p class="mt-1 text-xs text-ink-faint">{c.hint}</p>
+            </div>
+            {c.cta && (
+              <Icon name="lucide:arrow-up-right" class="h-4 w-4 shrink-0 text-ink-faint" />
+            )}
+          </>
+        );
+        return c.href ? (
+          <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener" class="flex items-start gap-4 rounded-lg border border-edge bg-panel p-6 transition-colors hover:border-phosphor/60">
+            {inner}
+          </a>
+        ) : (
+          <div class="flex items-start gap-4 rounded-lg border border-edge bg-panel p-6">
+            {inner}
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

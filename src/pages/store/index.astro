@@ -1,0 +1,95 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { CATEGORIES } from "../../lib/catalog";
+
+const products = (await getCollection("products")).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return a.data.title.localeCompare(b.data.title);
+});
+
+const grouped = CATEGORIES.map((cat) => ({
+  ...cat,
+  items: products.filter((p) => p.data.category === cat.id),
+})).filter((cat) => cat.items.length > 0);
+---
+
+<BaseLayout
+  title="Store"
+  description="Handheld consoles, card readers, custom hardware, 3D-printed gear and software — sold at fair prices."
+>
+  <section class="grid-bg border-b border-edge">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <p class="font-mono text-sm text-phosphor-dim">
+        <span class="text-poke">~/</span>store<span class="cursor ml-1"></span>
+      </p>
+      <h1 class="mt-3 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+        The store
+      </h1>
+      <p class="mt-4 max-w-2xl text-ink-dim">
+        Everything here is built, flashed or configured by hand. Prices are
+        fair because there's no middleman — just me and a soldering iron.
+      </p>
+    </div>
+  </section>
+
+  <div class="sticky top-16 z-40 border-b border-edge bg-void/85 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-3 sm:px-6" id="filter-bar">
+      <button
+        data-filter="all"
+        class="filter-btn shrink-0 rounded border border-phosphor bg-phosphor/15 px-4 py-1.5 text-sm font-semibold text-phosphor"
+      >
+        All
+      </button>
+      {grouped.map((cat) => (
+        <button
+          data-filter={cat.id}
+          class="filter-btn shrink-0 rounded border border-edge px-4 py-1.5 text-sm text-ink-dim transition-colors hover:border-phosphor/50 hover:text-phosphor"
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    {grouped.map((cat) => (
+      <div data-section={cat.id} class="mb-14">
+        <div class="mb-6 flex items-center gap-3">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-edge bg-panel text-phosphor">
+            <Icon name={cat.icon} class="h-4 w-4" />
+          </span>
+          <div>
+            <h2 id={cat.id} class="font-display text-xl font-semibold text-ink">{cat.label}</h2>
+            <p class="text-sm text-ink-dim">{cat.blurb}</p>
+          </div>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {cat.items.map((p) => <ProductCard product={p} />)}
+        </div>
+      </div>
+    ))}
+  </section>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+  const sections = document.querySelectorAll<HTMLElement>("[data-section]");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter;
+      buttons.forEach((b) => {
+        const active = b.dataset.filter === filter;
+        b.className = active
+          ? "filter-btn shrink-0 rounded border border-phosphor bg-phosphor/15 px-4 py-1.5 text-sm font-semibold text-phosphor"
+          : "filter-btn shrink-0 rounded border border-edge px-4 py-1.5 text-sm text-ink-dim transition-colors hover:border-phosphor/50 hover:text-phosphor";
+      });
+      sections.forEach((s) => {
+        s.style.display = filter === "all" || s.dataset.section === filter ? "" : "none";
+      });
+    });
+  });
+</script>

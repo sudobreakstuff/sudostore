@@ -1,0 +1,25 @@
+---
+import { Icon } from "astro-icon/components";
+import { orderLink } from "../lib/site";
+
+interface Props {
+  product?: string;
+  label?: string;
+  variant?: "solid" | "outline";
+  class?: string;
+}
+
+const { product, label = "Order via WhatsApp", variant = "solid", class: className } = Astro.props;
+const href = orderLink(product ?? "a product from sudostore");
+
+const base = "inline-flex items-center justify-center gap-2 rounded px-5 py-2.5 text-sm font-semibold transition-colors";
+const styles =
+  variant === "solid"
+    ? "bg-poke text-void hover:bg-poke-bright"
+    : "border border-poke bg-poke/10 text-poke-bright hover:bg-poke hover:text-void";
+---
+
+<a href={href} target="_blank" rel="noopener" class={`${base} ${styles} ${className ?? ""}`}>
+  <Icon name="lucide:message-circle" class="h-4 w-4" />
+  {label}
+</a>

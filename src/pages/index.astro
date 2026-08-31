@@ -1,0 +1,201 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import OrderButton from "../components/OrderButton.astro";
+import { CATEGORIES } from "../lib/catalog";
+import { SITE, contactLink } from "../lib/site";
+
+const featured = (await getCollection("products", ({ data }) => data.featured)).slice(0, 4);
+const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="grid-bg relative overflow-hidden border-b border-edge">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+      <p class="font-mono text-sm text-phosphor-dim">
+        <span class="text-poke">$</span> ssh guest@sudostore.co.za
+        <span class="cursor ml-1"></span>
+      </p>
+      <h1 class="mt-5 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl">
+        Cool tech.
+        <span class="text-phosphor glow"> Fair prices. </span>
+        Open source.
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-dim">
+        Handhelds running SudoOS, card readers that actually read and write,
+        custom hardware, 3D-printed gear and software — built in
+        {SITE.location} and sold without the markup.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href="/store/"
+          class="inline-flex items-center gap-2 rounded bg-phosphor px-6 py-3 text-sm font-semibold text-void transition-colors hover:bg-phosphor-bright"
+        >
+          <Icon name="lucide:shopping-bag" class="h-4 w-4" />
+          Browse the store
+        </a>
+        <OrderButton product="something from sudostore" variant="outline" />
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs text-ink-faint">
+        <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-phosphor pulse-soft"></span>Built in South Africa</span>
+        <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-phosphor pulse-soft"></span>No AI slop</span>
+        <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-phosphor pulse-soft"></span>Open source first</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured -->
+  {featured.length > 0 && (
+    <section class="border-b border-edge">
+      <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div class="mb-8 flex items-end justify-between">
+          <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
+            <span class="text-phosphor">$</span> ./featured
+          </h2>
+          <a href="/store/" class="text-sm text-ink-dim hover:text-phosphor">
+            All products <Icon name="lucide:arrow-right" class="inline h-3.5 w-3.5" />
+          </a>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {featured.map((p) => <ProductCard product={p} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Categories -->
+  <section class="border-b border-edge bg-night/50">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
+        <span class="text-phosphor">$</span> ls ./store
+      </h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {CATEGORIES.map((cat) => (
+          <a
+            href={`/store/#${cat.id}`}
+            class="group flex items-start gap-4 rounded-lg border border-edge bg-panel p-5 transition-colors hover:border-phosphor/60"
+          >
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-edge bg-night text-phosphor group-hover:text-phosphor-bright">
+              <Icon name={cat.icon} class="h-5 w-5" />
+            </span>
+            <span>
+              <span class="block font-display font-semibold text-ink group-hover:text-phosphor">{cat.label}</span>
+              <span class="mt-1 block text-sm leading-relaxed text-ink-dim">{cat.blurb}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Ethos -->
+  <section class="border-b border-edge">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center">
+      <div>
+        <p class="font-mono text-sm text-phosphor-dim">
+          <span class="text-poke">$</span> cat why.md
+          <span class="cursor ml-1"></span>
+        </p>
+        <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-ink">
+          Built because of problems.
+        </h2>
+        <div class="mt-6 space-y-4 text-ink-dim leading-relaxed">
+          <p>
+            Macro keyboards cost too much, so I designed my own. A bakery
+            couldn't afford a POS, so I built one and open-sourced it. Every
+            product here started the same way: <em class="text-ink">"this
+            shouldn't be this hard."</em>
+          </p>
+          <p>
+            Open source isn't a license — it's a philosophy. Why paywall a tool
+            that solves a real problem? If it's repetitive, automate it. If it
+            doesn't exist, build it.
+          </p>
+        </div>
+        <a
+          href="/projects/"
+          class="mt-8 inline-flex items-center gap-2 rounded border border-phosphor bg-phosphor/10 px-5 py-2.5 text-sm font-semibold text-phosphor transition-colors hover:bg-phosphor hover:text-void"
+        >
+          <Icon name="lucide:code-2" class="h-4 w-4" />
+          See the open-source projects
+        </a>
+      </div>
+      <div class="rounded-lg border border-edge bg-panel font-mono text-sm">
+        <div class="flex items-center gap-2 border-b border-edge px-4 py-3">
+          <span class="h-3 w-3 rounded-full bg-poke"></span>
+          <span class="h-3 w-3 rounded-full bg-phosphor-dim"></span>
+          <span class="h-3 w-3 rounded-full bg-edge-bright"></span>
+          <span class="ml-2 text-xs text-ink-faint">~/sudostore</span>
+        </div>
+        <div class="space-y-2 p-4 text-ink-dim">
+          <p><span class="text-phosphor">$</span> ./find cool-tech --affordable</p>
+          <p class="text-phosphor">→ handhelds, card readers, macro keyboards…</p>
+          <p><span class="text-phosphor">$</span> cat philosophy.txt</p>
+          <p class="text-ink">→ build it, open it, teach it.</p>
+          <p><span class="text-phosphor">$</span> ./ship <span class="cursor"></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learn teaser -->
+  {latestLearn.length > 0 && (
+    <section class="border-b border-edge bg-night/50">
+      <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div class="mb-8 flex items-end justify-between">
+          <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
+            <span class="text-phosphor">$</span> ./learn
+          </h2>
+          <a href="/learn/" class="text-sm text-ink-dim hover:text-phosphor">
+            All guides <Icon name="lucide:arrow-right" class="inline h-3.5 w-3.5" />
+          </a>
+        </div>
+        <div class="grid gap-4 md:grid-cols-3">
+          {latestLearn.map((post) => (
+            <a
+              href={`/learn/${post.id}/`}
+              class="group flex flex-col gap-2 rounded-lg border border-edge bg-panel p-5 transition-colors hover:border-phosphor/60"
+            >
+              <span class="inline-flex items-center gap-2 text-xs text-ink-faint">
+                <Icon name="lucide:book-open" class="h-3.5 w-3.5 text-phosphor-dim" />
+                {post.data.level}
+              </span>
+              <h3 class="font-display font-semibold text-ink group-hover:text-phosphor">{post.data.title}</h3>
+              <p class="text-sm text-ink-dim line-clamp-2">{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Final CTA -->
+  <section class="grid-bg">
+    <div class="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
+      <h2 class="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+        Not sure what you need?
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl text-ink-dim">
+        Message me on WhatsApp and I'll point you at the right thing — or build
+        it if it doesn't exist yet.
+      </p>
+      <div class="mt-8 flex justify-center">
+        <a
+          href={contactLink()}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 rounded bg-poke px-6 py-3 text-sm font-semibold text-void transition-colors hover:bg-poke-bright"
+        >
+          <Icon name="lucide:message-circle" class="h-4 w-4" />
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

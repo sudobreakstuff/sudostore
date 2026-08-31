@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  sudostore design tokens — Game Boy phosphor + Pokéball red        */
+/* ------------------------------------------------------------------ */
+@theme {
+  /* base surfaces */
+  --color-void: #070a07;
+  --color-night: #0c110c;
+  --color-panel: #111812;
+  --color-edge: #22301f;
+  --color-edge-bright: #33502a;
+
+  /* phosphor greens */
+  --color-phosphor: #9bbc0f;
+  --color-phosphor-bright: #c6e029;
+  --color-phosphor-dim: #6b8a24;
+  --color-phosphor-dark: #2f4a18;
+
+  /* pokéball red accent */
+  --color-poke: #ee3a2f;
+  --color-poke-bright: #ff5347;
+  --color-poke-dark: #b9261c;
+
+  /* text */
+  --color-ink: #e6f0d8;
+  --color-ink-dim: #93a588;
+  --color-ink-faint: #5d6f55;
+
+  /* fonts */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+}
+
+/* ------------------------------------------------------------------ */
+/*  base                                                              */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-phosphor);
+    color: var(--color-void);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  /* custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-night);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-edge-bright);
+    border: 2px solid var(--color-night);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-phosphor-dim);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  retro decoration                                                  */
+/* ------------------------------------------------------------------ */
+
+/* CRT scanline overlay — applied to a fixed div in the layout */
+.scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.16) 3px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* subtle vignette */
+.vignette {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 59;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+/* faint blueprint grid */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(155, 188, 15, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(155, 188, 15, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* phosphor glow text */
+.glow {
+  text-shadow: 0 0 8px rgba(155, 188, 15, 0.55), 0 0 24px rgba(155, 188, 15, 0.25);
+}
+
+.glow-red {
+  text-shadow: 0 0 8px rgba(238, 58, 47, 0.55), 0 0 24px rgba(238, 58, 47, 0.25);
+}
+
+/* dashed terminal-style separator */
+.tick {
+  color: var(--color-phosphor-dim);
+}
+
+/* inline terminal prompt marker */
+.prompt::before {
+  content: "$ ";
+  color: var(--color-phosphor);
+}
+
+/* blinking cursor block */
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--color-phosphor);
+  animation: blink 1.1s steps(1) infinite;
+  vertical-align: text-bottom;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* soft pulse for status dots */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,72 @@
+---
+import { Icon } from "astro-icon/components";
+import Logo from "./Logo.astro";
+import { SITE, contactLink } from "../lib/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-edge bg-night">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
+    <div class="md:col-span-2">
+      <Logo />
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-ink-dim">
+        {SITE.tagline} Handhelds, card readers, custom hardware and software —
+        built in {SITE.location}.
+      </p>
+      <div class="mt-5 flex items-center gap-3">
+        <a
+          href={SITE.github}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex h-9 w-9 items-center justify-center rounded border border-edge text-ink-dim transition-colors hover:border-phosphor hover:text-phosphor"
+          aria-label="GitHub"
+        >
+          <Icon name="lucide:github" class="h-4 w-4" />
+        </a>
+        <a
+          href={contactLink()}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex h-9 w-9 items-center justify-center rounded border border-edge text-ink-dim transition-colors hover:border-poke hover:text-poke-bright"
+          aria-label="WhatsApp"
+        >
+          <Icon name="lucide:message-circle" class="h-4 w-4" />
+        </a>
+        <a
+          href={`mailto:${SITE.email}`}
+          class="inline-flex h-9 w-9 items-center justify-center rounded border border-edge text-ink-dim transition-colors hover:border-phosphor hover:text-phosphor"
+          aria-label="Email"
+        >
+          <Icon name="lucide:mail" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+
+    <nav aria-label="Footer">
+      <h3 class="font-mono text-xs uppercase tracking-widest text-ink-faint">Explore</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="text-ink-dim hover:text-phosphor" href="/store/">Store</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href="/services/">Services</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href="/projects/">Projects</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href="/learn/">Learn</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Company">
+      <h3 class="font-mono text-xs uppercase tracking-widest text-ink-faint">Company</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="text-ink-dim hover:text-phosphor" href="/about/">About</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href="/contact/">Contact</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href={SITE.portfolio} target="_blank" rel="noopener">Portfolio</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="border-t border-edge">
+    <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <p>© {year} {SITE.name}. Built with <Icon name="lucide:terminal" class="inline h-3.5 w-3.5 text-phosphor" /> in South Africa.</p>
+      <p class="font-mono"><span class="text-phosphor">$</span> ./keep-hacking</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("learn", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
+
+const levelStyles: Record<string, string> = {
+  beginner: "text-phosphor border-phosphor/40",
+  intermediate: "text-phosphor-bright border-phosphor/40",
+  advanced: "text-poke-bright border-poke/40",
+};
+---
+
+<BaseLayout
+  title="Learn"
+  description="Free guides on Linux, hardware, RFID and building your own gear — no jargon, no gatekeeping."
+>
+  <section class="grid-bg border-b border-edge">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <p class="font-mono text-sm text-phosphor-dim">
+        <span class="text-poke">~/</span>learn<span class="cursor ml-1"></span>
+      </p>
+      <h1 class="mt-3 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+        Learn to build
+      </h1>
+      <p class="mt-4 max-w-2xl text-ink-dim">
+        The same skills behind the products in the store, explained properly.
+        Start with a terminal, end with something you built yourself.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    {posts.length === 0 ? (
+      <div class="rounded-lg border border-edge bg-panel p-10 text-center">
+        <p class="font-mono text-ink-dim">$ ./learn <span class="cursor"></span></p>
+        <p class="mt-2 text-sm text-ink-faint">Guides are being written — check back soon.</p>
+      </div>
+    ) : (
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <a
+            href={`/learn/${post.id}/`}
+            class="group flex flex-col gap-3 rounded-lg border border-edge bg-panel p-6 transition-colors hover:border-phosphor/60"
+          >
+            <div class="flex items-center justify-between">
+              <span class={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs ${levelStyles[post.data.level] ?? levelStyles.beginner}`}>
+                {post.data.level}
+              </span>
+              <time class="font-mono text-xs text-ink-faint">
+                {post.data.published.toLocaleDateString("en-ZA", { year: "numeric", month: "short", day: "numeric" })}
+              </time>
+            </div>
+            <h2 class="font-display text-lg font-semibold leading-snug text-ink group-hover:text-phosphor">{post.data.title}</h2>
+            <p class="text-sm leading-relaxed text-ink-dim line-clamp-3">{post.data.description}</p>
+            {post.data.tags.length > 0 && (
+              <div class="mt-auto flex flex-wrap gap-1.5 pt-2">
+                {post.data.tags.map((tag) => (
+                  <span class="rounded border border-edge bg-night px-2 py-0.5 font-mono text-xs text-ink-faint">#{tag}</span>
+                ))}
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>
