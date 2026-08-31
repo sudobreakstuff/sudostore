@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { BASE } from "../../lib/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("learn", ({ data }) => !data.draft);
@@ -24,7 +25,7 @@ const levelStyles: Record<string, string> = {
 
 <BaseLayout title={title} description={description}>
   <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-    <a href="/learn/" class="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-phosphor">
+    <a href={`${BASE}learn/`} class="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-phosphor">
       <Icon name="lucide:arrow-left" class="h-4 w-4" />
       All guides
     </a>

@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { BASE } from "../../lib/site";
 
 const posts = (await getCollection("learn", ({ data }) => !data.draft))
   .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
@@ -42,7 +43,7 @@ const levelStyles: Record<string, string> = {
       <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <a
-            href={`/learn/${post.id}/`}
+            href={`${BASE}learn/${post.id}/`}
             class="group flex flex-col gap-3 rounded-lg border border-edge bg-panel p-6 transition-colors hover:border-phosphor/60"
           >
             <div class="flex items-center justify-between">

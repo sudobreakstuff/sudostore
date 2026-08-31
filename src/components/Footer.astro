@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
-import { SITE, contactLink } from "../lib/site";
+import { SITE, BASE, contactLink } from "../lib/site";
 
 const year = new Date().getFullYear();
 ---
@@ -46,18 +46,18 @@ const year = new Date().getFullYear();
     <nav aria-label="Footer">
       <h3 class="font-mono text-xs uppercase tracking-widest text-ink-faint">Explore</h3>
       <ul class="mt-4 space-y-2 text-sm">
-        <li><a class="text-ink-dim hover:text-phosphor" href="/store/">Store</a></li>
-        <li><a class="text-ink-dim hover:text-phosphor" href="/services/">Services</a></li>
-        <li><a class="text-ink-dim hover:text-phosphor" href="/projects/">Projects</a></li>
-        <li><a class="text-ink-dim hover:text-phosphor" href="/learn/">Learn</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}store/`}>Store</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}services/`}>Services</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}projects/`}>Projects</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}learn/`}>Learn</a></li>
       </ul>
     </nav>
 
     <nav aria-label="Company">
       <h3 class="font-mono text-xs uppercase tracking-widest text-ink-faint">Company</h3>
       <ul class="mt-4 space-y-2 text-sm">
-        <li><a class="text-ink-dim hover:text-phosphor" href="/about/">About</a></li>
-        <li><a class="text-ink-dim hover:text-phosphor" href="/contact/">Contact</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}about/`}>About</a></li>
+        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}contact/`}>Contact</a></li>
         <li><a class="text-ink-dim hover:text-phosphor" href={SITE.portfolio} target="_blank" rel="noopener">Portfolio</a></li>
       </ul>
     </nav>

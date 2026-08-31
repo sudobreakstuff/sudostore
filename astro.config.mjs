@@ -4,11 +4,15 @@ import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 
 // https://astro.build/config
-// NOTE: `site` and `base` are injected automatically by the GitHub Pages
-// deploy workflow (withastro/action reads actions/configure-pages). Leave
-// them unset here so local dev and Cloudflare Pages (custom domain) need no
-// base path.
+//
+// `site` and `base` default to GitHub Pages values (project site under
+// `/sudostore/`). For Cloudflare Pages + custom domain, set these in the
+// Cloudflare build environment:
+//   SITE_URL  = https://sudostore.co.za
+//   BASE_PATH = /
 export default defineConfig({
+  site: process.env.SITE_URL || 'https://sudobreakstuff.github.io',
+  base: process.env.BASE_PATH ?? '/sudostore/',
   integrations: [icon()],
   vite: {
     plugins: [tailwindcss()],

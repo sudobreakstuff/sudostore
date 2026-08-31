@@ -1,3 +1,5 @@
+export const BASE = import.meta.env.BASE_URL;
+
 export const SITE = {
   name: "sudostore",
   tagline: "Cool tech. Fair prices. Open source.",

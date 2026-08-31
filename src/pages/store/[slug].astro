@@ -6,6 +6,7 @@ import OrderButton from "../../components/OrderButton.astro";
 import ProductCard from "../../components/ProductCard.astro";
 import { categoryIcon, categoryLabel } from "../../lib/catalog";
 import { formatPrice } from "../../lib/format";
+import { BASE } from "../../lib/site";
 
 export async function getStaticPaths() {
   const products = await getCollection("products");
@@ -33,7 +34,7 @@ const statusStyles: Record<string, string> = {
 
 <BaseLayout title={title} description={tagline}>
   <article class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-    <a href="/store/" class="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-phosphor">
+    <a href={`${BASE}store/`} class="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-phosphor">
       <Icon name="lucide:arrow-left" class="h-4 w-4" />
       Back to store
     </a>

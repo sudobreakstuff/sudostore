@@ -1,14 +1,14 @@
 ---
 import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
-import { contactLink } from "../lib/site";
+import { BASE, contactLink } from "../lib/site";
 
 const nav = [
-  { label: "Store", href: "/store/" },
-  { label: "Services", href: "/services/" },
-  { label: "Projects", href: "/projects/" },
-  { label: "Learn", href: "/learn/" },
-  { label: "About", href: "/about/" },
+  { label: "Store", href: `${BASE}store/` },
+  { label: "Services", href: `${BASE}services/` },
+  { label: "Projects", href: `${BASE}projects/` },
+  { label: "Learn", href: `${BASE}learn/` },
+  { label: "About", href: `${BASE}about/` },
 ];
 ---
 

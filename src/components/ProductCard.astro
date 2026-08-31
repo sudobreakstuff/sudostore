@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 import { categoryIcon, categoryLabel } from "../lib/catalog";
 import { formatPrice } from "../lib/format";
+import { BASE } from "../lib/site";
 
 interface Props {
   product: CollectionEntry<"products">;
@@ -20,7 +21,7 @@ const statusStyles: Record<string, string> = {
 ---
 
 <a
-  href={`/store/${product.id}/`}
+  href={`${BASE}store/${product.id}/`}
   class="group relative flex flex-col overflow-hidden rounded-lg border border-edge bg-panel transition-all hover:-translate-y-0.5 hover:border-phosphor/60"
 >
   <div class="flex items-center justify-between border-b border-edge px-4 py-3">

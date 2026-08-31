@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { BASE } from "../lib/site";
 ---
 
 <BaseLayout title="404">
@@ -13,11 +14,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         the terminal ate it.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="/" class="inline-flex items-center gap-2 rounded bg-phosphor px-6 py-3 text-sm font-semibold text-void transition-colors hover:bg-phosphor-bright">
+        <a href={BASE} class="inline-flex items-center gap-2 rounded bg-phosphor px-6 py-3 text-sm font-semibold text-void transition-colors hover:bg-phosphor-bright">
           <Icon name="lucide:home" class="h-4 w-4" />
           Back home
         </a>
-        <a href="/store/" class="inline-flex items-center gap-2 rounded border border-edge px-6 py-3 text-sm font-semibold text-ink-dim transition-colors hover:border-phosphor hover:text-phosphor">
+        <a href={`${BASE}store/`} class="inline-flex items-center gap-2 rounded border border-edge px-6 py-3 text-sm font-semibold text-ink-dim transition-colors hover:border-phosphor hover:text-phosphor">
           <Icon name="lucide:shopping-bag" class="h-4 w-4" />
           Browse the store
         </a>
