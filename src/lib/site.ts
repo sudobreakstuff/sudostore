@@ -7,7 +7,7 @@ export const SITE = {
     "Handheld consoles, card readers, custom hardware, 3D-printed gear and software — built in South Africa, sold without the markup.",
   url: "https://sudostore.co.za",
   email: "sudobreakstuff1zn@gmail.com",
-  location: "Newcastle, South Africa",
+  location: "South Africa",
   github: "https://github.com/sudobreakstuff",
   portfolio: "https://sudobreakstuff.github.io",
   whatsappDisplay: "+27 65 822 4618",

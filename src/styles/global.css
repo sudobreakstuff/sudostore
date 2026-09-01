@@ -46,8 +46,9 @@
 
   --grid: linear-gradient(rgba(61, 169, 255, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(61, 169, 255, 0.05) 1px, transparent 1px);
-  --ambient: radial-gradient(60% 50% at 15% 0%, rgba(61, 169, 255, 0.07), transparent 60%),
-    radial-gradient(50% 45% at 100% 100%, rgba(255, 43, 43, 0.06), transparent 60%);
+  --orb-blue: rgba(61, 169, 255, 0.22);
+  --orb-cyan: rgba(0, 190, 255, 0.14);
+  --orb-red: rgba(255, 43, 43, 0.16);
 
   --glow-neon: rgba(61, 169, 255, 0.55);
   --glow-red: rgba(255, 43, 43, 0.55);
@@ -75,8 +76,9 @@
 
   --grid: linear-gradient(rgba(10, 110, 214, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(10, 110, 214, 0.06) 1px, transparent 1px);
-  --ambient: radial-gradient(60% 50% at 15% 0%, rgba(10, 110, 214, 0.06), transparent 60%),
-    radial-gradient(50% 45% at 100% 100%, rgba(221, 16, 16, 0.05), transparent 60%);
+  --orb-blue: rgba(10, 110, 214, 0.14);
+  --orb-cyan: rgba(0, 150, 220, 0.10);
+  --orb-red: rgba(221, 16, 16, 0.10);
 
   --glow-neon: rgba(10, 110, 214, 0.25);
   --glow-red: rgba(221, 16, 16, 0.25);
@@ -94,8 +96,6 @@
 
   body {
     background-color: var(--color-void);
-    background-image: var(--ambient);
-    background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-mono);
     -webkit-font-smoothing: antialiased;
@@ -161,6 +161,57 @@
     rgba(0, 0, 0, 0) 55%,
     var(--vignette) 100%
   );
+}
+
+/* electric aurora — soft drifting energy behind the content */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+.aurora-orb--blue {
+  width: 55vmax;
+  height: 55vmax;
+  top: -22%;
+  left: -12%;
+  background: var(--orb-blue);
+  animation: aurora-a 30s ease-in-out infinite alternate;
+}
+.aurora-orb--cyan {
+  width: 42vmax;
+  height: 42vmax;
+  top: 38%;
+  left: 42%;
+  background: var(--orb-cyan);
+  animation: aurora-c 40s ease-in-out infinite alternate;
+}
+.aurora-orb--red {
+  width: 46vmax;
+  height: 46vmax;
+  bottom: -24%;
+  right: -12%;
+  background: var(--orb-red);
+  animation: aurora-b 34s ease-in-out infinite alternate;
+}
+@keyframes aurora-a {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(14vw, 10vh) scale(1.15); }
+}
+@keyframes aurora-b {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-12vw, -8vh) scale(1.2); }
+}
+@keyframes aurora-c {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-10vw, -12vh) scale(0.9); }
 }
 
 /* blueprint grid (used as page hero background) */

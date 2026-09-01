@@ -51,10 +51,15 @@ const ogImage = new URL(`${BASE}favicon.svg`, Astro.site ?? SITE.url).toString()
     <meta name="theme-color" content="#050810" />
   </head>
   <body class="min-h-screen">
+    <div class="aurora" aria-hidden="true">
+      <div class="aurora-orb aurora-orb--blue"></div>
+      <div class="aurora-orb aurora-orb--cyan"></div>
+      <div class="aurora-orb aurora-orb--red"></div>
+    </div>
     <div class="scanlines" aria-hidden="true"></div>
     <div class="vignette" aria-hidden="true"></div>
     <Header />
-    <main>
+    <main class="relative z-10">
       <slot />
     </main>
     <Footer />
