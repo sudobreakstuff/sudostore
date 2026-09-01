@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import OrderButton from "../../components/OrderButton.astro";
 import ProductCard from "../../components/ProductCard.astro";
@@ -17,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 const { product } = Astro.props;
-const { title, tagline, description, price, priceNote, category, status, specs, tags } = product.data;
+const { title, tagline, description, price, priceNote, category, status, specs, tags, image } = product.data;
 const { Content } = await render(product);
 
 const related = (await getCollection("products", ({ data }) => data.category === category))
@@ -42,7 +43,19 @@ const statusStyles: Record<string, string> = {
     <div class="mt-8 grid gap-10 lg:grid-cols-3">
       <!-- Main -->
       <div class="lg:col-span-2">
-        <div class="flex flex-wrap items-center gap-3">
+        {image ? (
+          <Image
+            src={image}
+            alt={title}
+            class="aspect-[16/10] w-full rounded-lg border border-edge object-cover"
+          />
+        ) : (
+          <div class="flex aspect-[16/10] w-full items-center justify-center rounded-lg border border-edge bg-night">
+            <Icon name={categoryIcon(category)} class="h-16 w-16 text-edge-bright" />
+          </div>
+        )}
+
+        <div class="mt-6 flex flex-wrap items-center gap-3">
           <span class="inline-flex items-center gap-1.5 text-sm text-ink-dim">
             <Icon name={categoryIcon(category)} class="h-4 w-4 text-neon-dim" />
             {categoryLabel(category)}

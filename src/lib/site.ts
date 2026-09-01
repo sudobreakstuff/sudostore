@@ -4,7 +4,7 @@ export const SITE = {
   name: "sudostore",
   tagline: "Cool tech. Fair prices. Open source.",
   description:
-    "Handheld consoles, card readers, custom hardware, 3D-printed gear and software — built in South Africa, sold without the markup.",
+    "Handheld consoles, card readers, custom hardware, 3D-printed gear and software — built in South Africa, sold at honest prices.",
   url: "https://sudostore.co.za",
   email: "sudobreakstuff1zn@gmail.com",
   location: "South Africa",

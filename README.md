@@ -41,6 +41,7 @@ Product frontmatter example:
 title: "SudoDeck"
 tagline: "Wireless macro keyboard"
 description: "..."
+image: ./sudodeck.jpg       # put the photo in src/content/products/ next to this file
 price: 1099
 category: "input-devices"   # handhelds | card-readers | input-devices | 3d-printing | software-services
 status: "in-stock"          # in-stock | made-to-order | pre-order | sold-out
@@ -50,6 +51,11 @@ specs:
 tags: ["macro-keyboard"]
 ---
 ```
+
+**Adding a product photo:** drop the image file into `src/content/products/`
+and reference it with `image: ./filename.jpg` in the product's frontmatter.
+Images are auto-optimized to WebP at build time. Products without an image
+show a clean category icon placeholder.
 
 ## Deploy
 

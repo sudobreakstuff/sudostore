@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { categoryIcon, categoryLabel } from "../lib/catalog";
 import { formatPrice } from "../lib/format";
@@ -10,13 +11,13 @@ interface Props {
 }
 
 const { product } = Astro.props;
-const { title, tagline, price, priceNote, category, status } = product.data;
+const { title, tagline, price, priceNote, category, status, image } = product.data;
 
 const statusStyles: Record<string, string> = {
-  "in-stock": "text-neon border-neon/40",
-  "made-to-order": "text-neon-bright border-neon/40",
-  "pre-order": "text-red-bright border-red/40",
-  "sold-out": "text-ink-faint border-edge",
+  "in-stock": "text-neon border-neon/40 bg-void/80",
+  "made-to-order": "text-neon-bright border-neon/40 bg-void/80",
+  "pre-order": "text-red-bright border-red/40 bg-void/80",
+  "sold-out": "text-ink-faint border-edge bg-void/80",
 };
 ---
 
@@ -24,19 +25,31 @@ const statusStyles: Record<string, string> = {
   href={`${BASE}store/${product.id}/`}
   class="group relative flex flex-col overflow-hidden rounded-lg border border-edge bg-panel transition-all hover:-translate-y-0.5 hover:border-neon/60"
 >
-  <div class="flex items-center justify-between border-b border-edge px-4 py-3">
-    <span class="inline-flex items-center gap-1.5 text-xs text-ink-dim">
-      <Icon name={categoryIcon(category)} class="h-3.5 w-3.5 text-neon-dim" />
-      {categoryLabel(category)}
-    </span>
-    <span class={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] ${statusStyles[status] ?? statusStyles["in-stock"]}`}>
+  <div class="relative aspect-[4/3] overflow-hidden border-b border-edge bg-night">
+    {image ? (
+      <Image
+        src={image}
+        alt={title}
+        loading="lazy"
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center">
+        <Icon name={categoryIcon(category)} class="h-12 w-12 text-edge-bright" />
+      </div>
+    )}
+    <span class={`absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] backdrop-blur ${statusStyles[status] ?? statusStyles["in-stock"]}`}>
       <span class="h-1.5 w-1.5 rounded-full bg-current pulse-soft"></span>
       {status === "made-to-order" ? "Made to order" : status === "pre-order" ? "Pre-order" : status === "sold-out" ? "Sold out" : "In stock"}
     </span>
   </div>
 
   <div class="flex flex-1 flex-col gap-2 p-4">
-    <h3 class="font-display text-lg font-semibold leading-tight text-ink group-hover:text-neon transition-colors">
+    <span class="inline-flex items-center gap-1.5 text-xs text-ink-dim">
+      <Icon name={categoryIcon(category)} class="h-3.5 w-3.5 text-neon-dim" />
+      {categoryLabel(category)}
+    </span>
+    <h3 class="font-display text-lg font-semibold leading-tight text-ink transition-colors group-hover:text-neon">
       {title}
     </h3>
     <p class="text-sm leading-relaxed text-ink-dim line-clamp-2">{tagline}</p>
