@@ -1,35 +1,85 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/*  sudostore design tokens — neon blue + red (Pokémon vibes)         */
+/*  sudostore — neon blue + red, light/dark via CSS variables         */
+/*  Theme values live in :root (dark) and [data-theme="light"].       */
 /* ------------------------------------------------------------------ */
 @theme {
-  /* base surfaces */
-  --color-void: #050810;
-  --color-night: #0a0f1a;
-  --color-panel: #0e1626;
-  --color-edge: #1c2a3f;
-  --color-edge-bright: #2c4a6e;
+  --color-void: var(--void);
+  --color-night: var(--night);
+  --color-panel: var(--panel);
+  --color-edge: var(--edge);
+  --color-edge-bright: var(--edge-bright);
 
-  /* neon blues */
-  --color-neon: #3da9ff;
-  --color-neon-bright: #7cc4ff;
-  --color-neon-dim: #1f6fae;
-  --color-neon-dark: #0d3a5c;
+  --color-neon: var(--neon);
+  --color-neon-bright: var(--neon-bright);
+  --color-neon-dim: var(--neon-dim);
 
-  /* neon red accent */
-  --color-red: #ff2b2b;
-  --color-red-bright: #ff5c5c;
-  --color-red-dark: #c01010;
+  --color-red: var(--red);
+  --color-red-bright: var(--red-bright);
 
-  /* text */
-  --color-ink: #e8f0ff;
-  --color-ink-dim: #8fa3c0;
-  --color-ink-faint: #5c6f8f;
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
 
-  /* fonts */
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+}
+
+:root {
+  --void: #050810;
+  --night: #0a0f1a;
+  --panel: #0e1626;
+  --edge: #1c2a3f;
+  --edge-bright: #2c4a6e;
+
+  --neon: #3da9ff;
+  --neon-bright: #7cc4ff;
+  --neon-dim: #1f6fae;
+
+  --red: #ff2b2b;
+  --red-bright: #ff5c5c;
+
+  --ink: #e8f0ff;
+  --ink-dim: #8fa3c0;
+  --ink-faint: #5c6f8f;
+
+  --grid: linear-gradient(rgba(61, 169, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 169, 255, 0.05) 1px, transparent 1px);
+  --pokeball-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%233da9ff' stroke-opacity='0.07' stroke-width='1.2'%3E%3Ccircle cx='60' cy='60' r='34'/%3E%3Cpath d='M26 60h68'/%3E%3Cpath d='M26 60a34 34 0 0 0 68 0'/%3E%3Ccircle cx='60' cy='60' r='9'/%3E%3C/g%3E%3C/svg%3E");
+
+  --glow-neon: rgba(61, 169, 255, 0.55);
+  --glow-red: rgba(255, 43, 43, 0.55);
+  --scanline: rgba(0, 0, 0, 0.16);
+  --vignette: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] {
+  --void: #f5f7fb;
+  --night: #eceff6;
+  --panel: #ffffff;
+  --edge: #d7dde9;
+  --edge-bright: #b8c4d6;
+
+  --neon: #0a6ed6;
+  --neon-bright: #0060c0;
+  --neon-dim: #4a86c0;
+
+  --red: #dd1010;
+  --red-bright: #b80000;
+
+  --ink: #16202f;
+  --ink-dim: #48586e;
+  --ink-faint: #7f8fa6;
+
+  --grid: linear-gradient(rgba(10, 110, 214, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 110, 214, 0.06) 1px, transparent 1px);
+  --pokeball-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%230a6ed6' stroke-opacity='0.06' stroke-width='1.2'%3E%3Ccircle cx='60' cy='60' r='34'/%3E%3Cpath d='M26 60h68'/%3E%3Cpath d='M26 60a34 34 0 0 0 68 0'/%3E%3Ccircle cx='60' cy='60' r='9'/%3E%3C/g%3E%3C/svg%3E");
+
+  --glow-neon: rgba(10, 110, 214, 0.25);
+  --glow-red: rgba(221, 16, 16, 0.25);
+  --scanline: rgba(0, 0, 0, 0.05);
+  --vignette: rgba(0, 0, 0, 0.10);
 }
 
 /* ------------------------------------------------------------------ */
@@ -42,10 +92,13 @@
 
   body {
     background-color: var(--color-void);
+    background-image: var(--pokeball-tile);
+    background-size: 120px 120px;
     color: var(--color-ink);
     font-family: var(--font-mono);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   ::selection {
@@ -89,7 +142,7 @@
     to bottom,
     rgba(0, 0, 0, 0) 0px,
     rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0.16) 3px,
+    var(--scanline) 3px,
     rgba(0, 0, 0, 0) 4px
   );
   mix-blend-mode: multiply;
@@ -104,25 +157,23 @@
   background: radial-gradient(
     ellipse at center,
     rgba(0, 0, 0, 0) 55%,
-    rgba(0, 0, 0, 0.45) 100%
+    var(--vignette) 100%
   );
 }
 
-/* faint blueprint grid */
+/* blueprint grid + pokéball pattern (used as page hero background) */
 .grid-bg {
-  background-image:
-    linear-gradient(rgba(61, 169, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(61, 169, 255, 0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: var(--grid), var(--pokeball-tile);
+  background-size: 32px 32px, 120px 120px;
 }
 
 /* neon glow text */
 .glow {
-  text-shadow: 0 0 8px rgba(61, 169, 255, 0.55), 0 0 24px rgba(61, 169, 255, 0.25);
+  text-shadow: 0 0 8px var(--glow-neon), 0 0 24px var(--glow-neon);
 }
 
 .glow-red {
-  text-shadow: 0 0 8px rgba(255, 43, 43, 0.55), 0 0 24px rgba(255, 43, 43, 0.25);
+  text-shadow: 0 0 8px var(--glow-red), 0 0 24px var(--glow-red);
 }
 
 /* dashed terminal-style separator */

@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 import { BASE, contactLink } from "../lib/site";
 
 const nav = [
@@ -34,16 +35,20 @@ const nav = [
         <Icon name="lucide:message-circle" class="h-4 w-4" />
         Order now
       </a>
+      <ThemeToggle class="ml-2" />
     </nav>
 
-    <button
-      id="menu-toggle"
-      class="inline-flex h-10 w-10 items-center justify-center rounded border border-edge text-ink md:hidden"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
-      <Icon name="lucide:menu" class="h-5 w-5" />
-    </button>
+    <div class="flex items-center gap-2 md:hidden">
+      <ThemeToggle />
+      <button
+        id="menu-toggle"
+        class="inline-flex h-10 w-10 items-center justify-center rounded border border-edge text-ink"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <Icon name="lucide:menu" class="h-5 w-5" />
+      </button>
+    </div>
   </div>
 
   <div id="mobile-menu" class="hidden border-t border-edge bg-night md:hidden">
@@ -75,5 +80,19 @@ const nav = [
   toggle?.addEventListener("click", () => {
     const open = menu?.classList.toggle("hidden") === false;
     toggle.setAttribute("aria-expanded", String(open));
+  });
+
+  document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const root = document.documentElement;
+      const isLight = root.getAttribute("data-theme") === "light";
+      if (isLight) {
+        root.removeAttribute("data-theme");
+        localStorage.setItem("sudostore-theme", "dark");
+      } else {
+        root.setAttribute("data-theme", "light");
+        localStorage.setItem("sudostore-theme", "light");
+      }
+    });
   });
 </script>

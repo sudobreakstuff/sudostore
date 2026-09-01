@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductCard from "../components/ProductCard.astro";
 import OrderButton from "../components/OrderButton.astro";
+import Pokeball from "../components/Pokeball.astro";
 import { CATEGORIES } from "../lib/catalog";
 import { SITE, BASE, contactLink } from "../lib/site";
 
@@ -16,7 +17,8 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
 <BaseLayout>
   <!-- Hero -->
   <section class="grid-bg relative overflow-hidden border-b border-edge">
-    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+    <Pokeball class="pointer-events-none absolute -right-16 -top-24 h-72 w-72 text-neon opacity-[0.07] sm:h-96 sm:w-96" />
+    <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
       <p class="font-mono text-sm text-neon-dim">
         <span class="text-red">$</span> ssh guest@sudostore.co.za
         <span class="cursor ml-1"></span>
