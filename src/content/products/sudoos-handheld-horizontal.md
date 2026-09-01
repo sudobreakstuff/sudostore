@@ -8,7 +8,8 @@ description: |
   included free.
 category: "handhelds"
 images:
-  - ./r36h-horizontal.jpg
+  - ./sudoos-horizontal-1.jpeg
+  - ./sudoos-horizontal-2.jpeg
 price: 1450
 status: "made-to-order"
 featured: true

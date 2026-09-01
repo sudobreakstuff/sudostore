@@ -6,7 +6,7 @@ description: |
   in and boot — no flashing, no fuss. Pick the size that fits how much you want
   to carry around.
 images:
-  - ./sudoos-sd-card.png
+  - ./sudoos-sd-card.jpg
 category: "handhelds"
 price: 300
 priceNote: "from R300"

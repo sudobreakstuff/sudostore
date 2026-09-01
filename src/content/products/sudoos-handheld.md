@@ -7,7 +7,8 @@ description: |
   console ships with a games card included free, so it plays out of the box.
 category: "handhelds"
 images:
-  - ./sudoos-handheld.jpg
+  - ./sudoos-vertical-1.jpeg
+  - ./sudoos-vertical-2.jpeg
 price: 1200
 status: "made-to-order"
 featured: true
