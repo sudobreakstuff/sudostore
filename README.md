@@ -59,9 +59,13 @@ show a clean category icon placeholder.
 
 ## Deploy
 
-- **GitHub Pages:** `.github/workflows/deploy.yml` builds and deploys on every
-  push to `main`. The base path is set automatically, so the site lives at
-  `sudobreakstuff.github.io/sudostore/`.
-- **Cloudflare Pages:** point a Pages project at this repo, set the build
-  command to `npm run build` and output directory to `dist`. No base path
-  needed for a custom domain.
+- **Cloudflare Pages (production):** `.github/workflows/deploy-cloudflare.yml`
+  builds and deploys to `sudostore.pages.dev` / `sudostore.co.za` on every push
+  to `main`, using the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`
+  repo secrets.
+- **GitHub Pages (preview):** `.github/workflows/deploy.yml` also builds on
+  every push to `main`. The base path is set automatically, so the preview
+  lives at `sudobreakstuff.github.io/sudostore/`.
+
+Both builds inject `SITE_URL=https://sudostore.co.za` and `BASE_PATH=/`. For
+local previews, GitHub Pages uses its own base path via the workflow.
