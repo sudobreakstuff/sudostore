@@ -1,0 +1,29 @@
+---
+import { SITE } from "../lib/site";
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://sudostore.co.za/#org",
+      "name": "sudostore",
+      "url": "https://sudostore.co.za",
+      "email": SITE.email,
+      "areaServed": "ZA",
+      "sameAs": [
+        SITE.github,
+        SITE.portfolio,
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sudostore.co.za/#website",
+      "url": "https://sudostore.co.za",
+      "name": "sudostore",
+      "description": SITE.description,
+      "publisher": { "@id": "https://sudostore.co.za/#org" },
+    },
+  ],
+})} />

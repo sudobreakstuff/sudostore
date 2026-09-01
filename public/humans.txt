@@ -1,0 +1,10 @@
+/* TEAM */
+Reach: sudostore via WhatsApp or email
+Since: 2026
+
+/* THANKS */
+Built with Astro, Tailwind CSS, Lucide icons, Cloudflare Pages & GitHub.
+Open source: github.com/sudobreakstuff
+
+/* SAY HI */
+sudostore.co.za

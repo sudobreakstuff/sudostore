@@ -7,7 +7,7 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="relative z-10 border-t border-edge bg-night">
-  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-5">
     <div class="md:col-span-2">
       <Logo />
       <p class="mt-4 max-w-xs text-sm leading-relaxed text-ink-dim">
@@ -59,6 +59,16 @@ const year = new Date().getFullYear();
         <li><a class="text-ink-dim hover:text-neon" href={`${BASE}about/`}>About</a></li>
         <li><a class="text-ink-dim hover:text-neon" href={`${BASE}contact/`}>Contact</a></li>
         <li><a class="text-ink-dim hover:text-neon" href={SITE.portfolio} target="_blank" rel="noopener">Portfolio</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Legal">
+      <h3 class="font-mono text-xs uppercase tracking-widest text-ink-faint">Legal</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}privacy/`}>Privacy Policy</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}terms/`}>Terms</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}shipping/`}>Shipping</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}returns/`}>Returns</a></li>
       </ul>
     </nav>
   </div>

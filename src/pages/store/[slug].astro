@@ -32,6 +32,22 @@ const related = (await getCollection("products", ({ data }) => data.category ===
   .filter((p) => p.id !== product.id)
   .slice(0, 3);
 
+const productJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": title,
+  "description": tagline,
+  "image": galleryImages.map((g) => new URL(g.full, Astro.site ?? "https://sudostore.co.za").toString()),
+  "brand": { "@type": "Brand", "name": "sudostore" },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "ZAR",
+    "price": price ?? 0,
+    "availability": status === "sold-out" ? "https://schema.org/OutOfStock" : status === "pre-order" ? "https://schema.org/PreOrder" : "https://schema.org/InStock",
+    "url": Astro.url.toString(),
+  },
+});
+
 const statusStyles: Record<string, string> = {
   "in-stock": "text-neon border-neon/40",
   "made-to-order": "text-neon-bright border-neon/40",
@@ -41,6 +57,8 @@ const statusStyles: Record<string, string> = {
 ---
 
 <BaseLayout title={title} description={tagline}>
+  <script type="application/ld+json" set:html={productJsonLd}></script>
+
   <article class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
     <a href={`${BASE}store/`} class="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-neon">
       <Icon name="lucide:arrow-left" class="h-4 w-4" />

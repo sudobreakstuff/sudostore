@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070d18"/>
+      <stop offset="1" stop-color="#050810"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="0.12" cy="0.05" r="1">
+      <stop offset="0" stop-color="#1f6fae" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#1f6fae" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#orb)"/>
+
+  <!-- faint blueprint grid -->
+  <g stroke="#22301f" stroke-opacity="0.16" stroke-width="1">
+    <path d="M0 90h1200M0 180h1200M0 270h1200M0 360h1200M0 450h1200M0 540h1200"/>
+    <path d="M120 0v630M240 0v630M360 0v630M480 0v630M600 0v630M720 0v630M840 0v630M960 0v630M1080 0v630"/>
+  </g>
+
+  <!-- left accent bar -->
+  <rect x="0" y="0" width="10" height="630" fill="#3da9ff"/>
+  <rect x="10" y="0" width="4" height="630" fill="#ff2b2b"/>
+
+  <!-- pokeball mark -->
+  <g transform="translate(84,86)">
+    <circle cx="42" cy="42" r="40" fill="#f4f6fb"/>
+    <circle cx="42" cy="42" r="40" fill="none" stroke="#16202f" stroke-width="5"/>
+    <path d="M2 42a40 40 0 0 1 80 0Z" fill="#dd1010"/>
+    <rect x="2" y="39" width="80" height="6" fill="#16202f"/>
+    <circle cx="42" cy="42" r="12" fill="#f4f6fb" stroke="#16202f" stroke-width="6"/>
+  </g>
+  <text x="142" y="116" font-family="'JetBrains Mono','DejaVu Sans Mono',monospace" font-size="44" font-weight="700" fill="#3da9ff">sudo<tspan fill="#ff2b2b">store</tspan></text>
+
+  <!-- headline -->
+  <text x="84" y="300" font-family="'Space Grotesk','DejaVu Sans',sans-serif" font-size="86" font-weight="700" fill="#e8f0ff">Cool tech.</text>
+  <text x="84" y="392" font-family="'Space Grotesk','DejaVu Sans',sans-serif" font-size="58" font-weight="700" fill="#3da9ff">Fair prices. <tspan fill="#ff2b2b">Open source.</tspan></text>
+
+  <!-- sub -->
+  <text x="84" y="460" font-family="'JetBrains Mono','DejaVu Sans Mono',monospace" font-size="26" fill="#8fa3c0">Handhelds · card readers · custom hardware · 3D printing</text>
+
+  <!-- footer -->
+  <line x1="84" y1="540" x2="1116" y2="540" stroke="#1c2a3f" stroke-width="2"/>
+  <text x="84" y="584" font-family="'JetBrains Mono','DejaVu Sans Mono',monospace" font-size="28" font-weight="700" fill="#5c6f8f">sudostore.co.za</text>
+</svg>

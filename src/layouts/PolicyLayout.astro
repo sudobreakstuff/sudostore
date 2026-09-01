@@ -1,0 +1,9 @@
+---
+import type { Props } from "astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Props {
+  title: string;
+  updated?: string;
+  children: ForwardedSlot;
+}
