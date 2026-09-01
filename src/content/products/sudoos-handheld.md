@@ -6,6 +6,8 @@ description: |
   branded boot sequence, tuned performance and a curated game library. Plays
   retro systems out of the box and is a proper little Linux machine when you
   want it to be.
+images:
+  - ./sudoos-handheld.jpg
 category: "handhelds"
 status: "made-to-order"
 featured: true

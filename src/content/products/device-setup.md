@@ -5,6 +5,8 @@ description: |
   Get your device flashed, configured and working without the hours of reading.
   SudoOS installs, ESP32 firmware, card reader setup — I'll handle the fiddly
   bits and send it back ready to use.
+images:
+  - ./device-setup.jpg
 category: "software-services"
 status: "made-to-order"
 specs:

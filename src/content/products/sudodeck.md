@@ -6,6 +6,11 @@ description: |
   Multi-page grid, 30 buttons per page, app launcher, live widgets and Web
   Serial configuration. The open-source answer to keyboards that cost too much.
   Assembled and sold right here.
+images:
+  - ./sudodeck-front.jpeg
+  - ./sudodeck-angled.jpeg
+  - ./sudodeck-colors.jpeg
+  - ./sudodeck-top.jpeg
 category: "input-devices"
 price: 1099
 status: "made-to-order"

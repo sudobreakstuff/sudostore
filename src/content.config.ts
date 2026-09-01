@@ -8,7 +8,7 @@ const products = defineCollection({
       title: z.string(),
       tagline: z.string(),
       description: z.string(),
-      image: image().optional(),
+      images: z.array(image()).optional(),
       price: z.number().optional(),
       priceNote: z.string().optional(),
       category: z.enum([

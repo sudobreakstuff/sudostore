@@ -11,7 +11,8 @@ interface Props {
 }
 
 const { product } = Astro.props;
-const { title, tagline, price, priceNote, category, status, image } = product.data;
+const { title, tagline, price, priceNote, category, status, images } = product.data;
+const image = images?.[0];
 
 const statusStyles: Record<string, string> = {
   "in-stock": "text-neon border-neon/40 bg-void/80",

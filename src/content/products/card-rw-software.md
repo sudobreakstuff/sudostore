@@ -5,6 +5,8 @@ description: |
   The software that drives the reader: a terminal-based EM410x read/write tool
   with hex-ID writing and cloning, session logging and CSV export. Ships ready
   to run alongside the hardware, with setup and usage notes included.
+images:
+  - ./card-rw-software.jpg
 category: "card-readers"
 status: "in-stock"
 specs:

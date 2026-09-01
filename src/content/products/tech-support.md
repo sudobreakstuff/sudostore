@@ -5,6 +5,8 @@ description: |
   Need a network set up, a router configured, or a Linux box sorted? I've done
   support and systems work across businesses and homes. Practical, honest help
   without the jargon overload.
+images:
+  - ./tech-support.jpg
 category: "software-services"
 status: "made-to-order"
 priceNote: "Per job / per hour"

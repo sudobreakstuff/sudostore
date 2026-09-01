@@ -6,6 +6,8 @@ description: |
   clone and write EM410x cards from a terminal with a clean animated TUI,
   session logging and CSV export. Built for people who actually need to get
   cards working — not just look at them.
+images:
+  - ./rfid-card-reader.webp
 category: "card-readers"
 status: "in-stock"
 featured: true

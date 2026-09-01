@@ -4,6 +4,8 @@ tagline: "Customisable desk and handheld accessories"
 description: |
   Custom-designed stands, mounts, keycaps and small accessories. Pick a design
   and I'll adapt it to your device, colours and finish before it goes to print.
+images:
+  - ./stands-mounts-keycaps.jpg
 category: "3d-printing"
 status: "made-to-order"
 specs:

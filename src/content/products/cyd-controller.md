@@ -5,6 +5,8 @@ description: |
   A physical touch interface for browser and media control. Nine touch zones
   on an ESP32 touchscreen mapped to media shortcuts, sending keystrokes to your
   desktop. A satisfying little desk gadget that just works.
+images:
+  - ./cyd-controller.jpg
 category: "input-devices"
 status: "made-to-order"
 specs:
