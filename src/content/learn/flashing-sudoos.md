@@ -1,18 +1,19 @@
 ---
-title: "Flashing SudoOS onto an R36S"
-description: "A step-by-step guide to putting SudoOS on your R36S handheld, from downloading the image to first boot."
+title: "Flashing SudoOS onto an R36S / R36H"
+description: "A step-by-step guide to putting SudoOS on your R36S or R36H handheld, from downloading the image to first boot."
 published: 2026-08-30
 level: "beginner"
-tags: ["sudoos", "handheld", "r36s", "linux"]
+tags: ["sudoos", "handheld", "r36s", "r36h", "linux"]
 ---
 
-The R36S is a great little handheld, but it gets a lot better with a proper OS.
-SudoOS is a custom Linux build made for it — this guide walks you through the
-whole flash from start to finish.
+The R36S (vertical) and R36H (horizontal) are great little handhelds, but they
+get a lot better with a proper OS. SudoOS is a custom Linux build made for
+them — this guide walks you through the whole flash from start to finish. The
+process is identical for both models.
 
 ## What you need
 
-- An R36S handheld
+- An R36S or R36H handheld
 - A microSD card (a good brand — the stock cards die fast)
 - A computer with a card reader
 - The SudoOS image
@@ -35,7 +36,7 @@ wrong device will overwrite the wrong disk.
 
 ## Step 3 — Boot
 
-Put the card in the R36S and power it on. The first boot takes longer than
+Put the card in the handheld and power it on. The first boot takes longer than
 normal while the filesystem expands and things settle in. Give it a minute.
 
 ## Step 4 — First things first
@@ -44,5 +45,6 @@ normal while the filesystem expands and things settle in. Give it a minute.
 - Check the storage menu — you may want a second card for games
 - Play with the theme and keybindings until it feels right
 
-If something doesn't work, reach out — hardware varies between R36S batches
-and most issues are a config tweak away.
+If something doesn't work, reach out — hardware varies between batches and most
+issues are a config tweak away. Or skip the whole thing and grab a pre-loaded
+SudoOS card from the store instead.
