@@ -2,9 +2,10 @@
 title: "Stands, Mounts & Keycaps"
 tagline: "Desk and handheld accessories, printed to order"
 description: |
-  Custom-designed stands, mounts and keycaps. A display stand for your R36S,
-  a mount for your desk setup, or a set of custom keycaps — pick a design and
-  I'll adapt it to your device, colours and finish before it goes to print.
+  Custom-designed stands, mounts and keycaps. A display stand for your
+  handheld, a mount for your desk setup, or a set of custom keycaps — pick a
+  design and I'll adapt it to your device, colours and finish before it goes
+  to print.
 images:
   - ./stands-mounts-keycaps.webp
 category: "3d-printing"

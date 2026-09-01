@@ -1,19 +1,18 @@
 ---
-title: "Flashing SudoOS onto an R36S / R36H"
-description: "A step-by-step guide to putting SudoOS on your R36S or R36H handheld, from downloading the image to first boot."
+title: "Flashing SudoOS onto Your Handheld"
+description: "A step-by-step guide to putting SudoOS on your handheld console, from downloading the image to first boot."
 published: 2026-08-30
 level: "beginner"
-tags: ["sudoos", "handheld", "r36s", "r36h", "linux"]
+tags: ["sudoos", "handheld", "linux"]
 ---
 
-The R36S (vertical) and R36H (horizontal) are great little handhelds, but they
-get a lot better with a proper OS. SudoOS is a custom Linux build made for
-them — this guide walks you through the whole flash from start to finish. The
-process is identical for both models.
+Our vertical and horizontal handhelds are great little consoles, but they get
+a lot better with a proper OS. SudoOS is a custom Linux build made for them —
+this guide walks you through the whole flash from start to finish.
 
 ## What you need
 
-- An R36S or R36H handheld
+- A handheld console
 - A microSD card (a good brand — the stock cards die fast)
 - A computer with a card reader
 - The SudoOS image

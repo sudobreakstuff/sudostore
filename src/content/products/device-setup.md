@@ -8,7 +8,7 @@ description: |
 
   What I can set up for you:
 
-  - SudoOS installs on R36S / R36H handhelds, including a games card
+  - SudoOS installs on our vertical and horizontal consoles, including a games card
   - ESP32 firmware flashing (SudoDeck, CYD and custom builds)
   - Proxmark3 card reader setup and calibration
   - Custom kernels, boot logos and ROM/emulator configuration
@@ -19,7 +19,7 @@ images:
 category: "software-services"
 status: "made-to-order"
 specs:
-  - "SudoOS / R36S / R36H installs"
+  - "SudoOS installs"
   - "ESP32 firmware flashing"
   - "Proxmark3 setup"
   - "Custom kernels and boot logos"
