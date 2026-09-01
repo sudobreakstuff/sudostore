@@ -67,7 +67,7 @@ const statusStyles: Record<string, string> = {
         {specs.length > 0 && (
           <div class="mt-10">
             <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
-              <span class="text-neon">$</span> cat specs
+              <span class="text-red">$</span> cat specs
             </h2>
             <ul class="mt-4 grid gap-2 sm:grid-cols-2">
               {specs.map((spec) => (
@@ -85,7 +85,7 @@ const statusStyles: Record<string, string> = {
       <aside>
         <div class="sticky top-24 rounded-lg border border-edge bg-panel p-6">
           <p class="font-mono text-xs uppercase tracking-widest text-ink-faint">Price</p>
-          <p class="mt-2 font-mono text-3xl font-bold text-neon">{formatPrice(price, priceNote)}</p>
+          <p class="mt-2 font-mono text-3xl font-bold text-red glow-red">{formatPrice(price, priceNote)}</p>
 
           <div class="mt-6 space-y-3">
             <OrderButton product={`${title} (${tagline})`} class="w-full" />
@@ -112,7 +112,7 @@ const statusStyles: Record<string, string> = {
     {related.length > 0 && (
       <div class="mt-16 border-t border-edge pt-12">
         <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
-          <span class="text-neon">$</span> ./related
+          <span class="text-red">$</span> ./related
         </h2>
         <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((p) => <ProductCard product={p} />)}
