@@ -1,31 +1,31 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/*  sudostore design tokens — Game Boy phosphor + Pokéball red        */
+/*  sudostore design tokens — neon blue + red (Pokémon vibes)         */
 /* ------------------------------------------------------------------ */
 @theme {
   /* base surfaces */
-  --color-void: #070a07;
-  --color-night: #0c110c;
-  --color-panel: #111812;
-  --color-edge: #22301f;
-  --color-edge-bright: #33502a;
+  --color-void: #050810;
+  --color-night: #0a0f1a;
+  --color-panel: #0e1626;
+  --color-edge: #1c2a3f;
+  --color-edge-bright: #2c4a6e;
 
-  /* phosphor greens */
-  --color-phosphor: #9bbc0f;
-  --color-phosphor-bright: #c6e029;
-  --color-phosphor-dim: #6b8a24;
-  --color-phosphor-dark: #2f4a18;
+  /* neon blues */
+  --color-neon: #3da9ff;
+  --color-neon-bright: #7cc4ff;
+  --color-neon-dim: #1f6fae;
+  --color-neon-dark: #0d3a5c;
 
-  /* pokéball red accent */
-  --color-poke: #ee3a2f;
-  --color-poke-bright: #ff5347;
-  --color-poke-dark: #b9261c;
+  /* neon red accent */
+  --color-red: #ff2b2b;
+  --color-red-bright: #ff5c5c;
+  --color-red-dark: #c01010;
 
   /* text */
-  --color-ink: #e6f0d8;
-  --color-ink-dim: #93a588;
-  --color-ink-faint: #5d6f55;
+  --color-ink: #e8f0ff;
+  --color-ink-dim: #8fa3c0;
+  --color-ink-faint: #5c6f8f;
 
   /* fonts */
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -49,7 +49,7 @@
   }
 
   ::selection {
-    background: var(--color-phosphor);
+    background: var(--color-neon);
     color: var(--color-void);
   }
 
@@ -71,7 +71,7 @@
     border: 2px solid var(--color-night);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-phosphor-dim);
+    background: var(--color-neon-dim);
   }
 }
 
@@ -111,29 +111,29 @@
 /* faint blueprint grid */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(155, 188, 15, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(155, 188, 15, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(61, 169, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 169, 255, 0.05) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-/* phosphor glow text */
+/* neon glow text */
 .glow {
-  text-shadow: 0 0 8px rgba(155, 188, 15, 0.55), 0 0 24px rgba(155, 188, 15, 0.25);
+  text-shadow: 0 0 8px rgba(61, 169, 255, 0.55), 0 0 24px rgba(61, 169, 255, 0.25);
 }
 
 .glow-red {
-  text-shadow: 0 0 8px rgba(238, 58, 47, 0.55), 0 0 24px rgba(238, 58, 47, 0.25);
+  text-shadow: 0 0 8px rgba(255, 43, 43, 0.55), 0 0 24px rgba(255, 43, 43, 0.25);
 }
 
 /* dashed terminal-style separator */
 .tick {
-  color: var(--color-phosphor-dim);
+  color: var(--color-neon-dim);
 }
 
 /* inline terminal prompt marker */
 .prompt::before {
   content: "$ ";
-  color: var(--color-phosphor);
+  color: var(--color-neon);
 }
 
 /* blinking cursor block */
@@ -141,7 +141,7 @@
   display: inline-block;
   width: 0.55em;
   height: 1em;
-  background: var(--color-phosphor);
+  background: var(--color-neon);
   animation: blink 1.1s steps(1) infinite;
   vertical-align: text-bottom;
 }

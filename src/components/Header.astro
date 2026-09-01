@@ -20,16 +20,16 @@ const nav = [
       {nav.map((item) => (
         <a
           href={item.href}
-          class="rounded px-3 py-2 text-sm text-ink-dim transition-colors hover:text-phosphor"
+          class="rounded px-3 py-2 text-sm text-ink-dim transition-colors hover:text-neon"
         >
-          <span class="text-phosphor-dim">/</span>{item.label.toLowerCase()}
+          <span class="text-neon-dim">/</span>{item.label.toLowerCase()}
         </a>
       ))}
       <a
         href={contactLink()}
         target="_blank"
         rel="noopener"
-        class="ml-3 inline-flex items-center gap-2 rounded border border-poke bg-poke/10 px-4 py-2 text-sm font-semibold text-poke-bright transition-colors hover:bg-poke hover:text-void"
+        class="ml-3 inline-flex items-center gap-2 rounded border border-red bg-red/10 px-4 py-2 text-sm font-semibold text-red-bright transition-colors hover:bg-red hover:text-void"
       >
         <Icon name="lucide:message-circle" class="h-4 w-4" />
         Order now
@@ -51,16 +51,16 @@ const nav = [
       {nav.map((item) => (
         <a
           href={item.href}
-          class="rounded px-3 py-3 text-ink-dim transition-colors hover:bg-panel hover:text-phosphor"
+          class="rounded px-3 py-3 text-ink-dim transition-colors hover:bg-panel hover:text-neon"
         >
-          <span class="text-phosphor-dim">/</span>{item.label.toLowerCase()}
+          <span class="text-neon-dim">/</span>{item.label.toLowerCase()}
         </a>
       ))}
       <a
         href={contactLink()}
         target="_blank"
         rel="noopener"
-        class="mt-2 mb-2 inline-flex items-center justify-center gap-2 rounded border border-poke bg-poke/10 px-4 py-3 text-poke-bright"
+        class="mt-2 mb-2 inline-flex items-center justify-center gap-2 rounded border border-red bg-red/10 px-4 py-3 text-red-bright"
       >
         <Icon name="lucide:message-circle" class="h-4 w-4" />
         Order now

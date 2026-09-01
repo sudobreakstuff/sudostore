@@ -17,15 +17,15 @@ const { Content } = await render(post);
 const { title, description, level, tags, published } = post.data;
 
 const levelStyles: Record<string, string> = {
-  beginner: "text-phosphor border-phosphor/40",
-  intermediate: "text-phosphor-bright border-phosphor/40",
-  advanced: "text-poke-bright border-poke/40",
+  beginner: "text-neon border-neon/40",
+  intermediate: "text-neon-bright border-neon/40",
+  advanced: "text-red-bright border-red/40",
 };
 ---
 
 <BaseLayout title={title} description={description}>
   <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-    <a href={`${BASE}learn/`} class="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-phosphor">
+    <a href={`${BASE}learn/`} class="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-neon">
       <Icon name="lucide:arrow-left" class="h-4 w-4" />
       All guides
     </a>
@@ -72,7 +72,7 @@ const levelStyles: Record<string, string> = {
   }
   .article :global(h2)::before {
     content: "$ ";
-    color: var(--color-phosphor);
+    color: var(--color-neon);
     font-family: var(--font-mono);
   }
   .article :global(h3) {
@@ -100,7 +100,7 @@ const levelStyles: Record<string, string> = {
   }
   .article :global(code) {
     font-family: var(--font-mono);
-    color: var(--color-phosphor);
+    color: var(--color-neon);
     font-size: 0.9em;
   }
   .article :global(pre) {
@@ -115,12 +115,12 @@ const levelStyles: Record<string, string> = {
     color: var(--color-ink);
   }
   .article :global(a) {
-    color: var(--color-phosphor);
+    color: var(--color-neon);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
   .article :global(blockquote) {
-    border-left: 3px solid var(--color-poke);
+    border-left: 3px solid var(--color-red);
     padding-left: 1rem;
     margin: 1.25rem 0;
     color: var(--color-ink-dim);

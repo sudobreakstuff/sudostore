@@ -17,13 +17,13 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
   <!-- Hero -->
   <section class="grid-bg relative overflow-hidden border-b border-edge">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-      <p class="font-mono text-sm text-phosphor-dim">
-        <span class="text-poke">$</span> ssh guest@sudostore.co.za
+      <p class="font-mono text-sm text-neon-dim">
+        <span class="text-red">$</span> ssh guest@sudostore.co.za
         <span class="cursor ml-1"></span>
       </p>
       <h1 class="mt-5 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl">
         Cool tech.
-        <span class="text-phosphor glow"> Fair prices. </span>
+        <span class="text-neon glow"> Fair prices. </span>
         Open source.
       </h1>
       <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-dim">
@@ -34,7 +34,7 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
       <div class="mt-8 flex flex-wrap items-center gap-4">
         <a
           href={`${BASE}store/`}
-          class="inline-flex items-center gap-2 rounded bg-phosphor px-6 py-3 text-sm font-semibold text-void transition-colors hover:bg-phosphor-bright"
+          class="inline-flex items-center gap-2 rounded bg-neon px-6 py-3 text-sm font-semibold text-void transition-colors hover:bg-neon-bright"
         >
           <Icon name="lucide:shopping-bag" class="h-4 w-4" />
           Browse the store
@@ -43,9 +43,9 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
       </div>
 
       <div class="mt-10 flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs text-ink-faint">
-        <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-phosphor pulse-soft"></span>Built in South Africa</span>
-        <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-phosphor pulse-soft"></span>No AI slop</span>
-        <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-phosphor pulse-soft"></span>Open source first</span>
+        <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-neon pulse-soft"></span>Built in South Africa</span>
+        <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-neon pulse-soft"></span>No AI slop</span>
+        <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-neon pulse-soft"></span>Open source first</span>
       </div>
     </div>
   </section>
@@ -56,9 +56,9 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
       <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div class="mb-8 flex items-end justify-between">
           <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
-            <span class="text-phosphor">$</span> ./featured
+            <span class="text-neon">$</span> ./featured
           </h2>
-          <a href={`${BASE}store/`} class="text-sm text-ink-dim hover:text-phosphor">
+          <a href={`${BASE}store/`} class="text-sm text-ink-dim hover:text-neon">
             All products <Icon name="lucide:arrow-right" class="inline h-3.5 w-3.5" />
           </a>
         </div>
@@ -73,19 +73,19 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
   <section class="border-b border-edge bg-night/50">
     <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
-        <span class="text-phosphor">$</span> ls ./store
+        <span class="text-neon">$</span> ls ./store
       </h2>
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {CATEGORIES.map((cat) => (
           <a
             href={`${BASE}store/#${cat.id}`}
-            class="group flex items-start gap-4 rounded-lg border border-edge bg-panel p-5 transition-colors hover:border-phosphor/60"
+            class="group flex items-start gap-4 rounded-lg border border-edge bg-panel p-5 transition-colors hover:border-neon/60"
           >
-            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-edge bg-night text-phosphor group-hover:text-phosphor-bright">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-edge bg-night text-neon group-hover:text-neon-bright">
               <Icon name={cat.icon} class="h-5 w-5" />
             </span>
             <span>
-              <span class="block font-display font-semibold text-ink group-hover:text-phosphor">{cat.label}</span>
+              <span class="block font-display font-semibold text-ink group-hover:text-neon">{cat.label}</span>
               <span class="mt-1 block text-sm leading-relaxed text-ink-dim">{cat.blurb}</span>
             </span>
           </a>
@@ -98,8 +98,8 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
   <section class="border-b border-edge">
     <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center">
       <div>
-        <p class="font-mono text-sm text-phosphor-dim">
-          <span class="text-poke">$</span> cat why.md
+        <p class="font-mono text-sm text-neon-dim">
+          <span class="text-red">$</span> cat why.md
           <span class="cursor ml-1"></span>
         </p>
         <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-ink">
@@ -120,7 +120,7 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
         </div>
         <a
           href={`${BASE}projects/`}
-          class="mt-8 inline-flex items-center gap-2 rounded border border-phosphor bg-phosphor/10 px-5 py-2.5 text-sm font-semibold text-phosphor transition-colors hover:bg-phosphor hover:text-void"
+          class="mt-8 inline-flex items-center gap-2 rounded border border-neon bg-neon/10 px-5 py-2.5 text-sm font-semibold text-neon transition-colors hover:bg-neon hover:text-void"
         >
           <Icon name="lucide:code-2" class="h-4 w-4" />
           See the open-source projects
@@ -128,17 +128,17 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
       </div>
       <div class="rounded-lg border border-edge bg-panel font-mono text-sm">
         <div class="flex items-center gap-2 border-b border-edge px-4 py-3">
-          <span class="h-3 w-3 rounded-full bg-poke"></span>
-          <span class="h-3 w-3 rounded-full bg-phosphor-dim"></span>
+          <span class="h-3 w-3 rounded-full bg-red"></span>
+          <span class="h-3 w-3 rounded-full bg-neon-dim"></span>
           <span class="h-3 w-3 rounded-full bg-edge-bright"></span>
           <span class="ml-2 text-xs text-ink-faint">~/sudostore</span>
         </div>
         <div class="space-y-2 p-4 text-ink-dim">
-          <p><span class="text-phosphor">$</span> ./find cool-tech --affordable</p>
-          <p class="text-phosphor">→ handhelds, card readers, macro keyboards…</p>
-          <p><span class="text-phosphor">$</span> cat philosophy.txt</p>
+          <p><span class="text-neon">$</span> ./find cool-tech --affordable</p>
+          <p class="text-neon">→ handhelds, card readers, macro keyboards…</p>
+          <p><span class="text-neon">$</span> cat philosophy.txt</p>
           <p class="text-ink">→ build it, open it, teach it.</p>
-          <p><span class="text-phosphor">$</span> ./ship <span class="cursor"></span></p>
+          <p><span class="text-neon">$</span> ./ship <span class="cursor"></span></p>
         </div>
       </div>
     </div>
@@ -150,9 +150,9 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
       <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div class="mb-8 flex items-end justify-between">
           <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
-            <span class="text-phosphor">$</span> ./learn
+            <span class="text-neon">$</span> ./learn
           </h2>
-          <a href={`${BASE}learn/`} class="text-sm text-ink-dim hover:text-phosphor">
+          <a href={`${BASE}learn/`} class="text-sm text-ink-dim hover:text-neon">
             All guides <Icon name="lucide:arrow-right" class="inline h-3.5 w-3.5" />
           </a>
         </div>
@@ -160,13 +160,13 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
           {latestLearn.map((post) => (
             <a
               href={`${BASE}learn/${post.id}/`}
-              class="group flex flex-col gap-2 rounded-lg border border-edge bg-panel p-5 transition-colors hover:border-phosphor/60"
+              class="group flex flex-col gap-2 rounded-lg border border-edge bg-panel p-5 transition-colors hover:border-neon/60"
             >
               <span class="inline-flex items-center gap-2 text-xs text-ink-faint">
-                <Icon name="lucide:book-open" class="h-3.5 w-3.5 text-phosphor-dim" />
+                <Icon name="lucide:book-open" class="h-3.5 w-3.5 text-neon-dim" />
                 {post.data.level}
               </span>
-              <h3 class="font-display font-semibold text-ink group-hover:text-phosphor">{post.data.title}</h3>
+              <h3 class="font-display font-semibold text-ink group-hover:text-neon">{post.data.title}</h3>
               <p class="text-sm text-ink-dim line-clamp-2">{post.data.description}</p>
             </a>
           ))}
@@ -190,7 +190,7 @@ const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
           href={contactLink()}
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center gap-2 rounded bg-poke px-6 py-3 text-sm font-semibold text-void transition-colors hover:bg-poke-bright"
+          class="inline-flex items-center gap-2 rounded bg-red px-6 py-3 text-sm font-semibold text-void transition-colors hover:bg-red-bright"
         >
           <Icon name="lucide:message-circle" class="h-4 w-4" />
           Chat on WhatsApp

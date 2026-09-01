@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 //
@@ -13,7 +14,7 @@ import icon from 'astro-icon';
 export default defineConfig({
   site: process.env.SITE_URL || 'https://sudobreakstuff.github.io',
   base: process.env.BASE_PATH ?? '/sudostore/',
-  integrations: [icon()],
+  integrations: [icon(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },

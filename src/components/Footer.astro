@@ -19,7 +19,7 @@ const year = new Date().getFullYear();
           href={SITE.github}
           target="_blank"
           rel="noopener"
-          class="inline-flex h-9 w-9 items-center justify-center rounded border border-edge text-ink-dim transition-colors hover:border-phosphor hover:text-phosphor"
+          class="inline-flex h-9 w-9 items-center justify-center rounded border border-edge text-ink-dim transition-colors hover:border-neon hover:text-neon"
           aria-label="GitHub"
         >
           <Icon name="lucide:github" class="h-4 w-4" />
@@ -28,14 +28,14 @@ const year = new Date().getFullYear();
           href={contactLink()}
           target="_blank"
           rel="noopener"
-          class="inline-flex h-9 w-9 items-center justify-center rounded border border-edge text-ink-dim transition-colors hover:border-poke hover:text-poke-bright"
+          class="inline-flex h-9 w-9 items-center justify-center rounded border border-edge text-ink-dim transition-colors hover:border-red hover:text-red-bright"
           aria-label="WhatsApp"
         >
           <Icon name="lucide:message-circle" class="h-4 w-4" />
         </a>
         <a
           href={`mailto:${SITE.email}`}
-          class="inline-flex h-9 w-9 items-center justify-center rounded border border-edge text-ink-dim transition-colors hover:border-phosphor hover:text-phosphor"
+          class="inline-flex h-9 w-9 items-center justify-center rounded border border-edge text-ink-dim transition-colors hover:border-neon hover:text-neon"
           aria-label="Email"
         >
           <Icon name="lucide:mail" class="h-4 w-4" />
@@ -46,27 +46,27 @@ const year = new Date().getFullYear();
     <nav aria-label="Footer">
       <h3 class="font-mono text-xs uppercase tracking-widest text-ink-faint">Explore</h3>
       <ul class="mt-4 space-y-2 text-sm">
-        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}store/`}>Store</a></li>
-        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}services/`}>Services</a></li>
-        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}projects/`}>Projects</a></li>
-        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}learn/`}>Learn</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}store/`}>Store</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}services/`}>Services</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}projects/`}>Projects</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}learn/`}>Learn</a></li>
       </ul>
     </nav>
 
     <nav aria-label="Company">
       <h3 class="font-mono text-xs uppercase tracking-widest text-ink-faint">Company</h3>
       <ul class="mt-4 space-y-2 text-sm">
-        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}about/`}>About</a></li>
-        <li><a class="text-ink-dim hover:text-phosphor" href={`${BASE}contact/`}>Contact</a></li>
-        <li><a class="text-ink-dim hover:text-phosphor" href={SITE.portfolio} target="_blank" rel="noopener">Portfolio</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}about/`}>About</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={`${BASE}contact/`}>Contact</a></li>
+        <li><a class="text-ink-dim hover:text-neon" href={SITE.portfolio} target="_blank" rel="noopener">Portfolio</a></li>
       </ul>
     </nav>
   </div>
 
   <div class="border-t border-edge">
     <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between sm:px-6">
-      <p>© {year} {SITE.name}. Built with <Icon name="lucide:terminal" class="inline h-3.5 w-3.5 text-phosphor" /> in South Africa.</p>
-      <p class="font-mono"><span class="text-phosphor">$</span> ./keep-hacking</p>
+      <p>© {year} {SITE.name}. Built with <Icon name="lucide:terminal" class="inline h-3.5 w-3.5 text-neon" /> in South Africa.</p>
+      <p class="font-mono"><span class="text-neon">$</span> ./keep-hacking</p>
     </div>
   </div>
 </footer>

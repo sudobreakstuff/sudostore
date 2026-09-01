@@ -17,8 +17,8 @@ const channels = [
 >
   <section class="grid-bg border-b border-edge">
     <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <p class="font-mono text-sm text-phosphor-dim">
-        <span class="text-poke">~/</span>contact<span class="cursor ml-1"></span>
+      <p class="font-mono text-sm text-neon-dim">
+        <span class="text-red">~/</span>contact<span class="cursor ml-1"></span>
       </p>
       <h1 class="mt-3 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">Contact</h1>
       <p class="mt-4 max-w-2xl text-ink-dim">
@@ -33,7 +33,7 @@ const channels = [
       {channels.map((c) => {
         const inner = (
           <>
-            <span class={`inline-flex h-11 w-11 items-center justify-center rounded-md border ${c.accent ? "border-poke bg-poke/10 text-poke-bright" : "border-edge bg-panel text-phosphor"}`}>
+            <span class={`inline-flex h-11 w-11 items-center justify-center rounded-md border ${c.accent ? "border-red bg-red/10 text-red-bright" : "border-edge bg-panel text-neon"}`}>
               <Icon name={c.icon} class="h-5 w-5" />
             </span>
             <div class="flex-1">
@@ -47,7 +47,7 @@ const channels = [
           </>
         );
         return c.href ? (
-          <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener" class="flex items-start gap-4 rounded-lg border border-edge bg-panel p-6 transition-colors hover:border-phosphor/60">
+          <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener" class="flex items-start gap-4 rounded-lg border border-edge bg-panel p-6 transition-colors hover:border-neon/60">
             {inner}
           </a>
         ) : (

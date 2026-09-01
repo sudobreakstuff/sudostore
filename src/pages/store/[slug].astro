@@ -25,16 +25,16 @@ const related = (await getCollection("products", ({ data }) => data.category ===
   .slice(0, 3);
 
 const statusStyles: Record<string, string> = {
-  "in-stock": "text-phosphor border-phosphor/40",
-  "made-to-order": "text-phosphor-bright border-phosphor/40",
-  "pre-order": "text-poke-bright border-poke/40",
+  "in-stock": "text-neon border-neon/40",
+  "made-to-order": "text-neon-bright border-neon/40",
+  "pre-order": "text-red-bright border-red/40",
   "sold-out": "text-ink-faint border-edge",
 };
 ---
 
 <BaseLayout title={title} description={tagline}>
   <article class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-    <a href={`${BASE}store/`} class="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-phosphor">
+    <a href={`${BASE}store/`} class="inline-flex items-center gap-1.5 text-sm text-ink-dim hover:text-neon">
       <Icon name="lucide:arrow-left" class="h-4 w-4" />
       Back to store
     </a>
@@ -44,7 +44,7 @@ const statusStyles: Record<string, string> = {
       <div class="lg:col-span-2">
         <div class="flex flex-wrap items-center gap-3">
           <span class="inline-flex items-center gap-1.5 text-sm text-ink-dim">
-            <Icon name={categoryIcon(category)} class="h-4 w-4 text-phosphor-dim" />
+            <Icon name={categoryIcon(category)} class="h-4 w-4 text-neon-dim" />
             {categoryLabel(category)}
           </span>
           <span class={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs ${statusStyles[status] ?? statusStyles["in-stock"]}`}>
@@ -54,25 +54,25 @@ const statusStyles: Record<string, string> = {
         </div>
 
         <h1 class="mt-4 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">{title}</h1>
-        <p class="mt-3 text-lg text-phosphor glow">{tagline}</p>
+        <p class="mt-3 text-lg text-neon glow">{tagline}</p>
 
         <div class="mt-8 space-y-4 text-ink-dim leading-relaxed">
           {description.split("\n\n").map((para) => <p>{para}</p>)}
         </div>
 
-        <div class="prose-invert mt-8 [&_code]:text-phosphor [&_h2]:font-display [&_h2]:text-ink [&_a]:text-phosphor">
+        <div class="prose-invert mt-8 [&_code]:text-neon [&_h2]:font-display [&_h2]:text-ink [&_a]:text-neon">
           <Content />
         </div>
 
         {specs.length > 0 && (
           <div class="mt-10">
             <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
-              <span class="text-phosphor">$</span> cat specs
+              <span class="text-neon">$</span> cat specs
             </h2>
             <ul class="mt-4 grid gap-2 sm:grid-cols-2">
               {specs.map((spec) => (
                 <li class="flex items-start gap-2 text-sm text-ink-dim">
-                  <Icon name="lucide:check" class="mt-0.5 h-4 w-4 shrink-0 text-phosphor" />
+                  <Icon name="lucide:check" class="mt-0.5 h-4 w-4 shrink-0 text-neon" />
                   {spec}
                 </li>
               ))}
@@ -85,13 +85,13 @@ const statusStyles: Record<string, string> = {
       <aside>
         <div class="sticky top-24 rounded-lg border border-edge bg-panel p-6">
           <p class="font-mono text-xs uppercase tracking-widest text-ink-faint">Price</p>
-          <p class="mt-2 font-mono text-3xl font-bold text-phosphor">{formatPrice(price, priceNote)}</p>
+          <p class="mt-2 font-mono text-3xl font-bold text-neon">{formatPrice(price, priceNote)}</p>
 
           <div class="mt-6 space-y-3">
             <OrderButton product={`${title} (${tagline})`} class="w-full" />
             <a
               href={`mailto:sudobreakstuff1zn@gmail.com?subject=${encodeURIComponent(`Order: ${title}`)}`}
-              class="inline-flex w-full items-center justify-center gap-2 rounded border border-edge px-5 py-2.5 text-sm font-semibold text-ink-dim transition-colors hover:border-phosphor hover:text-phosphor"
+              class="inline-flex w-full items-center justify-center gap-2 rounded border border-edge px-5 py-2.5 text-sm font-semibold text-ink-dim transition-colors hover:border-neon hover:text-neon"
             >
               <Icon name="lucide:mail" class="h-4 w-4" />
               Email instead
@@ -112,7 +112,7 @@ const statusStyles: Record<string, string> = {
     {related.length > 0 && (
       <div class="mt-16 border-t border-edge pt-12">
         <h2 class="font-mono text-sm uppercase tracking-widest text-ink-dim">
-          <span class="text-phosphor">$</span> ./related
+          <span class="text-neon">$</span> ./related
         </h2>
         <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((p) => <ProductCard product={p} />)}
