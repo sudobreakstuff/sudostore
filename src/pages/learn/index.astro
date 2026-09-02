@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SearchInput from "../../components/SearchInput.astro";
 import { BASE } from "../../lib/site";
 
 const posts = (await getCollection("learn", ({ data }) => !data.draft))
@@ -34,6 +35,15 @@ const levelStyles: Record<string, string> = {
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div class="mb-8 max-w-md">
+      <SearchInput id="learn-search" placeholder="Search guides…" />
+    </div>
+
+    <div id="learn-no-results" class="hidden rounded-lg border border-edge bg-panel p-10 text-center">
+      <p class="font-mono text-sm text-ink-dim">$ ./search --no-results <span class="cursor"></span></p>
+      <p class="mt-2 text-sm text-ink-faint">No guides match that search. Try another term.</p>
+    </div>
+
     {posts.length === 0 ? (
       <div class="rounded-lg border border-edge bg-panel p-10 text-center">
         <p class="font-mono text-ink-dim">$ ./learn <span class="cursor"></span></p>
@@ -44,6 +54,7 @@ const levelStyles: Record<string, string> = {
         {posts.map((post) => (
           <a
             href={`${BASE}learn/${post.id}/`}
+            data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(" ")} ${post.data.level}`.toLowerCase()}
             class="group flex flex-col gap-3 rounded-lg border border-edge bg-panel p-6 transition-colors hover:border-neon/60"
           >
             <div class="flex items-center justify-between">
@@ -69,3 +80,22 @@ const levelStyles: Record<string, string> = {
     )}
   </section>
 </BaseLayout>
+
+<script>
+  const search = document.getElementById("learn-search");
+  const cards = document.querySelectorAll<HTMLElement>("[data-search]");
+  const noResults = document.getElementById("learn-no-results");
+
+  function apply(): void {
+    const q = search ? search.value.trim().toLowerCase() : "";
+    let any = false;
+    cards.forEach((c) => {
+      const show = !q || (c.dataset.search ?? "").includes(q);
+      c.style.display = show ? "" : "none";
+      if (show) any = true;
+    });
+    if (noResults) noResults.classList.toggle("hidden", any);
+  }
+
+  search?.addEventListener("input", apply);
+</script>

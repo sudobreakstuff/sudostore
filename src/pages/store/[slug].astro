@@ -7,7 +7,7 @@ import OrderButton from "../../components/OrderButton.astro";
 import ProductCard from "../../components/ProductCard.astro";
 import { categoryIcon, categoryLabel } from "../../lib/catalog";
 import { formatPrice } from "../../lib/format";
-import { BASE } from "../../lib/site";
+import { BASE, SITE } from "../../lib/site";
 
 export async function getStaticPaths() {
   const products = await getCollection("products");
@@ -147,7 +147,7 @@ const statusStyles: Record<string, string> = {
           <div class="mt-6 space-y-3">
             <OrderButton product={`${title} (${tagline})`} class="w-full" />
             <a
-              href={`mailto:sudobreakstuff1zn@gmail.com?subject=${encodeURIComponent(`Order: ${title}`)}`}
+              href={`mailto:${SITE.email}?subject=${encodeURIComponent(`Order: ${title}`)}`}
               class="inline-flex w-full items-center justify-center gap-2 rounded border border-edge px-5 py-2.5 text-sm font-semibold text-ink-dim transition-colors hover:border-neon hover:text-neon"
             >
               <Icon name="lucide:mail" class="h-4 w-4" />

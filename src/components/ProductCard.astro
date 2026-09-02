@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { product } = Astro.props;
-const { title, tagline, price, priceNote, category, status, images } = product.data;
+const { title, tagline, price, priceNote, category, status, images, tags = [] } = product.data;
 const image = images?.[0];
 
 const statusStyles: Record<string, string> = {
@@ -24,6 +24,7 @@ const statusStyles: Record<string, string> = {
 
 <a
   href={`${BASE}store/${product.id}/`}
+  data-search={`${title} ${tagline} ${tags.join(" ")} ${categoryLabel(category)}`.toLowerCase()}
   class="group relative flex flex-col overflow-hidden rounded-lg border border-edge bg-panel transition-all hover:-translate-y-0.5 hover:border-neon/60"
 >
   <div class="relative aspect-[4/3] overflow-hidden border-b border-edge bg-night">

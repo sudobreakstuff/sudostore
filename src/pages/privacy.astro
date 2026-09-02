@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../lib/site";
 ---
 
 <BaseLayout title="Privacy Policy" description="How sudostore handles your information.">
@@ -36,7 +37,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <p>Order chats happen on WhatsApp. Messenger and chat history are subject to WhatsApp's own privacy policy, and messages stay in WhatsApp unless you ask us to delete them.</p>
 
       <h2>Your rights</h2>
-      <p>You can ask us at any time what information we hold about you and request that it be corrected or deleted. Email <a href="mailto:sudobreakstuff1zn@gmail.com">sudobreakstuff1zn@gmail.com</a> and we'll sort it out.</p>
+      <p>You can ask us at any time what information we hold about you and request that it be corrected or deleted. Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we'll sort it out.</p>
     </div>
   </article>
 </BaseLayout>

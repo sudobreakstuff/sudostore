@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProductCard from "../../components/ProductCard.astro";
+import SearchInput from "../../components/SearchInput.astro";
 import { CATEGORIES } from "../../lib/catalog";
 
 const products = (await getCollection("products")).sort((a, b) => {
@@ -36,25 +37,33 @@ const grouped = CATEGORIES.map((cat) => ({
   </section>
 
   <div class="sticky top-16 z-40 border-b border-edge bg-void/85 backdrop-blur-md">
-    <div class="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-3 sm:px-6" id="filter-bar">
-      <button
-        data-filter="all"
-        class="filter-btn shrink-0 rounded border border-neon bg-neon/15 px-4 py-1.5 text-sm font-semibold text-neon"
-      >
-        All
-      </button>
-      {grouped.map((cat) => (
+    <div class="mx-auto max-w-6xl px-4 py-3 sm:px-6">
+      <SearchInput id="store-search" placeholder="Search products…" />
+      <div class="mt-3 flex gap-2 overflow-x-auto" id="filter-bar">
         <button
-          data-filter={cat.id}
-          class="filter-btn shrink-0 rounded border border-edge px-4 py-1.5 text-sm text-ink-dim transition-colors hover:border-neon/50 hover:text-neon"
+          data-filter="all"
+          class="filter-btn shrink-0 rounded border border-neon bg-neon/15 px-4 py-1.5 text-sm font-semibold text-neon"
         >
-          {cat.label}
+          All
         </button>
-      ))}
+        {grouped.map((cat) => (
+          <button
+            data-filter={cat.id}
+            class="filter-btn shrink-0 rounded border border-edge px-4 py-1.5 text-sm text-ink-dim transition-colors hover:border-neon/50 hover:text-neon"
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
     </div>
   </div>
 
   <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div id="store-no-results" class="hidden rounded-lg border border-edge bg-panel p-10 text-center">
+      <p class="font-mono text-sm text-ink-dim">$ ./search --no-results <span class="cursor"></span></p>
+      <p class="mt-2 text-sm text-ink-faint">No products match that search. Try another term.</p>
+    </div>
+
     {grouped.map((cat) => (
       <div data-section={cat.id} class="mb-14">
         <div class="mb-6 flex items-center gap-3">
@@ -77,19 +86,46 @@ const grouped = CATEGORIES.map((cat) => ({
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
   const sections = document.querySelectorAll<HTMLElement>("[data-section]");
+  const search = document.getElementById("store-search");
+  const noResults = document.getElementById("store-no-results");
+  let activeFilter = "all";
+
+  const activeClass = "filter-btn shrink-0 rounded border border-neon bg-neon/15 px-4 py-1.5 text-sm font-semibold text-neon";
+  const idleClass = "filter-btn shrink-0 rounded border border-edge px-4 py-1.5 text-sm text-ink-dim transition-colors hover:border-neon/50 hover:text-neon";
+
+  function matchesQuery(card): boolean {
+    if (!search) return true;
+    const q = search.value.trim().toLowerCase();
+    if (!q) return true;
+    return (card.dataset.search ?? "").includes(q);
+  }
+
+  function apply(): void {
+    let anyVisible = false;
+    sections.forEach((s) => {
+      const sectionOk = activeFilter === "all" || s.dataset.section === activeFilter;
+      const cards = s.querySelectorAll<HTMLElement>("[data-search]");
+      let sectionHasMatches = false;
+      cards.forEach((c) => {
+        const show = sectionOk && matchesQuery(c);
+        c.style.display = show ? "" : "none";
+        if (show) sectionHasMatches = true;
+      });
+      s.style.display = sectionOk && sectionHasMatches ? "" : "none";
+      if (sectionOk && sectionHasMatches) anyVisible = true;
+    });
+    if (noResults) noResults.classList.toggle("hidden", anyVisible);
+  }
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter;
+      activeFilter = btn.dataset.filter;
       buttons.forEach((b) => {
-        const active = b.dataset.filter === filter;
-        b.className = active
-          ? "filter-btn shrink-0 rounded border border-neon bg-neon/15 px-4 py-1.5 text-sm font-semibold text-neon"
-          : "filter-btn shrink-0 rounded border border-edge px-4 py-1.5 text-sm text-ink-dim transition-colors hover:border-neon/50 hover:text-neon";
+        b.className = b.dataset.filter === activeFilter ? activeClass : idleClass;
       });
-      sections.forEach((s) => {
-        s.style.display = filter === "all" || s.dataset.section === filter ? "" : "none";
-      });
+      apply();
     });
   });
+
+  search?.addEventListener("input", apply);
 </script>

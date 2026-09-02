@@ -1,0 +1,25 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  id: string;
+  placeholder?: string;
+  label?: string;
+}
+
+const { id, placeholder = "Search…", label = "Search" } = Astro.props;
+---
+
+<div class="relative">
+  <Icon
+    name="lucide:search"
+    class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-faint"
+  />
+  <input
+    type="search"
+    id={id}
+    placeholder={placeholder}
+    aria-label={label}
+    class="w-full rounded-lg border border-edge bg-panel py-2.5 pl-10 pr-4 font-mono text-sm text-ink placeholder:text-ink-faint transition-colors focus:border-neon focus:outline-none focus:ring-1 focus:ring-neon/40"
+  />
+</div>
