@@ -1,29 +1,40 @@
 ---
 import { SITE } from "../lib/site";
----
 
-<script type="application/ld+json" set:html={JSON.stringify({
+const orgJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
       "@id": "https://sudostore.co.za/#org",
       "name": "sudostore",
+      "alternateName": "sudo store",
       "url": "https://sudostore.co.za",
       "email": SITE.email,
-      "areaServed": "ZA",
-      "sameAs": [
-        SITE.github,
-        SITE.portfolio,
-      ],
+      "description": "South African online tech store for retro handhelds, card readers, custom hardware, 3D-printed gear and software — built in South Africa.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ZA",
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "South Africa",
+      },
+      "foundingLocation": "South Africa",
+      "countryOfOrigin": "ZA",
+      "sameAs": [SITE.github, SITE.portfolio],
     },
     {
       "@type": "WebSite",
       "@id": "https://sudostore.co.za/#website",
       "url": "https://sudostore.co.za",
       "name": "sudostore",
+      "inLanguage": "en-ZA",
       "description": SITE.description,
       "publisher": { "@id": "https://sudostore.co.za/#org" },
     },
   ],
-})} />
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />

@@ -49,8 +49,11 @@ const ogImage = new URL(`${BASE}og-banner.png`, Astro.site ?? SITE.url).toString
     </script>
     <link rel="canonical" href={Astro.url} />
     <meta property="og:url" content={Astro.url.toString()} />
+    <meta property="og:locale" content="en_ZA" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
+    <meta name="geo.region" content="ZA" />
+    <meta name="geo.placename" content="South Africa" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
