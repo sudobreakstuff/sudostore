@@ -3,7 +3,7 @@ title: "Pokémon in 3D on iPhone: Phosphor + the Dramaless Voxel Mod"
 description: "Run Pokémon Red, Blue or Yellow in full 3D on iOS with Phosphor — import your ROM, add the Dramaless Shape voxel mod and get the 3D camera working."
 published: 2026-09-01
 level: "intermediate"
-tags: ["pokemon", "3d", "iphone", "phosphor", "voxel"]
+tags: ["pokemon", "3d", "iphone", "phosphor", "voxel", "retro", "gaming"]
 ---
 
 Playing the original Pokémon on iPhone is nothing new. Playing it in *actual

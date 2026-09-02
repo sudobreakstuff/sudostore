@@ -3,7 +3,7 @@ title: "Pokémon in 3D on Android: Gen1Recomp + VoxelMod"
 description: "Play Pokémon Red, Blue and Yellow natively in 3D on Android with Gen1Recomp — import your ROM, add the VoxelMod, and get the 3D camera working."
 published: 2026-09-01
 level: "intermediate"
-tags: ["pokemon", "3d", "android", "gen1recomp", "voxel"]
+tags: ["pokemon", "3d", "android", "gen1recomp", "voxel", "retro", "gaming"]
 ---
 
 Gen1Recomp is a native re-implementation of the original Pokémon games — it
