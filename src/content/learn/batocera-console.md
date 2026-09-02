@@ -4,6 +4,15 @@ description: "Turn a USB flash drive or hard drive into a retro console with Bat
 published: 2026-09-01
 level: "intermediate"
 tags: ["batocera", "emulationstation", "retro", "linux", "gaming"]
+faqs:
+  - q: "What is Batocera?"
+    a: "Batocera is a Linux distribution made for retro gaming. You flash it to a USB drive or hard disk and it boots into EmulationStation on almost any PC or laptop."
+  - q: "How big a drive do I need for Batocera?"
+    a: "16GB fits the OS with little room for games. Use 64GB or larger so you can store a real game library on the same drive."
+  - q: "How do I add games to Batocera?"
+    a: "Put ROMs in the matching folders under share/roms/ (e.g. .gb in gb/, .gba in gba/, .chd in psx/), and BIOS files in share/bios/. Then scrape metadata for box art."
+  - q: "How do I install themes in Batocera?"
+    a: "Drop theme folders or zips into share/themes/, then pick one in EmulationStation under Settings → Themes."
 ---
 
 Batocera is a Linux distribution made specifically for retro gaming. You flash

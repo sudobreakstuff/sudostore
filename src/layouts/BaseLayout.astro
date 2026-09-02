@@ -44,6 +44,7 @@ const ogImage = new URL(`${BASE}og-banner.png`, Astro.site ?? SITE.url).toString
       })();
     </script>
     <link rel="canonical" href={Astro.url} />
+    <meta property="og:url" content={Astro.url.toString()} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={fullTitle} />

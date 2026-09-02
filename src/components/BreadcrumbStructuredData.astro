@@ -1,0 +1,19 @@
+---
+interface Props {
+  items: { name: string; path?: string }[];
+}
+
+const { items } = Astro.props;
+const crumbs = items.map((item, i) => ({
+  "@type": "ListItem",
+  position: i + 1,
+  name: item.name,
+  item: item.path ? `https://sudostore.co.za${item.path}` : undefined,
+}));
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: crumbs,
+})}></script>

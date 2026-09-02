@@ -45,6 +45,7 @@ const learn = defineCollection({
     published: z.coerce.date(),
     level: z.enum(["beginner", "intermediate", "advanced"]).default("beginner"),
     tags: z.array(z.string()).default([]),
+    faqs: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
     draft: z.boolean().default(false),
   }),
 });

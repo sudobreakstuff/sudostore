@@ -4,6 +4,15 @@ description: "The complete beginner setup for emulating retro consoles on your i
 published: 2026-09-01
 level: "beginner"
 tags: ["emulation", "ios", "delta", "retro", "gaming"]
+faqs:
+  - q: "Is Delta on the App Store?"
+    a: "Yes. Delta by Riley Testut is available directly on the App Store, so no computer or AltStore is needed for most users."
+  - q: "Where do I get ROMs for Delta?"
+    a: "Delta cannot download games. You provide .gb/.gbc/.gba/.nes/.snes/.n64 files from games you legally own, dumped from cartridges you have."
+  - q: "How do I import ROMs into Delta?"
+    a: "Put ROMs in the Files app, then import via Delta's file picker, or open the ROM file and choose 'Open with Delta'."
+  - q: "Can I use a controller with Delta?"
+    a: "Yes. Delta supports Bluetooth controllers like Xbox, PlayStation and Switch Pro controllers."
 ---
 
 iPhone emulation used to mean jailbreaks and computer apps. These days Delta is

@@ -4,6 +4,13 @@ description: "Play Pokémon Red, Blue and Yellow natively in 3D on Android with 
 published: 2026-09-01
 level: "intermediate"
 tags: ["pokemon", "3d", "android", "gen1recomp", "voxel", "retro", "gaming"]
+faqs:
+  - q: "What is Gen1Recomp?"
+    a: "Gen1Recomp is a native re-implementation of Pokémon Red, Blue and Yellow. It rebuilds the game from your ROM and runs it natively rather than emulating the Game Boy."
+  - q: "How do I get Pokémon in 3D on Android?"
+    a: "Install the Gen1Recomp Android app, import your Pokémon ROM, then import and enable the Dramatic Shape / Dramaless VoxelMod and turn on 3D view and the camera."
+  - q: "Do I need a specific ROM for Gen1Recomp?"
+    a: "Yes — it needs a Pokémon Red, Blue or Yellow ROM that matches the version you select (e.g. a US Red ROM imported as Red)."
 ---
 
 Gen1Recomp is a native re-implementation of the original Pokémon games — it
