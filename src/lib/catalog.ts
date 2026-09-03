@@ -3,7 +3,8 @@ export type Category =
   | "card-readers"
   | "input-devices"
   | "3d-printing"
-  | "software-services";
+  | "software-services"
+  | "diy-kits";
 
 export const CATEGORIES: { id: Category; label: string; icon: string; blurb: string }[] = [
   {
@@ -36,6 +37,12 @@ export const CATEGORIES: { id: Category; label: string; icon: string; blurb: str
     icon: "lucide:terminal",
     blurb: "Automation, setup, flashing and honest tech support.",
   },
+  {
+    id: "diy-kits",
+    label: "DIY Build Kits",
+    icon: "lucide:puzzle",
+    blurb: "Pokémon-themed build kits — learn electronics, collect them all.",
+  },
 ];
 
 export const categoryLabel = (id: Category): string =>
@@ -46,10 +53,11 @@ export const categoryIcon = (id: Category): string =>
 
 export const CATEGORY_PRIORITY: Record<Category, number> = {
   handhelds: 0,
-  "card-readers": 1,
-  "input-devices": 2,
-  "3d-printing": 3,
-  "software-services": 4,
+  "diy-kits": 1,
+  "card-readers": 2,
+  "input-devices": 3,
+  "3d-printing": 4,
+  "software-services": 5,
 };
 
 export const sortByCategoryPriority = <T extends { data: { category: Category } }>(

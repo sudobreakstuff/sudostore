@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#050810"/>
+      <stop offset="1" stop-color="#0a1628"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3da9ff" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#ff2b2b" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="neon-glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-glow">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="480" fill="url(#bg)"/>
+  <rect width="640" height="480" fill="url(#glow)" opacity="0.4"/>
+  <g opacity="0.08">
+    <line x1="0" y1="0" x2="640" y2="480" stroke="#3da9ff" stroke-width="0.5"/>
+    <line x1="640" y1="0" x2="0" y2="480" stroke="#3da9ff" stroke-width="0.5"/>
+    <line x1="320" y1="0" x2="320" y2="480" stroke="#3da9ff" stroke-width="0.5"/>
+    <line x1="0" y1="240" x2="640" y2="240" stroke="#3da9ff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Grid dots -->
+  <g fill="#3da9ff" opacity="0.06">
+    <circle cx="40" cy="40" r="1.5"/><circle cx="80" cy="40" r="1.5"/><circle cx="120" cy="40" r="1.5"/>
+    <circle cx="40" cy="80" r="1.5"/><circle cx="80" cy="80" r="1.5"/><circle cx="120" cy="80" r="1.5"/>
+    <circle cx="40" cy="120" r="1.5"/><circle cx="80" cy="120" r="1.5"/><circle cx="120" cy="120" r="1.5"/>
+    <circle cx="520" cy="40" r="1.5"/><circle cx="560" cy="40" r="1.5"/><circle cx="600" cy="40" r="1.5"/>
+    <circle cx="520" cy="80" r="1.5"/><circle cx="560" cy="80" r="1.5"/><circle cx="600" cy="80" r="1.5"/>
+    <circle cx="520" cy="120" r="1.5"/><circle cx="560" cy="120" r="1.5"/><circle cx="600" cy="120" r="1.5"/>
+    <circle cx="40" cy="360" r="1.5"/><circle cx="80" cy="360" r="1.5"/><circle cx="120" cy="360" r="1.5"/>
+    <circle cx="40" cy="400" r="1.5"/><circle cx="80" cy="400" r="1.5"/><circle cx="120" cy="400" r="1.5"/>
+    <circle cx="520" cy="360" r="1.5"/><circle cx="560" cy="360" r="1.5"/><circle cx="600" cy="360" r="1.5"/>
+    <circle cx="520" cy="400" r="1.5"/><circle cx="560" cy="400" r="1.5"/><circle cx="600" cy="400" r="1.5"/>
+  </g>
+
+  <!-- Title -->
+  <text x="320" y="52" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" fill="#3da9ff" opacity="0.7" letter-spacing="4">TRAINER'S LAB</text>
+  <text x="320" y="78" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="36" font-weight="bold" fill="#f0f4ff">Starter Pack</text>
+  <line x1="220" y1="90" x2="420" y2="90" stroke="#3da9ff" stroke-width="1" opacity="0.4"/>
+
+  <!-- Base Station - main box -->
+  <rect x="160" y="140" width="320" height="220" rx="12" fill="#0c1220" stroke="#3da9ff" stroke-width="1.5" opacity="0.9"/>
+  <rect x="160" y="140" width="320" height="220" rx="12" fill="none" stroke="#3da9ff" stroke-width="0.5" opacity="0.2" stroke-dasharray="4 4"/>
+
+  <!-- Top accent strip -->
+  <rect x="160" y="140" width="320" height="6" rx="3" fill="#ff2b2b" opacity="0.9"/>
+
+  <!-- Pokéball accent on lid -->
+  <circle cx="320" cy="165" r="14" fill="none" stroke="#ff2b2b" stroke-width="2"/>
+  <line x1="306" y1="165" x2="334" y2="165" stroke="#ff2b2b" stroke-width="2"/>
+  <circle cx="320" cy="165" r="4" fill="#ff2b2b"/>
+  <circle cx="320" cy="165" r="2.5" fill="#0c1220"/>
+
+  <!-- Breadboard inside -->
+  <rect x="195" y="200" width="250" height="70" rx="4" fill="#e8e8e0" opacity="0.95"/>
+  <!-- Breadboard holes -->
+  <g fill="#c0c0b8" opacity="0.6">
+    <circle cx="210" cy="215" r="1.5"/><circle cx="225" cy="215" r="1.5"/><circle cx="240" cy="215" r="1.5"/>
+    <circle cx="255" cy="215" r="1.5"/><circle cx="270" cy="215" r="1.5"/><circle cx="285" cy="215" r="1.5"/>
+    <circle cx="300" cy="215" r="1.5"/><circle cx="315" cy="215" r="1.5"/><circle cx="330" cy="215" r="1.5"/>
+    <circle cx="345" cy="215" r="1.5"/><circle cx="360" cy="215" r="1.5"/><circle cx="375" cy="215" r="1.5"/>
+    <circle cx="390" cy="215" r="1.5"/><circle cx="405" cy="215" r="1.5"/><circle cx="420" cy="215" r="1.5"/>
+    <circle cx="210" cy="230" r="1.5"/><circle cx="225" cy="230" r="1.5"/><circle cx="240" cy="230" r="1.5"/>
+    <circle cx="255" cy="230" r="1.5"/><circle cx="270" cy="230" r="1.5"/><circle cx="285" cy="230" r="1.5"/>
+    <circle cx="300" cy="230" r="1.5"/><circle cx="315" cy="230" r="1.5"/><circle cx="330" cy="230" r="1.5"/>
+    <circle cx="345" cy="230" r="1.5"/><circle cx="360" cy="230" r="1.5"/><circle cx="375" cy="230" r="1.5"/>
+    <circle cx="390" cy="230" r="1.5"/><circle cx="405" cy="230" r="1.5"/><circle cx="420" cy="230" r="1.5"/>
+    <circle cx="210" cy="245" r="1.5"/><circle cx="225" cy="245" r="1.5"/><circle cx="240" cy="245" r="1.5"/>
+    <circle cx="255" cy="245" r="1.5"/><circle cx="270" cy="245" r="1.5"/><circle cx="285" cy="245" r="1.5"/>
+    <circle cx="300" cy="245" r="1.5"/><circle cx="315" cy="245" r="1.5"/><circle cx="330" cy="245" r="1.5"/>
+    <circle cx="345" cy="245" r="1.5"/><circle cx="360" cy="245" r="1.5"/><circle cx="375" cy="245" r="1.5"/>
+    <circle cx="390" cy="245" r="1.5"/><circle cx="405" cy="245" r="1.5"/><circle cx="420" cy="245" r="1.5"/>
+    <circle cx="210" cy="260" r="1.5"/><circle cx="225" cy="260" r="1.5"/><circle cx="240" cy="260" r="1.5"/>
+    <circle cx="255" cy="260" r="1.5"/><circle cx="270" cy="260" r="1.5"/><circle cx="285" cy="260" r="1.5"/>
+    <circle cx="300" cy="260" r="1.5"/><circle cx="315" cy="260" r="1.5"/><circle cx="330" cy="260" r="1.5"/>
+    <circle cx="345" cy="260" r="1.5"/><circle cx="360" cy="260" r="1.5"/><circle cx="375" cy="260" r="1.5"/>
+    <circle cx="390" cy="260" r="1.5"/><circle cx="405" cy="260" r="1.5"/><circle cx="420" cy="260" r="1.5"/>
+  </g>
+  <!-- Center divider -->
+  <line x1="195" y1="235" x2="445" y2="235" stroke="#b0b0a8" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- ESP32 on breadboard -->
+  <rect x="280" y="208" width="60" height="24" rx="3" fill="#1a1a2e" stroke="#3da9ff" stroke-width="1"/>
+  <rect x="283" y="211" width="8" height="6" rx="1" fill="#3da9ff" opacity="0.6"/>
+  <rect x="283" y="221" width="8" height="6" rx="1" fill="#3da9ff" opacity="0.6"/>
+  <rect x="329" y="211" width="8" height="6" rx="1" fill="#3da9ff" opacity="0.6"/>
+  <rect x="329" y="221" width="8" height="6" rx="1" fill="#3da9ff" opacity="0.6"/>
+  <text x="310" y="225" text-anchor="middle" font-family="monospace" font-size="6" fill="#3da9ff">ESP32</text>
+
+  <!-- Jumper wires -->
+  <path d="M260 245 C260 220, 290 215, 280 208" stroke="#ff2b2b" stroke-width="1.5" fill="none" opacity="0.7"/>
+  <path d="M340 245 C340 220, 360 215, 355 208" stroke="#3da9ff" stroke-width="1.5" fill="none" opacity="0.7"/>
+  <path d="M370 245 C370 220, 380 215, 385 208" stroke="#22c55e" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+  <!-- Components floating around -->
+  <!-- LED -->
+  <g transform="translate(200, 300)">
+    <circle cx="0" cy="0" r="8" fill="#ff2b2b" opacity="0.9"/>
+    <circle cx="0" cy="0" r="4" fill="#ff6b6b" opacity="0.5"/>
+    <line x1="-3" y1="8" x2="-3" y2="20" stroke="#888" stroke-width="1"/>
+    <line x1="3" y1="8" x2="3" y2="18" stroke="#888" stroke-width="1"/>
+    <text x="0" y="30" text-anchor="middle" font-family="monospace" font-size="8" fill="#ff6b6b">LED</text>
+  </g>
+
+  <!-- Button -->
+  <g transform="translate(290, 310)">
+    <rect x="-8" y="-8" width="16" height="16" rx="2" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
+    <circle cx="0" cy="0" r="4" fill="#3da9ff" opacity="0.8"/>
+    <line x1="0" y1="8" x2="0" y2="18" stroke="#888" stroke-width="1"/>
+    <line x1="0" y1="8" x2="0" y2="18" stroke="#888" stroke-width="1"/>
+    <text x="0" y="28" text-anchor="middle" font-family="monospace" font-size="8" fill="#3da9ff">BTN</text>
+  </g>
+
+  <!-- Buzzer -->
+  <g transform="translate(380, 305)">
+    <circle cx="0" cy="0" r="10" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
+    <circle cx="0" cy="0" r="5" fill="#0a0a14"/>
+    <text x="0" y="3" text-anchor="middle" font-family="monospace" font-size="6" fill="#888">♪</text>
+    <text x="0" y="22" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">BUZ</text>
+  </g>
+
+  <!-- USB-C cable -->
+  <g transform="translate(440, 310)">
+    <rect x="-4" y="-3" width="8" height="6" rx="2" fill="#333" stroke="#666" stroke-width="0.5"/>
+    <rect x="-2" y="-1.5" width="4" height="3" rx="1" fill="#555"/>
+    <path d="M4 0 C20 -10, 30 10, 40 0" stroke="#444" stroke-width="2" fill="none"/>
+    <text x="20" y="20" text-anchor="middle" font-family="monospace" font-size="8" fill="#666">USB-C</text>
+  </g>
+
+  <!-- Trainer Card -->
+  <g transform="translate(100, 280)">
+    <rect x="0" y="0" width="70" height="95" rx="6" fill="#1a1a2e" stroke="#3da9ff" stroke-width="1"/>
+    <rect x="0" y="0" width="70" height="95" rx="6" fill="none" stroke="#ff2b2b" stroke-width="0.5" opacity="0.4"/>
+    <rect x="5" y="5" width="60" height="30" rx="3" fill="#0c1220"/>
+    <text x="35" y="24" text-anchor="middle" font-family="monospace" font-size="8" fill="#3da9ff">TRAINER</text>
+    <text x="35" y="48" text-anchor="middle" font-family="'Space Grotesk'" font-size="9" font-weight="bold" fill="#f0f4ff">SUDO</text>
+    <text x="35" y="58" text-anchor="middle" font-family="'Space Grotesk'" font-size="7" fill="#888">STARTER</text>
+    <line x1="10" y1="65" x2="60" y2="65" stroke="#3da9ff" stroke-width="0.5" opacity="0.3"/>
+    <text x="35" y="75" text-anchor="middle" font-family="monospace" font-size="6" fill="#666">LV.01</text>
+    <text x="35" y="85" text-anchor="middle" font-family="monospace" font-size="5" fill="#444">★ ★ ★</text>
+  </g>
+
+  <!-- Skills badges -->
+  <g transform="translate(440, 140)">
+    <rect x="0" y="0" width="140" height="80" rx="8" fill="#0c1220" stroke="#3da9ff" stroke-width="0.5" opacity="0.7"/>
+    <text x="70" y="18" text-anchor="middle" font-family="monospace" font-size="9" fill="#3da9ff" letter-spacing="2">YOU'LL LEARN</text>
+    <text x="15" y="35" font-family="monospace" font-size="8" fill="#22c55e">▸ Blink an LED</text>
+    <text x="15" y="48" font-family="monospace" font-size="8" fill="#22c55e">▸ Read a button</text>
+    <text x="15" y="61" font-family="monospace" font-size="8" fill="#22c55e">▸ Play tones</text>
+    <text x="15" y="74" font-family="monospace" font-size="8" fill="#22c55e">▸ WiFi basics</text>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="430" width="640" height="50" fill="#050810" opacity="0.8"/>
+  <line x1="0" y1="430" x2="640" y2="430" stroke="#3da9ff" stroke-width="0.5" opacity="0.3"/>
+  <text x="320" y="458" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="bold" fill="#f0f4ff">sudostore.co.za</text>
+  <text x="560" y="458" text-anchor="middle" font-family="monospace" font-size="10" fill="#3da9ff" opacity="0.6">R499</text>
+</svg>

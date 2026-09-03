@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#050810"/>
+      <stop offset="1" stop-color="#1a0510"/>
+    </linearGradient>
+    <radialGradient id="pokewarm" cx="0.5" cy="0.4" r="0.5">
+      <stop offset="0" stop-color="#ff2b2b" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#ff2b2b" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="neon-glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="640" height="480" fill="url(#bg)"/>
+  <rect width="640" height="480" fill="url(#pokewarm)"/>
+
+  <!-- Title -->
+  <text x="320" y="42" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" fill="#ff2b2b" opacity="0.7" letter-spacing="3">THEME 01</text>
+  <text x="320" y="68" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="32" font-weight="bold" fill="#f0f4ff">Pokéball Signal Tower</text>
+  <line x1="200" y1="80" x2="440" y2="80" stroke="#ff2b2b" stroke-width="1" opacity="0.4"/>
+
+  <!-- Pokéball main body -->
+  <g transform="translate(320, 250)">
+    <!-- Glow behind -->
+    <circle cx="0" cy="0" r="90" fill="#ff2b2b" filter="url(#neon-glow)" opacity="0.15"/>
+
+    <!-- Bottom hemisphere (white) -->
+    <path d="M-70 0 A70 70 0 0 0 70 0 Z" fill="#e8e8e0"/>
+    <path d="M-70 0 A70 70 0 0 0 70 0 Z" fill="none" stroke="#ccc" stroke-width="1"/>
+
+    <!-- Center band -->
+    <rect x="-72" y="-4" width="144" height="8" rx="0" fill="#1a1a1a"/>
+
+    <!-- Top hemisphere (red) -->
+    <path d="M-70 0 A70 70 0 0 1 70 0 Z" fill="#ff2b2b"/>
+    <path d="M-70 0 A70 70 0 0 1 70 0 Z" fill="none" stroke="#cc2020" stroke-width="1"/>
+
+    <!-- Center button -->
+    <circle cx="0" cy="0" r="14" fill="#e8e8e0" stroke="#1a1a1a" stroke-width="3"/>
+    <circle cx="0" cy="0" r="8" fill="#fff"/>
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#ddd" stroke-width="1"/>
+
+    <!-- LED ring around the ball -->
+    <circle cx="0" cy="0" r="85" fill="none" stroke="#3da9ff" stroke-width="2" stroke-dasharray="6 8" opacity="0.8"/>
+    <!-- Individual LED dots -->
+    <g fill="#3da9ff" filter="url(#neon-glow)">
+      <circle cx="0" cy="-85" r="3.5"/>
+      <circle cx="42.5" cy="-73.5" r="3.5"/>
+      <circle cx="73.5" cy="-42.5" r="3.5"/>
+      <circle cx="85" cy="0" r="3.5"/>
+      <circle cx="73.5" cy="42.5" r="3.5"/>
+      <circle cx="42.5" cy="73.5" r="3.5"/>
+      <circle cx="0" cy="85" r="3.5"/>
+      <circle cx="-42.5" cy="73.5" r="3.5"/>
+      <circle cx="-73.5" cy="42.5" r="3.5"/>
+      <circle cx="-85" cy="0" r="3.5"/>
+      <circle cx="-73.5" cy="-42.5" r="3.5"/>
+      <circle cx="-42.5" cy="-73.5" r="3.5"/>
+    </g>
+    <!-- Alternate LED colors -->
+    <g fill="#ff2b2b" filter="url(#neon-glow)" opacity="0.6">
+      <circle cx="21.3" cy="-82.3" r="3"/>
+      <circle cx="62.4" cy="-62.4" r="3"/>
+      <circle cx="82.3" cy="-21.3" r="3"/>
+      <circle cx="82.3" cy="21.3" r="3"/>
+      <circle cx="62.4" cy="62.4" r="3"/>
+      <circle cx="21.3" cy="82.3" r="3"/>
+      <circle cx="-21.3" cy="82.3" r="3"/>
+      <circle cx="-62.4" cy="62.4" r="3"/>
+      <circle cx="-82.3" cy="21.3" r="3"/>
+      <circle cx="-82.3" cy="-21.3" r="3"/>
+      <circle cx="-62.4" cy="-62.4" r="3"/>
+      <circle cx="-21.3" cy="-82.3" r="3"/>
+    </g>
+
+    <!-- Signal waves -->
+    <g stroke="#3da9ff" stroke-width="1" fill="none" opacity="0.3">
+      <circle cx="0" cy="0" r="100"/>
+      <circle cx="0" cy="0" r="115"/>
+      <circle cx="0" cy="0" r="130"/>
+    </g>
+  </g>
+
+  <!-- USB cable coming out bottom -->
+  <g>
+    <path d="M320 320 L320 370 C320 380, 330 385, 340 385 L420 385" stroke="#444" stroke-width="3" fill="none"/>
+    <rect x="420" y="381" width="12" height="8" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+    <text x="440" y="390" font-family="monospace" font-size="8" fill="#666">USB-C</text>
+  </g>
+
+  <!-- Skills panel -->
+  <g transform="translate(440, 100)">
+    <rect x="0" y="0" width="160" height="95" rx="8" fill="#0c1220" stroke="#ff2b2b" stroke-width="0.5" opacity="0.7"/>
+    <text x="80" y="18" text-anchor="middle" font-family="monospace" font-size="9" fill="#ff2b2b" letter-spacing="2">YOU'LL LEARN</text>
+    <text x="15" y="35" font-family="monospace" font-size="8" fill="#22c55e">▸ LED colour control</text>
+    <text x="15" y="48" font-family="monospace" font-size="8" fill="#22c55e">▸ Pattern animations</text>
+    <text x="15" y="61" font-family="monospace" font-size="8" fill="#22c55e">▸ WiFi notifications</text>
+    <text x="15" y="74" font-family="monospace" font-size="8" fill="#22c55e">▸ Arduino libraries</text>
+    <text x="15" y="87" font-family="monospace" font-size="8" fill="#22c55e">▸ PWM brightness</text>
+  </g>
+
+  <!-- Box contents -->
+  <g transform="translate(40, 340)">
+    <rect x="0" y="0" width="160" height="65" rx="6" fill="#0c1220" stroke="#3da9ff" stroke-width="0.5" opacity="0.5"/>
+    <text x="80" y="16" text-anchor="middle" font-family="monospace" font-size="8" fill="#3da9ff" letter-spacing="1">IN THE BOX</text>
+    <text x="12" y="30" font-family="monospace" font-size="7" fill="#888">● WS2812 LED ring (16px)</text>
+    <text x="12" y="42" font-family="monospace" font-size="7" fill="#888">● 3D-printed Pokéball case</text>
+    <text x="12" y="54" font-family="monospace" font-size="7" fill="#888">● Wires + connector</text>
+  </g>
+
+  <!-- Requires badge -->
+  <g transform="translate(40, 100)">
+    <rect x="0" y="0" width="130" height="24" rx="4" fill="#1a1a2e" stroke="#ff2b2b" stroke-width="0.5"/>
+    <circle cx="12" cy="12" r="5" fill="none" stroke="#ff2b2b" stroke-width="1"/>
+    <line x1="12" y1="7" x2="12" y2="17" stroke="#ff2b2b" stroke-width="1"/>
+    <line x1="7" y1="12" x2="17" y2="12" stroke="#ff2b2b" stroke-width="1"/>
+    <text x="70" y="15" text-anchor="middle" font-family="monospace" font-size="7" fill="#ff2b2b">REQUIRES STARTER</text>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="430" width="640" height="50" fill="#050810" opacity="0.8"/>
+  <line x1="0" y1="430" x2="640" y2="430" stroke="#ff2b2b" stroke-width="0.5" opacity="0.3"/>
+  <text x="320" y="458" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="bold" fill="#f0f4ff">sudostore.co.za</text>
+  <text x="560" y="458" text-anchor="middle" font-family="monospace" font-size="10" fill="#ff2b2b" opacity="0.6">R249</text>
+</svg>

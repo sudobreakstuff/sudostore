@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#050810"/>
+      <stop offset="1" stop-color="#0a0518"/>
+    </linearGradient>
+    <radialGradient id="retroglow" cx="0.5" cy="0.4" r="0.5">
+      <stop offset="0" stop-color="#22c55e" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#22c55e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="640" height="480" fill="url(#bg)"/>
+  <rect width="640" height="480" fill="url(#retroglow)"/>
+
+  <!-- Title -->
+  <text x="320" y="42" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" fill="#22c55e" opacity="0.7" letter-spacing="3">THEME 05</text>
+  <text x="320" y="68" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="32" font-weight="bold" fill="#f0f4ff">Retro Game Console Shell</text>
+  <line x1="180" y1="80" x2="460" y2="80" stroke="#22c55e" stroke-width="1" opacity="0.4"/>
+
+  <!-- Game Boy style shell -->
+  <g transform="translate(320, 270)">
+    <!-- Shadow -->
+    <rect x="-65" y="115" width="140" height="12" rx="6" fill="#000" opacity="0.3"/>
+
+    <!-- Main shell body -->
+    <rect x="-70" y="-100" width="140" height="215" rx="12" fill="#c8c8c0"/>
+    <rect x="-70" y="-100" width="140" height="215" rx="12" fill="none" stroke="#a0a098" stroke-width="1.5"/>
+
+    <!-- Screen bezel -->
+    <rect x="-55" y="-90" width="110" height="75" rx="4" fill="#4a4a42"/>
+    <rect x="-55" y="-90" width="110" height="75" rx="4" fill="none" stroke="#3a3a32" stroke-width="1"/>
+
+    <!-- Screen -->
+    <rect x="-45" y="-82" width="90" height="58" rx="2" fill="#9bbc0f"/>
+
+    <!-- Screen content - Snake game -->
+    <g fill="#0f380f">
+      <!-- Snake body -->
+      <rect x="-30" y="-70" width="6" height="6"/>
+      <rect x="-24" y="-70" width="6" height="6"/>
+      <rect x="-18" y="-70" width="6" height="6"/>
+      <rect x="-12" y="-70" width="6" height="6"/>
+      <rect x="-12" y="-64" width="6" height="6"/>
+      <rect x="-12" y="-58" width="6" height="6"/>
+      <rect x="-6" y="-58" width="6" height="6"/>
+      <rect x="0" y="-58" width="6" height="6"/>
+      <!-- Snake head -->
+      <rect x="6" y="-58" width="6" height="6" fill="#0f380f"/>
+      <!-- Eyes on head -->
+      <rect x="8" y="-57" width="2" height="2" fill="#9bbc0f"/>
+      <!-- Apple -->
+      <rect x="20" y="-40" width="6" height="6" fill="#0f380f"/>
+      <rect x="22" y="-44" width="2" height="4" fill="#0f380f"/>
+    </g>
+
+    <!-- Screen scanlines -->
+    <g stroke="#0f380f" stroke-width="0.3" opacity="0.1">
+      <line x1="-45" y1="-78" x2="45" y2="-78"/>
+      <line x1="-45" y1="-72" x2="45" y2="-72"/>
+      <line x1="-45" y1="-66" x2="45" y2="-66"/>
+      <line x1="-45" y1="-60" x2="45" y2="-60"/>
+      <line x1="-45" y1="-54" x2="45" y2="-54"/>
+      <line x1="-45" y1="-48" x2="45" y2="-48"/>
+    </g>
+
+    <!-- Score on screen -->
+    <text x="30" y="-68" font-family="monospace" font-size="6" fill="#0f380f">SCORE: 42</text>
+
+    <!-- D-pad -->
+    <g transform="translate(-30, 10)">
+      <!-- Horizontal bar -->
+      <rect x="-20" y="-5" width="40" height="10" rx="2" fill="#3a3a32"/>
+      <!-- Vertical bar -->
+      <rect x="-5" y="-20" width="10" height="40" rx="2" fill="#3a3a32"/>
+      <!-- Center -->
+      <circle cx="0" cy="0" r="4" fill="#2a2a22"/>
+      <!-- Direction indicators -->
+      <text x="0" y="-12" text-anchor="middle" font-family="monospace" font-size="6" fill="#666">▲</text>
+      <text x="0" y="18" text-anchor="middle" font-family="monospace" font-size="6" fill="#666">▼</text>
+      <text x="-14" y="2" text-anchor="middle" font-family="monospace" font-size="6" fill="#666">◀</text>
+      <text x="14" y="2" text-anchor="middle" font-family="monospace" font-size="6" fill="#666">▶</text>
+    </g>
+
+    <!-- A/B buttons -->
+    <g transform="translate(30, 15)">
+      <circle cx="10" cy="-5" r="8" fill="#cc2020" stroke="#991a1a" stroke-width="1"/>
+      <text x="10" y="-2" text-anchor="middle" font-family="monospace" font-size="8" fill="#fff" font-weight="bold">A</text>
+      <circle cx="-5" cy="10" r="8" fill="#cc2020" stroke="#991a1a" stroke-width="1"/>
+      <text x="-5" y="13" text-anchor="middle" font-family="monospace" font-size="8" fill="#fff" font-weight="bold">B</text>
+    </g>
+
+    <!-- Start/Select -->
+    <g transform="translate(0, 45)">
+      <rect x="-18" y="0" width="14" height="5" rx="2.5" fill="#3a3a32"/>
+      <text x="-11" y="14" text-anchor="middle" font-family="monospace" font-size="4" fill="#666">SELECT</text>
+      <rect x="4" y="0" width="14" height="5" rx="2.5" fill="#3a3a32"/>
+      <text x="11" y="14" text-anchor="middle" font-family="monospace" font-size="4" fill="#666">START</text>
+    </g>
+
+    <!-- Speaker grille -->
+    <g transform="translate(35, 65)">
+      <g fill="#a0a098" opacity="0.5">
+        <line x1="-15" y1="-8" x2="-5" y2="-8" stroke="#a0a098" stroke-width="1.5"/>
+        <line x1="-13" y1="-4" x2="-3" y2="-4" stroke="#a0a098" stroke-width="1.5"/>
+        <line x1="-11" y1="0" x2="-1" y2="0" stroke="#a0a098" stroke-width="1.5"/>
+        <line x1="-9" y2="4" x2="1" y2="4" stroke="#a0a098" stroke-width="1.5"/>
+        <line x1="-7" y1="8" x2="3" y2="8" stroke="#a0a098" stroke-width="1.5"/>
+      </g>
+    </g>
+
+    <!-- USB-C port top -->
+    <rect x="-8" y="-105" width="16" height="5" rx="2" fill="#333" stroke="#555" stroke-width="0.5"/>
+
+    <!-- "sudo" brand -->
+    <text x="0" y="-10" text-anchor="middle" font-family="monospace" font-size="7" fill="#888" letter-spacing="2">sudostore</text>
+  </g>
+
+  <!-- Skills panel -->
+  <g transform="translate(440, 100)">
+    <rect x="0" y="0" width="160" height="95" rx="8" fill="#0c1220" stroke="#22c55e" stroke-width="0.5" opacity="0.7"/>
+    <text x="80" y="18" text-anchor="middle" font-family="monospace" font-size="9" fill="#22c55e" letter-spacing="2">YOU'LL LEARN</text>
+    <text x="15" y="35" font-family="monospace" font-size="8" fill="#22c55e">▸ Game logic</text>
+    <text x="15" y="48" font-family="monospace" font-size="8" fill="#22c55e">▸ OLED rendering</text>
+    <text x="15" y="61" font-family="monospace" font-size="8" fill="#22c55e">▸ Collision detection</text>
+    <text x="15" y="74" font-family="monospace" font-size="8" fill="#22c55e">▸ Input handling</text>
+    <text x="15" y="87" font-family="monospace" font-size="8" fill="#22c55e">▸ State management</text>
+  </g>
+
+  <!-- Box contents -->
+  <g transform="translate(40, 340)">
+    <rect x="0" y="0" width="160" height="65" rx="6" fill="#0c1220" stroke="#22c55e" stroke-width="0.5" opacity="0.5"/>
+    <text x="80" y="16" text-anchor="middle" font-family="monospace" font-size="8" fill="#22c55e" letter-spacing="1">IN THE BOX</text>
+    <text x="12" y="30" font-family="monospace" font-size="7" fill="#888">● 0.96" OLED display</text>
+    <text x="12" y="42" font-family="monospace" font-size="7" fill="#888">● 4x tactile buttons</text>
+    <text x="12" y="54" font-family="monospace" font-size="7" fill="#888">● 3D-printed Game Boy shell</text>
+  </g>
+
+  <!-- Requires badge -->
+  <g transform="translate(40, 100)">
+    <rect x="0" y="0" width="130" height="24" rx="4" fill="#1a1a2e" stroke="#22c55e" stroke-width="0.5"/>
+    <circle cx="12" cy="12" r="5" fill="none" stroke="#22c55e" stroke-width="1"/>
+    <line x1="12" y1="7" x2="12" y2="17" stroke="#22c55e" stroke-width="1"/>
+    <line x1="7" y1="12" x2="17" y2="12" stroke="#22c55e" stroke-width="1"/>
+    <text x="70" y="15" text-anchor="middle" font-family="monospace" font-size="7" fill="#22c55e">REQUIRES STARTER</text>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="430" width="640" height="50" fill="#050810" opacity="0.8"/>
+  <line x1="0" y1="430" x2="640" y2="430" stroke="#22c55e" stroke-width="0.5" opacity="0.3"/>
+  <text x="320" y="458" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="bold" fill="#f0f4ff">sudostore.co.za</text>
+  <text x="560" y="458" text-anchor="middle" font-family="monospace" font-size="10" fill="#22c55e" opacity="0.6">R349</text>
+</svg>
