@@ -4,7 +4,7 @@ tagline: "OLED Pokédex with IR sensor — scan objects, display pixel art, play
 description: |
   A red clamshell Pokédex with a 0.96" OLED screen and IR obstacle sensor. Point it at objects and it displays pixel-art Pokémon silhouettes, plays recognition sounds, and logs scans. Built around your Starter Pack ESP32. Teaches I2C displays, sensor reading, and state machines.
 images:
-  - ../concept-pixel-dex-scanner.svg
+  - ./concept-pixel-dex-scanner.svg
 category: "diy-kits"
 price: 299
 status: "in-stock"

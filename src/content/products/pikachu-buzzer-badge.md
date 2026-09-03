@@ -4,7 +4,7 @@ tagline: "Wearable badge that plays Pikachu sounds — button-triggered melodies
 description: |
   A yellow Pikachu-themed badge with a speaker and two buttons. Press A for Pikachu's voice, press B for custom melodies. Built around your Starter Pack ESP32, housed in a 3D-printed case with ear accents. Teaches audio generation, tone sequences, and button input.
 images:
-  - ../concept-pikachu-buzzer-badge.svg
+  - ./concept-pikachu-buzzer-badge.svg
 category: "diy-kits"
 price: 199
 status: "in-stock"
