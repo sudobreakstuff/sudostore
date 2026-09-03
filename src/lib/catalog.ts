@@ -43,3 +43,18 @@ export const categoryLabel = (id: Category): string =>
 
 export const categoryIcon = (id: Category): string =>
   CATEGORIES.find((c) => c.id === id)?.icon ?? "lucide:box";
+
+export const CATEGORY_PRIORITY: Record<Category, number> = {
+  handhelds: 0,
+  "card-readers": 1,
+  "input-devices": 2,
+  "3d-printing": 3,
+  "software-services": 4,
+};
+
+export const sortByCategoryPriority = <T extends { data: { category: Category } }>(
+  a: T,
+  b: T
+): number =>
+  (CATEGORY_PRIORITY[a.data.category] ?? 99) - (CATEGORY_PRIORITY[b.data.category] ?? 99) ||
+  a.data.title.localeCompare(b.data.title);

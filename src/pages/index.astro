@@ -4,10 +4,12 @@ import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductCard from "../components/ProductCard.astro";
 import OrderButton from "../components/OrderButton.astro";
-import { CATEGORIES } from "../lib/catalog";
+import { CATEGORIES, sortByCategoryPriority } from "../lib/catalog";
 import { SITE, BASE, contactLink } from "../lib/site";
 
-const featured = (await getCollection("products", ({ data }) => data.featured)).slice(0, 4);
+const featured = (await getCollection("products", ({ data }) => data.featured))
+  .sort(sortByCategoryPriority)
+  .slice(0, 4);
 const latestLearn = (await getCollection("learn", ({ data }) => !data.draft))
   .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
   .slice(0, 3);
