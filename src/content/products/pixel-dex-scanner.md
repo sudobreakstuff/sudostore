@@ -21,12 +21,21 @@ tags: ["diy-kit", "intermediate", "esp32", "display", "sensor", "pokemon"]
 
 ## What's in the box
 
-| Component | Qty | Purpose |
-|-----------|-----|---------|
-| 0.96" SSD1306 OLED (I2C) | 1 | Display screen |
-| IR obstacle sensor | 1 | Object detection |
-| 3D-printed Pokédex case | 1 set (top + bottom) | Red clamshell enclosure |
-| Hinge + screws | 1 set | Opens and closes |
+<table class="w-full text-sm">
+  <thead>
+    <tr class="border-b border-edge">
+      <th class="py-2 text-left font-mono text-neon">Component</th>
+      <th class="py-2 text-center font-mono text-neon">Qty</th>
+      <th class="py-2 text-left font-mono text-neon">Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="border-b border-edge/50"><td class="py-1.5">0.96" SSD1306 OLED (I2C)</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Display screen</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">IR obstacle sensor</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Object detection</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">3D-printed Pokédex case</td><td class="py-1.5 text-center">1 set</td><td class="py-1.5 text-ink-dim">Red clamshell enclosure</td></tr>
+    <tr><td class="py-1.5">Hinge + screws</td><td class="py-1.5 text-center">1 set</td><td class="py-1.5 text-ink-dim">Opens and closes</td></tr>
+  </tbody>
+</table>
 
 **Requires:** Starter Pack (ESP32, breadboard, wires, USB-C cable, buttons, buzzer)
 

@@ -22,19 +22,62 @@ From this kit: relay module, WS2812B LED strip (1m), 3D-printed cyberpunk case.
 ## Step 1: Wire the relay
 
 ```
-Relay VCC  →  ESP32 5V
-Relay GND  →  ESP32 GND
-Relay IN   →  ESP32 GPIO 13
-```
+   Relay Module (1-channel)
+   ┌─────────────────────────┐
+   │  ┌─────────────────┐    │
+   │  │  RELAY MODULE   │    │
+   │  │  ┌─────┐        │    │
+   │  │  │     │ ← click│    │
+   │  │  └─────┘        │    │
+   │  └─────────────────┘    │
+   │  VCC GND IN             │
+   └──┬───┬───┬──────────────┘
+      │   │   │
+      │   │   └──── GPIO 13
+      │   └──────── GND
+      └──────────── 5V
 
-**Important:** The relay switches a separate circuit. Don't connect the device you want to control to the ESP32's power — the relay is the middleman.
+   Pin mapping:
+   ┌────────────┬────────────┐
+   │ Relay Pin  │ ESP32 Pin  │
+   ├────────────┼────────────┤
+   │ VCC        │ 5V         │
+   │ GND        │ GND        │
+   │ IN         │ GPIO 13    │
+   └────────────┴────────────┘
+
+   ⚠️  WARNING: The relay switches a SEPARATE circuit.
+   Do NOT connect the device you want to control to the ESP32's power.
+   The relay is the middleman between power and device.
+```
 
 ## Step 2: Wire the LED strip
 
 ```
-Strip VCC  →  ESP32 5V (or external 5V supply)
-Strip GND  →  ESP32 GND
-Strip DIN  →  ESP32 GPIO 12
+   WS2812B LED Strip (1 metre, 30 pixels/m)
+   ┌─────────────────────────────────────────┐
+   │  ● ● ● ● ● ● ● ● ● ● ● ● ● ● ● ● ●  │
+   │  ↑                                   ↑  │
+   │  DIN                              end  │
+   └──┬──────────────────────────────────┬───┘
+      │                                  │
+     VCC                                GND
+      │                                  │
+      │                                  │
+   ┌──┼──────────────────────────────────┼──┐
+   │  │                                  │  │
+   │ 5V                                GND │  ← ESP32 pins
+   │  │                                  │  │
+   └──┼──────────────────────────────────┼──┘
+
+   Pin mapping:
+   ┌────────────┬────────────┐
+   │ Strip Wire │ ESP32 Pin  │
+   ├────────────┼────────────┤
+   │ VCC (red)  │ 5V         │
+   │ DIN (green)│ GPIO 12    │
+   │ GND (white)│ GND       │
+   └────────────┴────────────┘
 ```
 
 ## Step 3: Install libraries
@@ -112,6 +155,26 @@ void loop() {
 
 **Result:** Open the Serial Monitor to see the IP address. Type it into your phone's browser — you get a control panel. Tap ON/OFF to switch the relay.
 
+```
+   Phone Browser:
+   ┌─────────────────────────┐
+   │  CYBERDECK CONTROL      │
+   │                         │
+   │     [ ON ]              │
+   │     [ OFF ]             │
+   │                         │
+   │  IP: 192.168.1.42       │
+   └─────────────────────────┘
+         ↓ WiFi
+   ┌─────────────────────────┐
+   │  ESP32 Web Server       │
+   │         ↓               │
+   │  GPIO 13 → Relay ON     │
+   │         ↓               │
+   │  Device turns ON        │
+   └─────────────────────────┘
+```
+
 ## Step 6: Add LED strip control
 
 Extend the web server with LED patterns:
@@ -145,6 +208,25 @@ void handleOff() {
 **Result:** Your phone now controls both the relay and the LED strip.
 
 ## Step 7: Assemble the cyberpunk case
+
+```
+   Cyberdeck Case Assembly:
+   ┌─────────────────────────────────────────┐
+   │  ╔═══════════════════════════════════╗  │
+   │  ║  CYBERDECK                        ║  │
+   │  ║  ┌──────────┐  ┌──────────┐      ║  │
+   │  ║  │  ESP32   │  │  RELAY   │      ║  │
+   │  ║  │          │  │  MODULE  │      ║  │
+   │  ║  └──────────┘  └──────────┘      ║  │
+   │  ║                                   ║  │
+   │  ║  [ON] [OFF]  ● ● ●  WiFi         ║  │
+   │  ╚═══════════════════════════════════╝  │
+   │         │ LED strip out                 │
+   │         ↓                               │
+   │  ● ● ● ● ● ● ● ● ● ● ● ● ● ● ● ● ●  │
+   │  (1m WS2812B strip, glowing)            │
+   └─────────────────────────────────────────┘
+```
 
 1. Fit the ESP32 and relay into the 3D-printed case
 2. Route the LED strip through the side slot

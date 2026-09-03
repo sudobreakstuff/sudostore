@@ -21,12 +21,51 @@ From this kit: WS2812B LED ring, 3D-printed Pokéball case, wiring harness.
 
 ## Step 1: Wire the LED ring
 
-The WS2812B ring has 3 wires:
-
 ```
-Ring VCC  →  ESP32 5V (or 3.3V)
-Ring GND  →  ESP32 GND
-Ring DIN  →  ESP32 GPIO 12
+   WS2812B LED Ring (16 pixels)
+   ┌─────────────────────────┐
+   │    ○ ○ ○ ○ ○ ○ ○ ○     │
+   │  ○                   ○  │
+   │  ○      LED RING     ○  │
+   │  ○                   ○  │
+   │    ○ ○ ○ ○ ○ ○ ○ ○     │
+   └─────┬─────┬─────┬───────┘
+         │     │     │
+        VCC   DIN   GND
+         │     │     │
+         │     │     │
+   ┌─────┼─────┼─────┼─────┐
+   │     │     │     │     │
+   │  5V │  12 │  GND│     │  ← ESP32 pins
+   │     │     │     │     │
+   └─────┴─────┴─────┴─────┘
+         ESP32 Board
+
+   Breadboard layout:
+   ┌─────────────────────────────────────────┐
+   │  + + + + + + + + + + + + + + + + + + +  │ ← 5V rail
+   │  - - - - - - - - - - - - - - - - - - -  │ ← GND rail
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   └─────────────────────────────────────────┘
+
+   Wire connections:
+   ┌────────────┬────────────┬────────────┐
+   │ Ring Wire  │ ESP32 Pin  │ Breadboard │
+   ├────────────┼────────────┼────────────┤
+   │ VCC (red)  │ 5V         │ + rail     │
+   │ DIN (green)│ GPIO 12    │ row 5      │
+   │ GND (white)│ GND       │ - rail     │
+   └────────────┴────────────┴────────────┘
 ```
 
 **Important:** The ring needs decent power. If you see flickering, use the 5V pin and a separate USB power supply for the ring.
@@ -48,7 +87,7 @@ Ring DIN  →  ESP32 GPIO 12
 CRGB leds[NUM_LEDS];
 
 void setup() {
-  FastLED.addLeds<WS2812B, DATA_PIN, GRB>(ledds, NUM_LEDS);
+  FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
 }
 
 void loop() {
@@ -119,6 +158,30 @@ void loop() {
 For real notifications, you'd poll a webhook or MQTT topic. The concept is the same — when you get a signal, light up the ring.
 
 ## Step 6: Assemble the Pokéball
+
+```
+   Pokéball Case Assembly:
+   ┌─────────────────────────────────────────┐
+   │                                         │
+   │         ┌─────────────────┐             │
+   │         │   RED TOP       │             │
+   │         │   (hemisphere)  │             │
+   │         └────────┬────────┘             │
+   │                  │ snap                  │
+   │         ┌────────┴────────┐             │
+   │         │  LED RING HERE  │ ← glow      │
+   │         │  (visible seam) │   shows     │
+   │         └────────┬────────┘   through   │
+   │                  │                      │
+   │         ┌────────┴────────┐             │
+   │         │  WHITE BOTTOM   │             │
+   │         │  (hemisphere)   │             │
+   │         └────────┬────────┘             │
+   │                  │ wires                │
+   │                  ↓                      │
+   │            to ESP32 + USB               │
+   └─────────────────────────────────────────┘
+```
 
 1. Place the LED ring inside the bottom (white) hemisphere
 2. Route the wires through the back hole

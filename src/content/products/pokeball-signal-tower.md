@@ -20,11 +20,20 @@ tags: ["diy-kit", "beginner", "esp32", "led", "pokemon", "wifi"]
 
 ## What's in the box
 
-| Component | Qty | Purpose |
-|-----------|-----|---------|
-| WS2812B LED ring (16px) | 1 | RGB LED array |
-| 3D-printed Pokéball case | 1 set (top + bottom) | Enclosure |
-| Wiring harness | 1 | Power + data connection |
+<table class="w-full text-sm">
+  <thead>
+    <tr class="border-b border-edge">
+      <th class="py-2 text-left font-mono text-neon">Component</th>
+      <th class="py-2 text-center font-mono text-neon">Qty</th>
+      <th class="py-2 text-left font-mono text-neon">Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="border-b border-edge/50"><td class="py-1.5">WS2812B LED ring (16px)</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">RGB LED array</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">3D-printed Pokéball case</td><td class="py-1.5 text-center">1 set</td><td class="py-1.5 text-ink-dim">Top + bottom enclosure</td></tr>
+    <tr><td class="py-1.5">Wiring harness</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Power + data connection</td></tr>
+  </tbody>
+</table>
 
 **Requires:** Starter Pack (ESP32, breadboard, wires, USB-C cable)
 

@@ -32,35 +32,71 @@ When you point it at something, the LED ring pulses, the screen displays a Poké
 
 ## Step 1: Wire everything
 
-### OLED (same as before)
 ```
-OLED VCC  →  3.3V
-OLED GND  →  GND
-OLED SDA  →  GPIO 21
-OLED SCL  →  GPIO 22
-```
+   Full Pokédex Station — All Components
+   ┌─────────────────────────────────────────────────────┐
+   │                                                     │
+   │   ┌─────────────┐        ┌─────────────────────┐   │
+   │   │  OLED 128x64│        │  WS2812B LED RING   │   │
+   │   │  (display)  │        │  (16 pixels)        │   │
+   │   └──────┬──────┘        └──────────┬──────────┘   │
+   │          │                          │               │
+   │   VCC  GND  SDA  SCL       VCC  DIN  GND          │
+   │    │    │    │    │         │    │    │             │
+   │    │    │    │    │         │    │    │             │
+   │   3.3V GND  21   22        5V   12   GND           │
+   │          │                          │               │
+   │          │    ┌─────────────┐       │               │
+   │          │    │  IR SENSOR  │       │               │
+   │          │    │  (obstacle) │       │               │
+   │          │    └──────┬──────┘       │               │
+   │          │           │              │               │
+   │          │      VCC  OUT  GND       │               │
+   │          │       │    │    │        │               │
+   │          │      3.3V  14  GND       │               │
+   │          │           │              │               │
+   │          │    ┌──────┴──────┐       │               │
+   │          │    │   BUZZER    │       │               │
+   │          │    │   (audio)   │       │               │
+   │          │    └──────┬──────┘       │               │
+   │          │           │              │               │
+   │          │        +  │  -           │               │
+   │          │           │              │               │
+   │          │          5V  GND         │               │
+   │          │           │              │               │
+   │          │           │              │               │
+   │   ┌──────┴───────────┴──────────────┴──────────┐   │
+   │   │              ESP32 BOARD                    │   │
+   │   │  ┌──────────────────────────────────────┐   │   │
+   │   │  │  3.3V  GND  5V  12  14  21  22      │   │   │
+   │   │  └──────────────────────────────────────┘   │   │
+   │   └─────────────────────────────────────────────┘   │
+   │                        │                            │
+   │                    USB-C cable                       │
+   │                        ↓                            │
+   │                   to computer                       │
+   └─────────────────────────────────────────────────────┘
 
-### LED ring
-```
-Ring VCC  →  5V
-Ring GND  →  GND
-Ring DIN  →  GPIO 12
-```
+   Pin mapping summary:
+   ┌────────────┬────────────┬────────────┐
+   │ Component  │ ESP32 Pin  │ Purpose    │
+   ├────────────┼────────────┼────────────┤
+   │ OLED VCC   │ 3.3V       │ Power      │
+   │ OLED GND   │ GND        │ Ground     │
+   │ OLED SDA   │ GPIO 21    │ I2C data   │
+   │ OLED SCL   │ GPIO 22    │ I2C clock  │
+   │ Ring VCC   │ 5V         │ Power      │
+   │ Ring DIN   │ GPIO 12    │ LED data   │
+   │ Ring GND   │ GND        │ Ground     │
+   │ IR VCC     │ 3.3V       │ Power      │
+   │ IR OUT     │ GPIO 14    │ Sensor     │
+   │ IR GND     │ GND        │ Ground     │
+   │ Buzzer +   │ 5V         │ Power      │
+   │ Buzzer -   │ GND        │ Ground     │
+   └────────────┴────────────┴────────────┘
 
-### IR sensor
+   Total pins used: GPIO 5, 12, 14, 21, 22 — all on one ESP32.
 ```
-IR VCC  →  3.3V
-IR GND  →  GND
-IR OUT  →  GPIO 14
-```
-
-### Buzzer
-```
-Buzzer +  →  GPIO 5
-Buzzer -  →  GND
-```
-
-**Total pins used:** GPIO 5, 12, 14, 21, 22 — all on one ESP32.
 
 ## Step 2: Combined code
 

@@ -21,12 +21,21 @@ tags: ["diy-kit", "intermediate", "esp32", "gaming", "retro", "oled"]
 
 ## What's in the box
 
-| Component | Qty | Purpose |
-|-----------|-----|---------|
-| 0.96" SSD1306 OLED (I2C) | 1 | Game display |
-| Tactile buttons | 4 | D-pad + A/B controls |
-| 3D-printed Game Boy shell | 1 | Grey retro enclosure |
-| Button caps + membrane | 1 set | Tactile feel |
+<table class="w-full text-sm">
+  <thead>
+    <tr class="border-b border-edge">
+      <th class="py-2 text-left font-mono text-neon">Component</th>
+      <th class="py-2 text-center font-mono text-neon">Qty</th>
+      <th class="py-2 text-left font-mono text-neon">Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="border-b border-edge/50"><td class="py-1.5">0.96" SSD1306 OLED (I2C)</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Game display</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">Tactile buttons</td><td class="py-1.5 text-center">4</td><td class="py-1.5 text-ink-dim">D-pad + A/B controls</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">3D-printed Game Boy shell</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Grey retro enclosure</td></tr>
+    <tr><td class="py-1.5">Button caps + membrane</td><td class="py-1.5 text-center">1 set</td><td class="py-1.5 text-ink-dim">Tactile feel</td></tr>
+  </tbody>
+</table>
 
 **Requires:** Starter Pack (ESP32, breadboard, wires, USB-C cable, buttons, buzzer)
 

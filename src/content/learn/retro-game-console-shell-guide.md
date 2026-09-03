@@ -24,22 +24,61 @@ From this kit: 0.96" SSD1306 OLED, 4x tactile buttons, 3D-printed Game Boy shell
 Same as the Dex Scanner:
 
 ```
-OLED VCC  →  ESP32 3.3V
-OLED GND  →  ESP32 GND
-OLED SDA  →  ESP32 GPIO 21
-OLED SCL  →  ESP32 GPIO 22
+   OLED Display (0.96" SSD1306)
+   ┌─────────────────────────┐
+   │  ┌─────────────────┐    │
+   │  │    OLED SCREEN  │    │
+   │  │    128 x 64 px  │    │
+   │  └─────────────────┘    │
+   │  VCC GND SDA SCL        │
+   └──┬───┬───┬───┬──────────┘
+      │   │   │   │
+      │   │   │   └──── GPIO 22
+      │   │   └──────── GPIO 21
+      │   └──────────── GND
+      └──────────────── 3.3V
 ```
 
 ## Step 2: Wire the buttons
 
 ```
-D-pad Up     →  ESP32 GPIO 14
-D-pad Down   →  ESP32 GPIO 27
-D-pad Left   →  ESP32 GPIO 26
-D-pad Right  →  ESP32 GPIO 25
-Button A     →  ESP32 GPIO 33
-Button B     →  ESP32 GPIO 32
-All GND pins →  ESP32 GND
+   D-pad Layout:              A/B Buttons:
+   ┌───────────┐              ┌───────────┐
+   │     ▲     │              │           │
+   │   LEFT  RIGHT            │    (A)    │
+   │     ▼     │              │    (B)    │
+   └───────────┘              └───────────┘
+
+   Pin mapping:
+   ┌────────────┬────────────┬────────────┐
+   │ Button     │ ESP32 Pin  │ Breadboard │
+   ├────────────┼────────────┼────────────┤
+   │ D-pad Up   │ GPIO 14    │ row 30     │
+   │ D-pad Down │ GPIO 27    │ row 33     │
+   │ D-pad Left │ GPIO 26    │ row 36     │
+   │ D-pad Right│ GPIO 25    │ row 39     │
+   │ Button A   │ GPIO 33    │ row 42     │
+   │ Button B   │ GPIO 32    │ row 45     │
+   │ All GND    │ GND        │ - rail     │
+   └────────────┴────────────┴────────────┘
+
+   Breadboard layout:
+   ┌─────────────────────────────────────────┐
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · [UP][DN][LT][RT] · · · · · · ·  │ ← D-pad
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · [A][B] · · ·  │ ← A/B
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   └─────────────────────────────────────────┘
 ```
 
 ## Step 3: Install the display library
@@ -108,6 +147,21 @@ void loop() {
 
 **Result:** Move the paddle with up/down, bounce the ball, rack up points.
 
+```
+   OLED Screen — Pong:
+   ┌─────────────────────────────────────────┐
+   │  SCORE: 42                              │
+   │                                         │
+   │  █                              ●       │
+   │  █                              ●       │
+   │  █                              ●       │
+   │  █                              ●       │
+   │  █                              ●       │
+   │                                         │
+   └─────────────────────────────────────────┘
+   ↑ paddle                    ball → ●
+```
+
 ## Step 5: Snake — growing and eating
 
 ```cpp
@@ -166,6 +220,22 @@ void loop() {
 }
 ```
 
+```
+   OLED Screen — Snake:
+   ┌─────────────────────────────────────────┐
+   │                                         │
+   │     ■ ■ ■ ■ →                           │
+   │                 ■                       │
+   │                 ■                       │
+   │                 ■                       │
+   │                                         │
+   │                         ■ (food)        │
+   │                                         │
+   └─────────────────────────────────────────┘
+   ↑ snake head moves with D-pad
+   ↑ food appears randomly
+```
+
 ## Step 6: Add sound
 
 Wire the buzzer from your Starter Pack and add:
@@ -177,6 +247,30 @@ tone(5, 220, 200);  // game over
 ```
 
 ## Step 7: Assemble the Game Boy
+
+```
+   Game Boy Shell Assembly:
+   ┌─────────────────────────────────────────┐
+   │  ┌─────────────────────────────────┐    │
+   │  │         GAME BOY SHELL          │    │
+   │  │  ┌─────────────────────────┐    │    │
+   │  │  │      OLED SCREEN        │    │    │
+   │  │  │      (visible)          │    │    │
+   │  │  └─────────────────────────┘    │    │
+   │  │                                 │    │
+   │  │     [D-pad]      [A] [B]       │    │
+   │  │                                 │    │
+   │  │     [SELECT]  [START]          │    │
+   │  │                                 │    │
+   │  │     ┌───────────────┐          │    │
+   │  │     │   SPEAKER     │          │    │
+   │  │     └───────────────┘          │    │
+   │  └───────────────┬─────────────────┘    │
+   │                  │ USB-C                │
+   │                  ↓                      │
+   │            to computer                  │
+   └─────────────────────────────────────────┘
+```
 
 1. Fit the OLED into the screen window
 2. Place the buttons in the D-pad and A/B positions

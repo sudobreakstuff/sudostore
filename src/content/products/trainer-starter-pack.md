@@ -26,19 +26,28 @@ tags: ["diy-kit", "beginner", "esp32", "electronics", "pokemon", "starter"]
 
 ## What's in the box
 
-| Component | Qty | Purpose |
-|-----------|-----|---------|
-| ESP32 dev board | 1 | The brain of every kit |
-| Breadboard (full-size) | 1 | Solderless prototyping |
-| Jumper wire kit (M-M, M-F, F-F) | 1 set | Connecting components |
-| USB-C cable | 1 | Power + programming |
-| LEDs (red, blue, green) | 3 | Visual output |
-| Tactile push buttons | 3 | User input |
-| Piezo buzzer | 1 | Audio output |
-| Resistors (220Ω, 1kΩ, 10kΩ) | 10 | Current limiting + pull-ups |
-| Hookup wire | 1 spool | Extra connections |
-| 3D-printed Lab Base Station | 1 | Holds breadboard + ESP32 |
-| Collectable Trainer Card | 1 | Your build inventory |
+<table class="w-full text-sm">
+  <thead>
+    <tr class="border-b border-edge">
+      <th class="py-2 text-left font-mono text-neon">Component</th>
+      <th class="py-2 text-center font-mono text-neon">Qty</th>
+      <th class="py-2 text-left font-mono text-neon">Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="border-b border-edge/50"><td class="py-1.5">ESP32 dev board</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">The brain of every kit</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">Breadboard (full-size)</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Solderless prototyping</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">Jumper wire kit (M-M, M-F, F-F)</td><td class="py-1.5 text-center">1 set</td><td class="py-1.5 text-ink-dim">Connecting components</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">USB-C cable</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Power + programming</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">LEDs (red, blue, green)</td><td class="py-1.5 text-center">3</td><td class="py-1.5 text-ink-dim">Visual output</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">Tactile push buttons</td><td class="py-1.5 text-center">3</td><td class="py-1.5 text-ink-dim">User input</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">Piezo buzzer</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Audio output</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">Resistors (220Ω, 1kΩ, 10kΩ)</td><td class="py-1.5 text-center">10</td><td class="py-1.5 text-ink-dim">Current limiting + pull-ups</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">Hookup wire</td><td class="py-1.5 text-center">1 spool</td><td class="py-1.5 text-ink-dim">Extra connections</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">3D-printed Lab Base Station</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Holds breadboard + ESP32</td></tr>
+    <tr><td class="py-1.5">Collectable Trainer Card</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Your build inventory</td></tr>
+  </tbody>
+</table>
 
 ## What you'll learn
 

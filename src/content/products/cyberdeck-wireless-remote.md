@@ -21,12 +21,21 @@ tags: ["diy-kit", "intermediate", "esp32", "relay", "led", "home-automation"]
 
 ## What's in the box
 
-| Component | Qty | Purpose |
-|-----------|-----|---------|
-| 1-channel relay module | 1 | Switch high-power devices |
-| WS2812B LED strip (1m) | 1 | Programmable RGB lighting |
-| 3D-printed cyberpunk case | 1 | Black box with neon accent lines |
-| Wiring harness | 1 | Power + data connections |
+<table class="w-full text-sm">
+  <thead>
+    <tr class="border-b border-edge">
+      <th class="py-2 text-left font-mono text-neon">Component</th>
+      <th class="py-2 text-center font-mono text-neon">Qty</th>
+      <th class="py-2 text-left font-mono text-neon">Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="border-b border-edge/50"><td class="py-1.5">1-channel relay module</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Switch high-power devices</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">WS2812B LED strip (1m)</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Programmable RGB lighting</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">3D-printed cyberpunk case</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Black box with neon accent lines</td></tr>
+    <tr><td class="py-1.5">Wiring harness</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Power + data connections</td></tr>
+  </tbody>
+</table>
 
 **Requires:** Starter Pack (ESP32, breadboard, wires, USB-C cable)
 

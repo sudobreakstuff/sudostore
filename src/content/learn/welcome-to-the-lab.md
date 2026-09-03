@@ -17,19 +17,18 @@ faqs:
 
 Open the box and check you've got everything:
 
-| Component | Check |
-|-----------|-------|
-| ESP32 dev board | ✓ |
-| Breadboard (full-size) | ✓ |
-| Jumper wire kit (M-M, M-F, F-F) | ✓ |
-| USB-C cable | ✓ |
-| 3x LEDs (red, blue, green) | ✓ |
-| 3x tactile buttons | ✓ |
-| Piezo buzzer | ✓ |
-| Resistors (220Ω, 1kΩ, 10kΩ) | ✓ |
-| Hookup wire | ✓ |
-| 3D-printed Lab Base Station | ✓ |
-| Collectable Trainer Card | ✓ |
+```
+┌─────────────────────────────────────────────────────┐
+│  TRAINER'S LAB STARTER PACK                         │
+├─────────────────────────────────────────────────────┤
+│  ✓ ESP32 dev board          ✓ USB-C cable           │
+│  ✓ Breadboard (full-size)   ✓ 3x LEDs (R/B/G)      │
+│  ✓ Jumper wire kit          ✓ 3x tactile buttons    │
+│  ✓ Piezo buzzer             ✓ Resistors (220Ω etc)  │
+│  ✓ Hookup wire              ✓ 3D-printed base       │
+│  ✓ Collectable Trainer Card                         │
+└─────────────────────────────────────────────────────┘
+```
 
 Missing something? Message us on WhatsApp.
 
@@ -65,9 +64,58 @@ This is the "hello world" of electronics.
 ### Wire it up
 
 ```
-ESP32 GPIO 2  →  220Ω resistor  →  LED anode (long leg)
-ESP32 GND     →  LED cathode (short leg)
+    ESP32 Board
+   ┌──────────┐
+   │          │
+   │  GPIO 2 ├───────┬───────[220Ω]───────┤▶├──── GND
+   │          │       │                    LED
+   │  GND     ├───────┘
+   │          │
+   └──────────┘
+
+   Breadboard view:
+   ┌─────────────────────────────────────────┐
+   │  + + + + + + + + + + + + + + + + + + +  │ ← power rail
+   │  - - - - - - - - - - - - - - - - - - -  │ ← ground rail
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   └─────────────────────────────────────────┘
+
+   Components on breadboard:
+   ┌─────────────────────────────────────────┐
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · [R]─ · ┤▶├ · · · · · ·  │
+   │  · · · · · · ·  220Ω  LED  · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   └─────────────────────────────────────────┘
+
+   Pin mapping:
+   ┌────────────┬────────────┐
+   │ ESP32 Pin  │ Breadboard │
+   ├────────────┼────────────┤
+   │ GPIO 2     │ row 5      │
+   │ GND        │ row 8      │
+   └────────────┴────────────┘
 ```
+
+**What's happening:** GPIO 2 sends power through the 220Ω resistor (which limits current) to the LED's anode (long leg). The LED's cathode (short leg) connects to GND. When GPIO 2 is HIGH, current flows and the LED lights up.
 
 ### Flash the code
 
@@ -93,9 +141,59 @@ Click the upload button (→). If it says "Connecting...", hold the **BOOT** but
 ### Wire it up
 
 ```
-ESP32 GPIO 4  →  button pin 1
-ESP32 GND     →  button pin 2
+    ESP32 Board
+   ┌──────────┐
+   │          │
+   │  GPIO 4 ├───────┤ btn ├──── GND
+   │          │       pin1  pin2
+   │  GND     ├───────┘
+   │          │
+   └──────────┘
+
+   Breadboard view:
+   ┌─────────────────────────────────────────┐
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   └─────────────────────────────────────────┘
+
+   Button on breadboard:
+   ┌─────────────────────────────────────────┐
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · [BTN] · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   └─────────────────────────────────────────┘
+
+   Pin mapping:
+   ┌────────────┬────────────┐
+   │ ESP32 Pin  │ Breadboard │
+   ├────────────┼────────────┤
+   │ GPIO 4     │ row 12     │
+   │ GND        │ row 15     │
+   └────────────┴────────────┘
 ```
+
+**What's happening:** The button bridges two rows on the breadboard. When pressed, it connects GPIO 4 to GND. The `INPUT_PULLUP` setting means GPIO 4 is normally HIGH (no press) and goes LOW when the button connects it to GND.
 
 ### Flash the code
 
@@ -120,9 +218,59 @@ Open **Tools → Serial Monitor** (115200 baud). Press the button — you'll see
 ### Wire it up
 
 ```
-ESP32 GPIO 5  →  buzzer positive (+)
-ESP32 GND     →  buzzer negative (-)
+    ESP32 Board
+   ┌──────────┐
+   │          │
+   │  GPIO 5 ├───────┤ BUZ ├──── GND
+   │          │       +    -
+   │  GND     ├───────┘
+   │          │
+   └──────────┘
+
+   Breadboard view:
+   ┌─────────────────────────────────────────┐
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   └─────────────────────────────────────────┘
+
+   Buzzer on breadboard:
+   ┌─────────────────────────────────────────┐
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   └─────────────────────────────────────────┘
+
+   Pin mapping:
+   ┌────────────┬────────────┐
+   │ ESP32 Pin  │ Breadboard │
+   ├────────────┼────────────┤
+   │ GPIO 5     │ row 20     │
+   │ GND        │ row 23     │
+   └────────────┴────────────┘
 ```
+
+**What's happening:** The `tone()` function sends a square wave at a specific frequency to GPIO 5. The buzzer converts this electrical signal into sound waves. Higher frequency = higher pitch.
 
 ### Flash the code
 
@@ -145,9 +293,24 @@ void loop() {
 }
 ```
 
-**Result:** A ascending scale plays on repeat. Try changing the numbers — higher = higher pitch.
+**Result:** An ascending scale plays on repeat. Try changing the numbers — higher = higher pitch.
 
 ## Step 7: Put it in the Lab Base Station
+
+```
+   ┌─────────────────────────────────────────┐
+   │  ┌───────────────────────────────────┐  │ ← 3D-printed base
+   │  │  ┌─────────────────────────────┐  │  │
+   │  │  │         BREADBOARD          │  │  │
+   │  │  │  [ESP32]  [LED]  [BTN]     │  │  │
+   │  │  │  [BUZZER]  [WIRES]         │  │  │
+   │  │  └─────────────────────────────┘  │  │
+   │  │           ↑ USB-C cable           │  │
+   │  └───────────┤───────────────────────┘  │
+   └──────────────┤──────────────────────────┘
+                  ↓
+            to your computer
+```
 
 1. Place the breadboard into the 3D-printed base station
 2. Route the USB-C cable through the back slot

@@ -24,18 +24,76 @@ From this kit: 0.96" SSD1306 OLED, IR obstacle sensor, 3D-printed Pokédex case.
 The OLED uses I2C — just 4 wires:
 
 ```
-OLED VCC  →  ESP32 3.3V
-OLED GND  →  ESP32 GND
-OLED SDA  →  ESP32 GPIO 21
-OLED SCL  →  ESP32 GPIO 22
+   OLED Display (0.96" SSD1306)
+   ┌─────────────────────────┐
+   │  ┌─────────────────┐    │
+   │  │                 │    │
+   │  │    OLED SCREEN  │    │
+   │  │    128 x 64 px  │    │
+   │  │                 │    │
+   │  └─────────────────┘    │
+   │  VCC GND SDA SCL        │
+   └──┬───┬───┬───┬──────────┘
+      │   │   │   │
+      │   │   │   └──── GPIO 22
+      │   │   └──────── GPIO 21
+      │   └──────────── GND
+      └──────────────── 3.3V
+
+   Pin mapping:
+   ┌────────────┬────────────┐
+   │ OLED Pin   │ ESP32 Pin  │
+   ├────────────┼────────────┤
+   │ VCC        │ 3.3V       │
+   │ GND        │ GND        │
+   │ SDA        │ GPIO 21    │
+   │ SCL        │ GPIO 22    │
+   └────────────┴────────────┘
+
+   Breadboard layout:
+   ┌─────────────────────────────────────────┐
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · [VCC][GND][SDA][SCL] · · · ·  │ ← OLED pins
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  · · · · · · · · · · · · · · · · · · ·  │
+   │  + + + + + + + + + + + + + + + + + + +  │
+   │  - - - - - - - - - - - - - - - - - - -  │
+   └─────────────────────────────────────────┘
 ```
 
 ## Step 2: Wire the IR sensor
 
 ```
-IR VCC  →  ESP32 3.3V
-IR GND  →  ESP32 GND
-IR OUT  →  ESP32 GPIO 14
+   IR Obstacle Sensor
+   ┌─────────────────────────┐
+   │  ┌─────────────────┐    │
+   │  │  ○   IR LED   ○ │    │
+   │  │     ┌─────┐     │    │
+   │  │     │SENSOR│     │    │
+   │  │     └─────┘     │    │
+   │  └─────────────────┘    │
+   │  VCC GND OUT            │
+   └──┬───┬───┬──────────────┘
+      │   │   │
+      │   │   └──── GPIO 14
+      │   └──────── GND
+      └──────────── 3.3V
+
+   Pin mapping:
+   ┌────────────┬────────────┐
+   │ Sensor Pin │ ESP32 Pin  │
+   ├────────────┼────────────┤
+   │ VCC        │ 3.3V       │
+   │ GND        │ GND        │
+   │ OUT        │ GPIO 14    │
+   └────────────┴────────────┘
 ```
 
 ## Step 3: Install the OLED library
@@ -135,6 +193,46 @@ void loop() {
 **Result:** Point the scanner at something — when it detects an object, it displays a Pokémon and increments the scan count.
 
 ## Step 7: Assemble the Pokédex
+
+```
+   Pokédex Case Assembly:
+   ┌─────────────────────────────────────────┐
+   │                                         │
+   │  ┌─────────────────────────────────┐    │
+   │  │         TOP HALF                │    │
+   │  │  ┌─────────────────────────┐    │    │
+   │  │  │      OLED SCREEN        │    │    │
+   │  │  │      (visible)          │    │    │
+   │  │  └─────────────────────────┘    │    │
+   │  │         IR SENSOR → ○           │    │
+   │  └───────────────┬─────────────────┘    │
+   │                  │ hinge                │
+   │  ┌───────────────┴─────────────────┐    │
+   │  │         BOTTOM HALF             │    │
+   │  │  ┌─────────────────────────┐    │    │
+   │  │  │      ESP32 BOARD        │    │    │
+   │  │  │      (hidden)           │    │    │
+   │  │  └─────────────────────────┘    │    │
+   │  │         BUZZER                  │    │
+   │  └─────────────────────────────────┘    │
+   │                                         │
+   └─────────────────────────────────────────┘
+
+   Wiring summary:
+   ┌────────────┬────────────┐
+   │ Component  │ ESP32 Pin  │
+   ├────────────┼────────────┤
+   │ OLED VCC   │ 3.3V       │
+   │ OLED GND   │ GND        │
+   │ OLED SDA   │ GPIO 21    │
+   │ OLED SCL   │ GPIO 22    │
+   │ IR VCC     │ 3.3V       │
+   │ IR GND     │ GND        │
+   │ IR OUT     │ GPIO 14    │
+   │ Buzzer +   │ GPIO 5     │
+   │ Buzzer -   │ GND        │
+   └────────────┴────────────┘
+```
 
 1. Fit the OLED into the top half of the clamshell case
 2. Mount the IR sensor behind the sensor window

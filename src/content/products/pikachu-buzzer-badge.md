@@ -21,12 +21,21 @@ tags: ["diy-kit", "beginner", "esp32", "audio", "pokemon", "wearable"]
 
 ## What's in the box
 
-| Component | Qty | Purpose |
-|-----------|-----|---------|
-| 8-ohm speaker | 1 | Audio output |
-| Tactile buttons (A/B) | 2 | User input |
-| 3D-printed Pikachu badge | 1 | Yellow case with ear accents |
-| Clip + pin | 1 | Wear it on your shirt or bag |
+<table class="w-full text-sm">
+  <thead>
+    <tr class="border-b border-edge">
+      <th class="py-2 text-left font-mono text-neon">Component</th>
+      <th class="py-2 text-center font-mono text-neon">Qty</th>
+      <th class="py-2 text-left font-mono text-neon">Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="border-b border-edge/50"><td class="py-1.5">8-ohm speaker</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Audio output</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">Tactile buttons (A/B)</td><td class="py-1.5 text-center">2</td><td class="py-1.5 text-ink-dim">User input</td></tr>
+    <tr class="border-b border-edge/50"><td class="py-1.5">3D-printed Pikachu badge</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Yellow case with ear accents</td></tr>
+    <tr><td class="py-1.5">Clip + pin</td><td class="py-1.5 text-center">1</td><td class="py-1.5 text-ink-dim">Wear it on your shirt or bag</td></tr>
+  </tbody>
+</table>
 
 **Requires:** Starter Pack (ESP32, breadboard, wires, USB-C cable)
 
