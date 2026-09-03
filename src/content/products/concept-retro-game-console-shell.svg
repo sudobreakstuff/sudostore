@@ -108,7 +108,7 @@
         <line x1="-15" y1="-8" x2="-5" y2="-8" stroke="#a0a098" stroke-width="1.5"/>
         <line x1="-13" y1="-4" x2="-3" y2="-4" stroke="#a0a098" stroke-width="1.5"/>
         <line x1="-11" y1="0" x2="-1" y2="0" stroke="#a0a098" stroke-width="1.5"/>
-        <line x1="-9" y2="4" x2="1" y2="4" stroke="#a0a098" stroke-width="1.5"/>
+        <line x1="-9" y1="4" x2="1" y2="4" stroke="#a0a098" stroke-width="1.5"/>
         <line x1="-7" y1="8" x2="3" y2="8" stroke="#a0a098" stroke-width="1.5"/>
       </g>
     </g>

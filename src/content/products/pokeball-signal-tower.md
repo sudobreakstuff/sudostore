@@ -4,7 +4,7 @@ tagline: "LED ring in a 3D-printed Pokéball — notifications, patterns, WiFi a
 description: |
   A WS2812 LED ring mounted inside a 3D-printed Pokéball case. Connect it to WiFi and it lights up when you get messages, displays custom colour patterns, or just looks incredible on your desk. Teaches LED control, colour theory, and Arduino libraries.
 images:
-  - ./concept-pokeball-signal-tower.svg
+  - ./concept-pokeball-signal-tower.png
 category: "diy-kits"
 price: 249
 status: "in-stock"

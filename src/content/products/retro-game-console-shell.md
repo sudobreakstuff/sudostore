@@ -4,7 +4,7 @@ tagline: "Game Boy-style shell with OLED — play Pong, Snake, and Breakout you 
 description: |
   A 3D-printed Game Boy-style shell with a 0.96" OLED screen and four tactile buttons. Code your own retro games — Pong, Snake, Breakout — and play them on a real handheld. The ultimate beginner project that teaches game logic, display rendering, and collision detection.
 images:
-  - ./concept-retro-game-console-shell.svg
+  - ./concept-retro-game-console-shell.png
 category: "diy-kits"
 price: 349
 status: "in-stock"

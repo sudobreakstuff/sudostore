@@ -4,7 +4,7 @@ tagline: "Relay + LED strip controller in a cyberpunk case — home automation s
 description: |
   A black cyberpunk-styled case with neon accent lines, housing a relay module and controlling a 1m WS2812 LED strip. Turn lights on/off from your phone, create custom LED animations, build HTTP APIs. The gateway to home automation. Teaches WiFi, HTTP, and relay control.
 images:
-  - ./concept-cyberdeck-wireless-remote.svg
+  - ./concept-cyberdeck-wireless-remote.png
 category: "diy-kits"
 price: 249
 status: "in-stock"

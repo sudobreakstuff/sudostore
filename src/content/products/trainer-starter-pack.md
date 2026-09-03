@@ -4,7 +4,7 @@ tagline: "Your first build kit — ESP32 + components + 3D-printed lab station"
 description: |
   Everything you need to start building. An ESP32 board, breadboard, jumper wires, LEDs, buttons, a buzzer, and a 3D-printed base station to hold it all. The Starter Pack teaches you the basics — blink an LED, read a button, play tones, connect to WiFi — and unlocks all five Theme Kits that follow.
 images:
-  - ./concept-starter-pack.svg
+  - ./concept-starter-pack.png
 category: "diy-kits"
 price: 499
 status: "in-stock"
