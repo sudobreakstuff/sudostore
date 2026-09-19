@@ -1,6 +1,7 @@
 ---
 title: "Pokémon in 3D on Android: Gen1Recomp + VoxelMod"
 description: "Play Pokémon Red, Blue and Yellow natively in 3D on Android with Gen1Recomp — import your ROM, add the VoxelMod, and get the 3D camera working."
+image: "/sudostore/assets/pokemon-3d-android-gen1recomp.png"
 published: 2026-09-01
 level: "intermediate"
 tags: ["pokemon", "3d", "android", "gen1recomp", "voxel", "retro", "gaming"]
@@ -18,6 +19,8 @@ doesn't emulate the Game Boy, it rebuilds the game from your ROM and runs it
 natively. Add the VoxelMod and you get a fully explorable 3D Kanto, with a
 camera you control. Best of all: it runs on Android phones in about ten
 minutes.
+
+<img src="/sudostore/assets/pokemon-3d-android-gen1recomp.png" alt="Pokémon Red in 3D voxel on Android" />
 
 ## What you need
 

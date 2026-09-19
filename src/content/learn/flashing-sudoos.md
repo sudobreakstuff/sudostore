@@ -1,6 +1,7 @@
 ---
 title: "Flashing SudoOS onto Your Handheld"
 description: "A step-by-step guide to putting SudoOS on your handheld console, from downloading the image to first boot."
+image: "/sudostore/assets/flashing-sudoos.jpg"
 published: 2026-08-30
 level: "beginner"
 tags: ["sudoos", "handheld", "linux"]
@@ -9,6 +10,8 @@ tags: ["sudoos", "handheld", "linux"]
 Our vertical and horizontal handhelds are great little consoles, but they get
 a lot better with a proper OS. SudoOS is a custom Linux build made for them —
 this guide walks you through the whole flash from start to finish.
+
+<img src="/sudostore/assets/flashing-sudoos.jpg" alt="SudoOS on a retro handheld console" />
 
 ## What you need
 

@@ -1,6 +1,7 @@
 ---
 title: "Build a Batocera Console: EmulationStation on a Drive, Boot Any PC"
 description: "Turn a USB flash drive or hard drive into a retro console with Batocera — flash it, add your ROMs, boot it on any laptop or PC, and theme it properly."
+image: "/sudostore/assets/batocera-console.jpg"
 published: 2026-09-01
 level: "intermediate"
 tags: ["batocera", "emulationstation", "retro", "linux", "gaming"]
@@ -20,6 +21,8 @@ it to a USB stick or hard drive, plug it into almost any PC or laptop, and it
 boots straight into EmulationStation — a console that just works, with no
 Windows, no setup, and your game collection on the same drive. This guide does
 it properly, from blank drive to themed, scraped, controller-ready rig.
+
+<img src="/sudostore/assets/batocera-console.jpg" alt="Batocera retro gaming console on a USB drive" />
 
 ## What you need
 

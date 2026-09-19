@@ -1,6 +1,7 @@
 ---
 title: "Python Basics: Variables, Loops and Functions"
 description: "Your first real taste of programming — the three ideas every language is built on, in Python."
+image: "/sudostore/assets/python-basics.jpg"
 published: 2026-09-01
 level: "beginner"
 tags: ["python", "coding", "beginner"]
@@ -8,6 +9,8 @@ tags: ["python", "coding", "beginner"]
 
 Nearly everything in programming comes down to three ideas. Learn these in
 Python and you'll recognise them in every other language you meet.
+
+<img src="/sudostore/assets/python-basics.jpg" alt="Python code in an editor with syntax highlighting" />
 
 ## Variables — boxes with names
 
