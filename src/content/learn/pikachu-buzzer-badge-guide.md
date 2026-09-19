@@ -20,6 +20,8 @@ From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable, buttons.
 
 From this kit: 8-ohm speaker, 2x tactile buttons, 3D-printed Pikachu badge case.
 
+<img src="/sudostore/assets/pikachu-buzzer-badge.jpg" alt="Pikachu Buzzer Badge with speaker and buttons" />
+
 ## Step 1: Wire the speaker
 
 ```

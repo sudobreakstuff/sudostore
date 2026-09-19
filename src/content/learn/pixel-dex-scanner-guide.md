@@ -20,6 +20,8 @@ From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable, buttons, buzze
 
 From this kit: 0.96" SSD1306 OLED, IR obstacle sensor, 3D-printed Pokédex case.
 
+<img src="/sudostore/assets/pixel-dex-scanner.jpg" alt="Pixel Dex Scanner with OLED display and IR sensor" />
+
 ## Step 1: Wire the OLED (I2C)
 
 The OLED uses I2C — just 4 wires:

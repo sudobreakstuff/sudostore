@@ -20,6 +20,8 @@ From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable, buttons, buzze
 
 From this kit: 0.96" SSD1306 OLED, 4x tactile buttons, 3D-printed Game Boy shell.
 
+<img src="/sudostore/assets/retro-game-console-shell.jpg" alt="Retro Game Console shell with OLED screen" />
+
 ## Step 1: Wire the OLED
 
 Same as the Dex Scanner:

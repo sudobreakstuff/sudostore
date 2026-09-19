@@ -37,6 +37,8 @@ Your own game controller that any computer recognises as a proper gamepad. Arcad
 
 > **🤔 Where to buy the ESP32-S3:** Search "ESP32-S3 dev kit" — you want one with the USB-C connector and the pins broken out. Most are under R200.
 
+<img src="/sudostore/assets/game-controller.png" alt="USB game controller with arcade buttons and joystick" />
+
 ## Step 1: Understand USB gamepads
 
 When you press a button on a gamepad, the computer receives a simple message: "Button 1 is pressed". That's it. No complex data — just a list of on/off states.

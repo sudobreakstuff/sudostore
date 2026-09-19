@@ -21,6 +21,8 @@ faqs:
 - **Starter Pack** (ESP32, breadboard, wires, buzzer)
 - One ESP32 to run everything
 
+<img src="/sudostore/assets/full-pokedex-station.jpg" alt="Full Pokédex Station with OLED screen and LED ring" />
+
 ## The concept
 
 A single unit with:

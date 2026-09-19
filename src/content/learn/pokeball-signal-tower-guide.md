@@ -20,6 +20,8 @@ From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable.
 
 From this kit: WS2812B LED ring, 3D-printed Pokéball case, wiring harness.
 
+<img src="/sudostore/assets/pokeball-signal-tower.jpg" alt="Pokéball Signal Tower with LED ring" />
+
 ## Step 1: Wire the LED ring
 
 ```
