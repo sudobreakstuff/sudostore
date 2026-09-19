@@ -15,6 +15,7 @@ category: "input-devices"
 price: 1099
 status: "made-to-order"
 featured: true
+model: sudodeck-wall-mount.stl
 specs:
   - "ESP32 + touchscreen"
   - "Bluetooth Low Energy HID"

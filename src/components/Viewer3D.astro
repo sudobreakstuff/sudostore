@@ -1,0 +1,23 @@
+---
+interface Props {
+  file: string
+  title?: string
+  aspect?: string
+}
+
+const { file, title = '3D View', aspect = 'aspect-[4/3]' } = Astro.props;
+---
+
+<div class="mt-6 rounded-lg border border-edge bg-night overflow-hidden">
+  <p class="font-mono text-xs uppercase tracking-widest text-ink-dim px-4 pt-4">
+    <span class="text-red">$</span> {title}
+  </p>
+  <div class={`${aspect} mt-3`}>
+    <iframe
+      src={`/3d/viewer.html?file=${file}`}
+      title={title}
+      class="h-full w-full rounded-lg border-0"
+      loading="lazy"
+    ></iframe>
+  </div>
+</div>
