@@ -1,7 +1,7 @@
 ---
 title: "Build a Network Monitor"
 description: "Desk device showing internet health with LEDs and OLED."
-image: "/sudostore/assets/network-monitor.jpg"
+image: "/sudostore/assets/network-monitor.webp"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "network", "wifi"]
