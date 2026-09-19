@@ -1,7 +1,7 @@
 ---
 title: "Build a Pomodoro Timer"
 description: "Physical button timer for focused work sessions with OLED display and buzzer."
-image: "/sudostore/assets/build-a-pomodoro-timer.jpg"
+image: "../../assets/build-a-pomodoro-timer.jpg"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "timer", "focus", "oled"]
@@ -20,7 +20,7 @@ From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable.
 
 From this kit: 2x tactile buttons, 0.96" OLED, piezo buzzer, 3D-printed case.
 
-<img src="/sudostore/assets/build-a-pomodoro-timer.jpg" alt="Pomodoro timer with OLED and buzzer" />
+<img src="../../assets/build-a-pomodoro-timer.jpg" alt="Pomodoro timer with OLED and buzzer" />
 
 ## Step 1: Wire the buttons
 

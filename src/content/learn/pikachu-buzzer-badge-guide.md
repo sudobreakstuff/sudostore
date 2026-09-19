@@ -1,7 +1,7 @@
 ---
 title: "Pikachu Buzzer Badge: Sound & Melody Guide"
 description: "Build a wearable Pikachu badge that plays sounds, melodies, and custom SFX. Press buttons, make noise, have fun."
-image: "/sudostore/assets/pikachu-buzzer-badge.jpg"
+image: "../../assets/pikachu-buzzer-badge.jpg"
 published: 2026-09-03
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "audio", "pokemon", "wearable"]
@@ -20,7 +20,7 @@ From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable, buttons.
 
 From this kit: 8-ohm speaker, 2x tactile buttons, 3D-printed Pikachu badge case.
 
-<img src="/sudostore/assets/pikachu-buzzer-badge.jpg" alt="Pikachu Buzzer Badge with speaker and buttons" />
+<img src="../../assets/pikachu-buzzer-badge.jpg" alt="Pikachu Buzzer Badge with speaker and buttons" />
 
 ## Step 1: Wire the speaker
 

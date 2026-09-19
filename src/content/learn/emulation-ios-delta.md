@@ -1,7 +1,7 @@
 ---
 title: "Emulators on iPhone: Delta, ROMs and Getting Started"
 description: "The complete beginner setup for emulating retro consoles on your iPhone with Delta — install, side-load-free on the App Store, import ROMs and play."
-image: "/sudostore/assets/emulation-ios-delta.png"
+image: "../../assets/emulation-ios-delta.png"
 published: 2026-09-01
 level: "beginner"
 tags: ["emulation", "ios", "delta", "retro", "gaming"]
@@ -20,7 +20,7 @@ iPhone emulation used to mean jailbreaks and computer apps. These days Delta is
 on the App Store and runs Game Boy, NES, SNES, GBA and more. Here's the whole
 setup, properly.
 
-<img src="/sudostore/assets/emulation-ios-delta.png" alt="Delta emulator running on iPhone" />
+<img src="../../assets/emulation-ios-delta.png" alt="Delta emulator running on iPhone" />
 
 ## What is Delta?
 

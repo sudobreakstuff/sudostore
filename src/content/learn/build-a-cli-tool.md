@@ -1,7 +1,7 @@
 ---
 title: "Project: Build a Command-Line To-Do App"
 description: "A first real project — write a small to-do list program in Python and run it from the terminal."
-image: "/sudostore/assets/build-a-cli-tool.png"
+image: "../../assets/build-a-cli-tool.png"
 published: 2026-09-01
 level: "beginner"
 tags: ["python", "project", "beginner"]
@@ -11,7 +11,7 @@ A to-do app is the classic first project — small, useful, and it teaches you
 variables, lists, loops and functions all at once. You'll write it in about
 thirty lines.
 
-<img src="/sudostore/assets/build-a-cli-tool.png" alt="Python to-do app running in the terminal" />
+<img src="../../assets/build-a-cli-tool.png" alt="Python to-do app running in the terminal" />
 
 ## What it'll do
 

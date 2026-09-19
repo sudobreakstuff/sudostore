@@ -1,7 +1,7 @@
 ---
 title: "Build a Digital Pet"
 description: "Tamagotchi-style virtual pet with OLED, buttons and buzzer."
-image: "/sudostore/assets/build-a-digital-pet.webp"
+image: "../../assets/build-a-digital-pet.webp"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "oled", "pet", "buzzer"]
@@ -34,7 +34,7 @@ A pocket-sized friend that lives on a tiny screen. Feed it, play with it, let it
 
 > **💡 Looking for the parts?** Search for "ESP32", "0.96 OLED I2C", "tactile button 6x6mm", "piezo buzzer" on any electronics shop. You want the buzzer that makes a tone when voltage is applied (not the one that just beeps).
 
-<img src="/sudostore/assets/build-a-digital-pet.webp" alt="Digital pet toy with pixel screen" />
+<img src="../../assets/build-a-digital-pet.webp" alt="Digital pet toy with pixel screen" />
 
 ## Step 1: The idea — how your pet works
 

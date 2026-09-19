@@ -1,7 +1,7 @@
 ---
 title: "Cyberdeck Wireless Remote: Home Automation Guide"
 description: "Build a relay controller and LED strip driver in a cyberpunk case. Control lights from your phone, build HTTP APIs, learn home automation."
-image: "/sudostore/assets/cyberdeck-wireless-remote.jpg"
+image: "../../assets/cyberdeck-wireless-remote.jpg"
 published: 2026-09-03
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "relay", "led", "home-automation"]
@@ -20,7 +20,7 @@ From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable.
 
 From this kit: relay module, WS2812B LED strip (1m), 3D-printed cyberpunk case.
 
-<img src="/sudostore/assets/cyberdeck-wireless-remote.jpg" alt="Cyberdeck wireless remote components" />
+<img src="../../assets/cyberdeck-wireless-remote.jpg" alt="Cyberdeck wireless remote components" />
 
 ## Step 1: Wire the relay
 

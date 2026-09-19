@@ -1,7 +1,7 @@
 ---
 title: "Build a Personal Dashboard"
 description: "ESP32 display showing weather, crypto and GitHub stats."
-image: "/sudostore/assets/build-a-personal-dashboard.jpg"
+image: "../../assets/build-a-personal-dashboard.jpg"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "api", "dashboard"]
@@ -33,7 +33,7 @@ A small device that sits on your desk and shows you data from the internet — w
 
 > **💡 No extra sensors needed!** This project uses existing APIs on the internet — it doesn't measure anything physical.
 
-<img src="/sudostore/assets/build-a-personal-dashboard.jpg" alt="Personal dashboard with ESP32 and OLED display" />
+<img src="../../assets/build-a-personal-dashboard.jpg" alt="Personal dashboard with ESP32 and OLED display" />
 
 ## Step 1: Understand the flow
 

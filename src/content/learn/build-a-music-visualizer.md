@@ -1,7 +1,7 @@
 ---
 title: "Build a Music Visualizer"
 description: "Reactive LED strip driven by microphone and ESP32."
-image: "/sudostore/assets/build-a-music-visualizer.jpg"
+image: "../../assets/build-a-music-visualizer.jpg"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "audio", "led"]
@@ -35,7 +35,7 @@ A strip of LEDs that dances to music in real time. You'll learn how sound become
 
 > **💡 Important:** Get a **microphone module** (like the MAX9814 or KY-038), NOT a raw microphone. Modules have amplification built in — a raw microphone won't give useful readings.
 
-<img src="/sudostore/assets/build-a-music-visualizer.jpg" alt="Music visualizer with WS2812B LED strip" />
+<img src="../../assets/build-a-music-visualizer.jpg" alt="Music visualizer with WS2812B LED strip" />
 
 ## Step 1: How sound becomes light
 

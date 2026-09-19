@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the Lab: Starter Pack Build Guide"
 description: "Your first electronics project — unbox, wire, flash, and play. Everything you need to know to get your Trainer's Lab Starter Pack running."
-image: "/sudostore/assets/starter-pack.jpg"
+image: "../../assets/starter-pack.jpg"
 published: 2026-09-03
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "starter-pack", "electronics"]
@@ -33,7 +33,7 @@ Open the box and check you've got everything:
 
 Missing something? Message us on WhatsApp.
 
-<img src="/sudostore/assets/starter-pack.jpg" alt="Trainer's Lab Starter Pack contents" />
+<img src="../../assets/starter-pack.jpg" alt="Trainer's Lab Starter Pack contents" />
 
 ## Step 1: Install Arduino IDE
 

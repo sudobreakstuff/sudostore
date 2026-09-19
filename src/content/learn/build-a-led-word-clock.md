@@ -1,7 +1,7 @@
 ---
 title: "Build an LED Word Clock"
 description: "Time displayed in glowing letters behind frosted acrylic."
-image: "/sudostore/assets/build-a-led-word-clock.jpg"
+image: "../../assets/build-a-led-word-clock.jpg"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "led", "clock"]
@@ -36,7 +36,7 @@ A beautiful word clock that shows the time in glowing LED letters behind frosted
 
 > **💡 The RTC module has a coin cell battery backup. This means it keeps time even when the ESP32 is unplugged. Without it, your clock would reset to 00:00 every time you unplug it.**
 
-<img src="/sudostore/assets/build-a-led-word-clock.jpg" alt="LED Word Clock build with ESP32 and WS2812B strip" />
+<img src="../../assets/build-a-led-word-clock.jpg" alt="LED Word Clock build with ESP32 and WS2812B strip" />
 
 ## Step 1: Plan your letter layout
 

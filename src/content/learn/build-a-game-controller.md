@@ -1,7 +1,7 @@
 ---
 title: "Build a Game Controller"
 description: "USB gamepad with arcade buttons, joystick and 3D-printed case."
-image: "/sudostore/assets/game-controller.png"
+image: "../../assets/game-controller.png"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "usb-hid", "gamepad"]
@@ -37,7 +37,7 @@ Your own game controller that any computer recognises as a proper gamepad. Arcad
 
 > **🤔 Where to buy:** Search "ESP32-S3 dev kit" — you want one with the USB-C connector and the pins broken out. Also search for "30mm arcade button" and "joystick module" on any electronics shop.
 
-<img src="/sudostore/assets/game-controller.png" alt="USB game controller with arcade buttons and joystick" />
+<img src="../../assets/game-controller.png" alt="USB game controller with arcade buttons and joystick" />
 
 ## Step 1: Understand USB gamepads
 

@@ -1,7 +1,7 @@
 ---
 title: "Build a Plant Monitor"
 description: "Soil moisture sensor, OLED display and watering alerts."
-image: "/sudostore/assets/build-a-plant-monitor.jpg"
+image: "../../assets/build-a-plant-monitor.jpg"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "sensor", "plant", "oled"]
@@ -32,7 +32,7 @@ A small station that sits next to your plant and tells you when it's thirsty. Yo
 
 > **💡 Important:** Get a **capacitive** moisture sensor, not a resistive one. Capacitive sensors don't corrode — resistive ones rust in the soil after a few weeks. They look similar but the capacitive one has a smooth white PCB, not exposed metal prongs.
 
-<img src="/sudostore/assets/build-a-plant-monitor.jpg" alt="Plant monitor with soil moisture sensor and OLED" />
+<img src="../../assets/build-a-plant-monitor.jpg" alt="Plant monitor with soil moisture sensor and OLED" />
 
 ## Step 1: Understand the sensor
 

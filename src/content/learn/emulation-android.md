@@ -1,7 +1,7 @@
 ---
 title: "Emulators on Android: Pick the Right One and Set It Up"
 description: "How to set up retro emulation on Android with the best-looking, easiest-to-use apps — RetroArch for everything, plus the quickest per-console options."
-image: "/sudostore/assets/emulation-android.jpg"
+image: "../../assets/emulation-android.jpg"
 published: 2026-09-01
 level: "beginner"
 tags: ["emulation", "android", "retroarch", "retro", "gaming"]
@@ -32,7 +32,7 @@ My recommendation: use **Lemuroid** to start (it's genuinely nice and
 easy to set up), and graduate to **RetroArch** once you want power-user
 features like shaders, netplay and per-system cores.
 
-<img src="/sudostore/assets/emulation-android.jpg" alt="RetroArch running on Android phone" />
+<img src="../../assets/emulation-android.jpg" alt="RetroArch running on Android phone" />
 
 ## Option A — Lemuroid (easiest, best-looking defaults)
 

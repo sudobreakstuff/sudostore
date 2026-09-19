@@ -1,7 +1,7 @@
 ---
 title: "Build a Web Scraper & Alert System"
 description: "Monitor any website, get notified when it changes."
-image: "/sudostore/assets/build-a-web-scraper.webp"
+image: "../../assets/build-a-web-scraper.webp"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "python", "scraping", "alerts"]
@@ -32,7 +32,7 @@ A program that watches any website for changes and alerts you. When a price drop
 
 > **💡 Don't have Linux?** You can use Windows with [WSL](https://learn.microsoft.com/en-us/windows/wsl/) (Windows Subsystem for Linux) or install Python directly. The guide works on any system with Python 3.
 
-<img src="/sudostore/assets/build-a-web-scraper.webp" alt="Web scraper running on a laptop" />
+<img src="../../assets/build-a-web-scraper.webp" alt="Web scraper running on a laptop" />
 
 ## Step 1: Understand the concept
 

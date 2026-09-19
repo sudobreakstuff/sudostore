@@ -1,7 +1,7 @@
 ---
 title: "Learn with NexCampus — an Offline Student Toolkit"
 description: "A free, offline learning suite with a Code Lab, dictionary, flashcards, periodic table and more. Open it in your browser and start."
-image: "/sudostore/assets/nexcampus.png"
+image: "../../assets/nexcampus.png"
 published: 2026-09-01
 level: "beginner"
 tags: ["tools", "study", "coding", "free"]
@@ -13,7 +13,7 @@ and works with zero internet once loaded.
 
 > Open it here: **[sudobreakstuff.github.io/Nexcampus](https://sudobreakstuff.github.io/Nexcampus/)**
 
-<img src="/sudostore/assets/nexcampus.png" alt="NexCampus offline learning toolkit interface" />
+<img src="../../assets/nexcampus.png" alt="NexCampus offline learning toolkit interface" />
 
 ## What's inside
 

@@ -1,7 +1,7 @@
 ---
 title: "Setting Up Your SudoDeck"
 description: "From unboxing to your first macro — flash, connect and configure the SudoDeck macro keyboard."
-image: "/sudostore/assets/sudo-deck-setup.jpg"
+image: "../../assets/sudo-deck-setup.jpg"
 published: 2026-09-01
 level: "beginner"
 tags: ["sudodeck", "esp32", "macro-keyboard", "hardware"]
@@ -10,7 +10,7 @@ tags: ["sudodeck", "esp32", "macro-keyboard", "hardware"]
 The SudoDeck is a wireless macro keyboard you configure from your browser. This
 guide takes you from a fresh device to a working button that types for you.
 
-<img src="/sudostore/assets/sudo-deck-setup.jpg" alt="SudoDeck wireless macro keyboard" />
+<img src="../../assets/sudo-deck-setup.jpg" alt="SudoDeck wireless macro keyboard" />
 
 ## Buy it or build it
 

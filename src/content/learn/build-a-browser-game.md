@@ -1,7 +1,7 @@
 ---
 title: "Build a Browser Game"
 description: "HTML5 canvas game built from scratch with JavaScript."
-image: "/sudostore/assets/browser-game.png"
+image: "../../assets/browser-game.png"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "javascript", "canvas", "game"]
@@ -31,7 +31,7 @@ A real browser game — no engines, no frameworks, just HTML, CSS and your own c
 
 > **💡 First time coding?** Don't worry. Every programmer started here. Type the code exactly as shown, and you'll have a working game in 30 minutes.
 
-<img src="/sudostore/assets/browser-game.png" alt="Browser game running in a browser" />
+<img src="../../assets/browser-game.png" alt="Browser game running in a browser" />
 
 ## Step 1: Set up your project
 

@@ -1,7 +1,7 @@
 ---
 title: "Your First Terminal Commands"
 description: "Never touched a terminal before? Here are the commands that actually matter, explained without the jargon."
-image: "/sudostore/assets/first-terminal-commands.png"
+image: "../../assets/first-terminal-commands.png"
 published: 2026-08-28
 level: "beginner"
 tags: ["linux", "terminal", "bash"]
@@ -10,7 +10,7 @@ tags: ["linux", "terminal", "bash"]
 The terminal looks scary until you realise it's just a faster way to talk to
 your computer. These few commands cover 90% of what you'll do day to day.
 
-<img src="/sudostore/assets/first-terminal-commands.png" alt="Linux terminal with commands" />
+<img src="../../assets/first-terminal-commands.png" alt="Linux terminal with commands" />
 
 ## Where am I, and what's here?
 

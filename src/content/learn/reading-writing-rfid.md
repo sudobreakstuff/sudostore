@@ -1,7 +1,7 @@
 ---
 title: "Reading and Writing RFID Cards"
 description: "How EM410x cards work and how to read, clone and write IDs with the card reader."
-image: "/sudostore/assets/reading-writing-rfid.png"
+image: "../../assets/reading-writing-rfid.png"
 published: 2026-08-25
 level: "intermediate"
 tags: ["rfid", "proxmark3", "hardware"]
@@ -11,7 +11,7 @@ EM410x cards are the simplest kind of RFID tag — they hold a single read-only
 ID and broadcast it whenever a reader powers them. That simplicity makes them
 easy to understand and easy to clone, which is exactly what this reader is for.
 
-<img src="/sudostore/assets/reading-writing-rfid.png" alt="Proxmark3 RFID reader hardware" />
+<img src="../../assets/reading-writing-rfid.png" alt="Proxmark3 RFID reader hardware" />
 
 ## How the ID works
 

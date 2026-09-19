@@ -1,7 +1,7 @@
 ---
 title: "SudoDeck: Buttons, Macros and Actions"
 description: "Every action type on the SudoDeck explained, with examples and when to use each one."
-image: "/sudostore/assets/sudo-deck-actions.jpg"
+image: "../../assets/sudo-deck-actions.jpg"
 published: 2026-09-01
 level: "intermediate"
 tags: ["sudodeck", "macros", "automation"]
@@ -10,7 +10,7 @@ tags: ["sudodeck", "macros", "automation"]
 Every button on the SudoDeck can be one of six action types. Here's what each
 one does and when to reach for it.
 
-<img src="/sudostore/assets/sudo-deck-actions.jpg" alt="SudoDeck macro keyboard with black buttons" />
+<img src="../../assets/sudo-deck-actions.jpg" alt="SudoDeck macro keyboard with black buttons" />
 
 ## Single Key
 
