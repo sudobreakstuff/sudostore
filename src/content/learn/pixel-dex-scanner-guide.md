@@ -1,7 +1,7 @@
 ---
 title: "Pixel Dex Scanner: OLED Display & Sensors"
 description: "Build a Pokédex with an OLED screen and IR sensor. Scan objects, display pixel art, and log your discoveries."
-image: "/assets/pixel-dex-scanner.png"
+image: "/sudostore/assets/pixel-dex-scanner.png"
 published: 2026-09-03
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "display", "sensor", "pokemon"]

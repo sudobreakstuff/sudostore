@@ -1,7 +1,7 @@
 ---
 title: "Build a Web Scraper & Alert System"
 description: "Monitor any website, get notified when it changes."
-image: "/assets/web-scraper.jpg"
+image: "/sudostore/assets/web-scraper.jpg"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "python", "scraping", "alerts"]

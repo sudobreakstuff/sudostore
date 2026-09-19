@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the Lab: Starter Pack Build Guide"
 description: "Your first electronics project — unbox, wire, flash, and play. Everything you need to know to get your Trainer's Lab Starter Pack running."
-image: "/assets/starter-pack.png"
+image: "/sudostore/assets/starter-pack.png"
 published: 2026-09-03
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "starter-pack", "electronics"]

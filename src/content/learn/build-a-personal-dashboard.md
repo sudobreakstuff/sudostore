@@ -1,7 +1,7 @@
 ---
 title: "Build a Personal Dashboard"
 description: "ESP32 display showing weather, crypto and GitHub stats."
-image: "/assets/personal-dashboard.jpg"
+image: "/sudostore/assets/personal-dashboard.jpg"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "api", "dashboard"]

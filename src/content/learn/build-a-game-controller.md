@@ -1,7 +1,7 @@
 ---
 title: "Build a Game Controller"
 description: "USB gamepad with arcade buttons, joystick and 3D-printed case."
-image: "/assets/game-controller.jpg"
+image: "/sudostore/assets/game-controller.jpg"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "usb-hid", "gamepad"]

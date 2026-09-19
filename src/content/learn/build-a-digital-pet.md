@@ -1,7 +1,7 @@
 ---
 title: "Build a Digital Pet"
 description: "Tamagotchi-style virtual pet with OLED, buttons and buzzer."
-image: "/assets/digital-pet.jpg"
+image: "/sudostore/assets/digital-pet.jpg"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "oled", "pet", "buzzer"]

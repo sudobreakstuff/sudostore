@@ -1,7 +1,7 @@
 ---
 title: "Pikachu Buzzer Badge: Sound & Melody Guide"
 description: "Build a wearable Pikachu badge that plays sounds, melodies, and custom SFX. Press buttons, make noise, have fun."
-image: "/assets/pikachu-buzzer-badge.png"
+image: "/sudostore/assets/pikachu-buzzer-badge.png"
 published: 2026-09-03
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "audio", "pokemon", "wearable"]

@@ -1,7 +1,7 @@
 ---
 title: "Build a Weather Station"
 description: "Desktop weather station with ESP32, BME280 sensor and OLED display."
-image: "/assets/weather-station.jpg"
+image: "/sudostore/assets/weather-station.jpg"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "sensor", "weather", "oled"]

@@ -1,7 +1,7 @@
 ---
 title: "Build a Browser Game"
 description: "HTML5 canvas game built from scratch with JavaScript."
-image: "/assets/browser-game.png"
+image: "/sudostore/assets/browser-game.png"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "javascript", "canvas", "game"]
