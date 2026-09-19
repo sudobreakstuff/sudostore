@@ -14,7 +14,7 @@ const { file, title = '3D View', aspect = 'aspect-[4/3]' } = Astro.props;
   </p>
   <div class={`${aspect} mt-3`}>
     <iframe
-      src={`/3d/viewer.html?file=${file}`}
+      src={`/3d/viewer?file=${file}`}
       title={title}
       class="h-full w-full rounded-lg border-0"
       loading="lazy"
