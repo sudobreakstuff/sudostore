@@ -100,6 +100,8 @@ const statusStyles: Record<string, string> = {
           </div>
         )}
 
+        {product.data.model && <Viewer3D file={product.data.model} title="3D View" />}
+
         <div class="mt-6 flex flex-wrap items-center gap-3">
           <span class="inline-flex items-center gap-1.5 text-sm text-ink-dim">
             <Icon name={categoryIcon(category)} class="h-4 w-4 text-neon-dim" />
