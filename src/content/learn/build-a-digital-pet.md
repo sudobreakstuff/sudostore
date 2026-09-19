@@ -22,15 +22,15 @@ A pocket-sized friend that lives on a tiny screen. Feed it, play with it, let it
 
 ## What you need
 
-| Part | What it does | ~Price |
-|------|-------------|--------|
-| ESP32 dev board | The brain | R80 |
-| 0.96" OLED display | Shows your pet's face | R60 |
-| 3x tactile buttons | Select, play, sleep | R15 |
-| Piezo buzzer | Makes sounds | R10 |
-| Breadboard | Wiring base | R25 |
-| Jumper wires | Connections | R20 |
-| USB-C cable | Power | R15 |
+| Part | What it does |
+|------|-------------|
+| ESP32 dev board | The brain |
+| 0.96" OLED display | Shows your pet's face |
+| 3x tactile buttons | Select, play, sleep |
+| Piezo buzzer | Makes sounds |
+| Breadboard | Wiring base |
+| Jumper wires | Connections |
+| USB-C cable | Power |
 
 > **💡 Looking for the parts?** Search for "ESP32", "0.96 OLED I2C", "tactile button 6x6mm", "piezo buzzer" on any electronics shop. You want the buzzer that makes a tone when voltage is applied (not the one that just beeps).
 

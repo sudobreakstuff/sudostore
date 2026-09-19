@@ -24,14 +24,14 @@ A strip of LEDs that dances to music in real time. You'll learn how sound become
 
 ## What you need
 
-| Part | What it does | ~Price |
-|------|-------------|--------|
-| ESP32 dev board | The brain | R80 |
-| WS2812B LED strip (60 LEDs) | The lights | R80 |
-| Microphone module | Detects sound | R35 |
-| 3D-printed housing | Holds everything | R40 (filament) |
-| Jumper wires | Connections | R20 |
-| USB-C cable | Power | R15 |
+| Part | What it does |
+|------|-------------|
+| ESP32 dev board | The brain |
+| WS2812B LED strip (60 LEDs) | The lights |
+| Microphone module | Detects sound |
+| 3D-printed housing | Holds everything |
+| Jumper wires | Connections |
+| USB-C cable | Power |
 
 > **💡 Important:** Get a **microphone module** (like the MAX9814 or KY-038), NOT a raw microphone. Modules have amplification built in — a raw microphone won't give useful readings.
 

@@ -24,18 +24,18 @@ Your own game controller that any computer recognises as a proper gamepad. Arcad
 
 ## What you need
 
-| Part | What it does | ~Price |
-|------|-------------|--------|
-| ESP32-S3 dev board | The brain + USB gamepad | R150 |
-| 6x 30mm arcade buttons | Your buttons | R60 |
-| Joystick module | Directional pad | R35 |
-| 3D-printed case | Holds everything | R40 (filament) |
-| Wires + breadboard | Connections | R60 |
-| USB-C cable | Power + data | R15 |
+| Part | What it does |
+|------|-------------|
+| ESP32-S3 dev board | The brain + USB gamepad |
+| 6x 30mm arcade buttons | Your buttons |
+| Joystick module | Directional pad |
+| 3D-printed case | Holds everything |
+| Wires + breadboard | Connections |
+| USB-C cable | Power + data |
 
 > **💡 Important:** You need the **ESP32-S3** specifically — it has USB OTG support which lets it act as a USB device (gamepad). Regular ESP32 boards cannot do this.
 
-> **🤔 Where to buy the ESP32-S3:** Search "ESP32-S3 dev kit" — you want one with the USB-C connector and the pins broken out. Most are under R200.
+> **🤔 Where to buy:** Search "ESP32-S3 dev kit" — you want one with the USB-C connector and the pins broken out. Also search for "30mm arcade button" and "joystick module" on any electronics shop.
 
 <img src="/sudostore/assets/game-controller.png" alt="USB game controller with arcade buttons and joystick" />
 

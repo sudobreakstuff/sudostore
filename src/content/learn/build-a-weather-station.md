@@ -24,14 +24,14 @@ A small box that sits on your desk and shows you the temperature, humidity and a
 
 **Buy these parts individually** — none of this comes in a kit:
 
-| Part | What it does | ~Price | Photo |
-|------|-------------|--------|-------|
-| ESP32 dev board | The brain — runs your code | R80 | [![ESP32](https://ae01.alicdn.com/kf/H6c83f9e8f1b24c4f9f0e4e5c5d6e7f8fL/ESP32.jpg)](https://www.aliexpress.com) |
-| BME280 sensor | Reads temp, humidity, pressure | R45 | ![BME280](https://www.elecrow.com/attachments/product/5c8e7e5d7f8e9f0f1f2f3f4f/bme280.jpg) |
-| 0.96" OLED display | Shows the readings | R60 | ![OLED](https://www.elecrow.com/attachments/product/5c8e7e5d7f8e9f0f1f2f3f5/096-oled.jpg) |
-| Breadboard | Lets you wire without soldering | R25 | ![Breadboard](https://www.elecrow.com/attachments/product/5c8e7e5d7f8e9f0f1f2f3f6/breadboard.jpg) |
-| Jumper wires | Connect everything | R20 | |
-| USB-C cable | Power and programming | R15 | |
+| Part | What it does | Photo |
+|------|-------------|-------|
+| ESP32 dev board | The brain — runs your code | [![ESP32](https://ae01.alicdn.com/kf/H6c83f9e8f1b24c4f9f0e4e5c5d6e7f8fL/ESP32.jpg)](https://www.aliexpress.com) |
+| BME280 sensor | Reads temp, humidity, pressure | ![BME280](https://www.elecrow.com/attachments/product/5c8e7e5d7f8e9f0f1f2f3f4f/bme280.jpg) |
+| 0.96" OLED display | Shows the readings | ![OLED](https://www.elecrow.com/attachments/product/5c8e7e5d7f8e9f0f1f2f3f5/096-oled.jpg) |
+| Breadboard | Lets you wire without soldering | ![Breadboard](https://www.elecrow.com/attachments/product/5c8e7e5d7f8e9f0f1f2f3f6/breadboard.jpg) |
+| Jumper wires | Connect everything |  |
+| USB-C cable | Power and programming |  |
 
 > **💡 Not sure what to buy?** Search for "ESP32 dev kit" on any electronics shop — you want the one with 38 pins. For the BME280, search "BME280 module" — it has 4 pins already soldered on.
 

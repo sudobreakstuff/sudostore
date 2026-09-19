@@ -24,12 +24,12 @@ A small device that sits on your desk and shows you data from the internet — w
 
 ## What you need
 
-| Part | What it does | ~Price |
-|------|-------------|--------|
-| ESP32 dev board | The brain | R80 |
-| 0.96" OLED display | Shows your data | R60 |
-| Jumper wires | Connections | R20 |
-| USB-C cable | Power | R15 |
+| Part | What it does |
+|------|-------------|
+| ESP32 dev board | The brain |
+| 0.96" OLED display | Shows your data |
+| Jumper wires | Connections |
+| USB-C cable | Power |
 
 > **💡 No extra sensors needed!** This project uses existing APIs on the internet — it doesn't measure anything physical.
 

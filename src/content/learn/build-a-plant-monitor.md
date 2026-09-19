@@ -22,13 +22,13 @@ A small station that sits next to your plant and tells you when it's thirsty. Yo
 
 ## What you need
 
-| Part | What it does | ~Price |
-|------|-------------|--------|
-| ESP32 dev board | The brain | R80 |
-| Capacitive soil moisture sensor | Detects wet or dry soil | R35 |
-| 0.96" OLED display | Shows the moisture level | R60 |
-| Breadboard + wires | Connections | R60 |
-| USB-C cable | Power | R15 |
+| Part | What it does |
+|------|-------------|
+| ESP32 dev board | The brain |
+| Capacitive soil moisture sensor | Detects wet or dry soil |
+| 0.96" OLED display | Shows the moisture level |
+| Breadboard + wires | Connections |
+| USB-C cable | Power |
 
 > **💡 Important:** Get a **capacitive** moisture sensor, not a resistive one. Capacitive sensors don't corrode — resistive ones rust in the soil after a few weeks. They look similar but the capacitive one has a smooth white PCB, not exposed metal prongs.
 

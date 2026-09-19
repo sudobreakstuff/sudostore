@@ -24,14 +24,14 @@ A small device that sits on your desk and tells you at a glance whether your int
 
 ## What you need
 
-| Part | What it does | ~Price |
-|------|-------------|--------|
-| ESP32 dev board | The brain | R80 |
-| 3x LEDs (green, amber, red) | Status indicators | R10 |
-| 0.96" OLED display | Shows latency numbers | R60 |
-| Breadboard + wires | Connections | R60 |
-| 3x 220Ω resistors | Limit LED current | R10 |
-| USB-C cable | Power | R15 |
+| Part | What it does |
+|------|-------------|
+| ESP32 dev board | The brain |
+| 3x LEDs (green, amber, red) | Status indicators |
+| 0.96" OLED display | Shows latency numbers |
+| Breadboard + wires | Connections |
+| 3x 220Ω resistors | Limit LED current |
+| USB-C cable | Power |
 
 > **💡 The resistor matters:** LEDs without resistors draw too much current and burn out quickly. Use 220Ω resistors for each LED. If you can't find them, any resistor between 100Ω and 470Ω works.
 

@@ -24,15 +24,15 @@ A beautiful word clock that shows the time in glowing LED letters behind frosted
 
 ## What you need
 
-| Part | What it does | ~Price |
-|------|-------------|--------|
-| ESP32 dev board | The brain | R80 |
-| WS2812B LED strip (288 LEDs) | The letters and border | R120 |
-| RTC module (DS3231) | Keeps time (even when powered off) | R45 |
-| Frosted acrylic panel | Diffuses the light | R35 |
-| 3D-printed frame | Holds everything | R50 (filament) |
-| Jumper wires | Connections | R20 |
-| USB-C cable | Power | R15 |
+| Part | What it does |
+|------|-------------|
+| ESP32 dev board | The brain |
+| WS2812B LED strip (288 LEDs) | The letters and border |
+| RTC module (DS3231) | Keeps time (even when powered off) |
+| Frosted acrylic panel | Diffuses the light |
+| 3D-printed frame | Holds everything |
+| Jumper wires | Connections |
+| USB-C cable | Power |
 
 > **💡 The RTC module has a coin cell battery backup. This means it keeps time even when the ESP32 is unplugged. Without it, your clock would reset to 00:00 every time you unplug it.**
 
