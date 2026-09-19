@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#050810"/>
+      <stop offset="1" stop-color="#0a1628"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3da9ff" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#ff2b2b" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="neon-glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="640" height="480" fill="url(#bg)"/>
+  <rect width="640" height="480" fill="url(#glow)" opacity="0.4"/>
+  <g opacity="0.06">
+    <line x1="0" y1="0" x2="640" y2="480" stroke="#3da9ff" stroke-width="0.5"/>
+    <line x1="640" y1="0" x2="0" y2="480" stroke="#3da9ff" stroke-width="0.5"/>
+    <line x1="320" y1="0" x2="320" y2="480" stroke="#3da9ff" stroke-width="0.5"/>
+    <line x1="0" y1="240" x2="640" y2="240" stroke="#3da9ff" stroke-width="0.5"/>
+  </g>
+  
+  <g transform="translate(320, 200)">
+    <rect x="-140" y="-60" width="280" height="120" rx="8" fill="#0a1628" stroke="#3da9ff" stroke-width="2" filter="url(#neon-glow)"/>
+    <rect x="-140" y="-60" width="280" height="16" rx="8" fill="#ff2b2b" opacity="0.3"/>
+    <circle cx="-125" cy="-52" r="3" fill="#ff2b2b"/>
+    <circle cx="-110" cy="-52" r="3" fill="#3da9ff" opacity="0.6"/>
+    <circle cx="-95" cy="-52" r="3" fill="#3da9ff" opacity="0.6"/>
+    <rect x="-130" y="-38" width="260" height="80" rx="2" fill="#050810" stroke="#3da9ff" stroke-width="0.5" opacity="0.3"/>
+    <rect x="-110" y="-25" width="30" height="30" rx="2" fill="#3da9ff" opacity="0.6"/>
+    <rect x="-70" y="-25" width="30" height="30" rx="2" fill="#3da9ff" opacity="0.4"/>
+    <rect x="-30" y="-25" width="30" height="30" rx="2" fill="#3da9ff" opacity="0.5"/>
+    <rect x="10" y="-25" width="30" height="30" rx="2" fill="#ff2b2b" opacity="0.6"/>
+    <rect x="50" y="-25" width="30" height="30" rx="2" fill="#3da9ff" opacity="0.4"/>
+    <rect x="-110" y="12" width="20" height="10" rx="2" fill="#3da9ff" opacity="0.3"/>
+    <rect x="-70" y="12" width="20" height="10" rx="2" fill="#3da9ff" opacity="0.3"/>
+    <rect x="-30" y="12" width="20" height="10" rx="2" fill="#3da9ff" opacity="0.3"/>
+    <rect x="10" y="12" width="20" height="10" rx="2" fill="#ff2b2b" opacity="0.3"/>
+    <rect x="50" y="12" width="20" height="10" rx="2" fill="#3da9ff" opacity="0.3"/>
+  </g>
+  <text x="320" y="420" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" fill="#3da9ff" opacity="0.6" letter-spacing="4">BUILD + PLAY</text>
+  <text x="320" y="450" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="14" fill="#f0f4ff" opacity="0.5">sudostore.co.za</text>
+</svg>
