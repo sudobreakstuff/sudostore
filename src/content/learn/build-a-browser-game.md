@@ -31,6 +31,8 @@ A real browser game — no engines, no frameworks, just HTML, CSS and your own c
 
 > **💡 First time coding?** Don't worry. Every programmer started here. Type the code exactly as shown, and you'll have a working game in 30 minutes.
 
+<img src="/sudostore/assets/browser-game.png" alt="Browser game running in a browser" />
+
 ## Step 1: Set up your project
 
 Create a folder called `my-game`. Inside, create 3 files:

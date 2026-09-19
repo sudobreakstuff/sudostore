@@ -33,6 +33,8 @@ A small device that sits on your desk and shows you data from the internet — w
 
 > **💡 No extra sensors needed!** This project uses existing APIs on the internet — it doesn't measure anything physical.
 
+<img src="/sudostore/assets/build-a-personal-dashboard.jpg" alt="Personal dashboard with ESP32 and OLED display" />
+
 ## Step 1: Understand the flow
 
 ```

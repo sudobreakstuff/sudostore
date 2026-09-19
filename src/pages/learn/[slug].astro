@@ -212,4 +212,34 @@ const articleJsonLd = JSON.stringify({
     color: var(--color-ink-dim);
     font-style: italic;
   }
+  .article :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 0.9rem;
+  }
+  .article :global(table th), .article :global(table td) {
+    border: 1px solid var(--color-edge);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+  .article :global(table th) {
+    background: var(--color-night);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+  .article :global(table td img) {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid var(--color-edge);
+  }
+  .article :global(img) {
+    border-radius: 0.5rem;
+    margin: 1.25rem 0;
+    max-width: 100%;
+  }
 </style>

@@ -35,6 +35,8 @@ A small device that sits on your desk and tells you at a glance whether your int
 
 > **💡 The resistor matters:** LEDs without resistors draw too much current and burn out quickly. Use 220Ω resistors for each LED. If you can't find them, any resistor between 100Ω and 470Ω works.
 
+<img src="/sudostore/assets/build-a-network-monitor.png" alt="Network monitor with LEDs and OLED display" />
+
 ## Step 1: Understand the concept
 
 Your ESP32 will:

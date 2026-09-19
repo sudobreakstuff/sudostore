@@ -20,6 +20,8 @@ From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable.
 
 From this kit: 2x tactile buttons, 0.96" OLED, piezo buzzer, 3D-printed case.
 
+<img src="/sudostore/assets/build-a-pomodoro-timer.jpg" alt="Pomodoro timer with OLED and buzzer" />
+
 ## Step 1: Wire the buttons
 
 Two buttons: one to start/stop, one to take a break. Both use INPUT_PULLUP:

@@ -32,6 +32,8 @@ A small station that sits next to your plant and tells you when it's thirsty. Yo
 
 > **💡 Important:** Get a **capacitive** moisture sensor, not a resistive one. Capacitive sensors don't corrode — resistive ones rust in the soil after a few weeks. They look similar but the capacitive one has a smooth white PCB, not exposed metal prongs.
 
+<img src="/sudostore/assets/build-a-plant-monitor.jpg" alt="Plant monitor with soil moisture sensor and OLED" />
+
 ## Step 1: Understand the sensor
 
 The moisture sensor has 3 pins: **VCC** (power), **GND** (ground), **AO** (analog output). AO sends a number from 0 to 4095 to the ESP32 based on how wet the soil is.

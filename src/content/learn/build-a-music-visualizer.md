@@ -35,6 +35,8 @@ A strip of LEDs that dances to music in real time. You'll learn how sound become
 
 > **💡 Important:** Get a **microphone module** (like the MAX9814 or KY-038), NOT a raw microphone. Modules have amplification built in — a raw microphone won't give useful readings.
 
+<img src="/sudostore/assets/build-a-music-visualizer.jpg" alt="Music visualizer with WS2812B LED strip" />
+
 ## Step 1: How sound becomes light
 
 ```

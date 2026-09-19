@@ -34,6 +34,8 @@ A pocket-sized friend that lives on a tiny screen. Feed it, play with it, let it
 
 > **💡 Looking for the parts?** Search for "ESP32", "0.96 OLED I2C", "tactile button 6x6mm", "piezo buzzer" on any electronics shop. You want the buzzer that makes a tone when voltage is applied (not the one that just beeps).
 
+<img src="/sudostore/assets/build-a-digital-pet.webp" alt="Digital pet toy with pixel screen" />
+
 ## Step 1: The idea — how your pet works
 
 Your pet has 3 stats: **hunger**, **happiness** and **energy**. Every second, these stats change:

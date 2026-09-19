@@ -33,6 +33,8 @@ Open the box and check you've got everything:
 
 Missing something? Message us on WhatsApp.
 
+<img src="/sudostore/assets/starter-pack.jpg" alt="Trainer's Lab Starter Pack contents" />
+
 ## Step 1: Install Arduino IDE
 
 1. Download Arduino IDE from [arduino.cc/en/software](https://arduino.cc/en/software)

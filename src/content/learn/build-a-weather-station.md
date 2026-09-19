@@ -35,6 +35,8 @@ A small box that sits on your desk and shows you the temperature, humidity and a
 
 > **💡 Not sure what to buy?** Search for "ESP32 dev kit" on any electronics shop — you want the one with 38 pins. For the BME280, search "BME280 module" — it has 4 pins already soldered on.
 
+<img src="/sudostore/assets/build-a-weather-station.jpg" alt="ESP32 BME280 weather station components" />
+
 ## Step 1: Find the pins
 
 Before wiring, let's understand what you're looking at.
