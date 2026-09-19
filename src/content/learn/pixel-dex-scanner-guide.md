@@ -1,7 +1,7 @@
 ---
 title: "Pixel Dex Scanner: OLED Display & Sensors"
 description: "Build a Pokédex with an OLED screen and IR sensor. Scan objects, display pixel art, and log your discoveries."
-image: "/sudostore/assets/pixel-dex-scanner.jpg"
+image: "/sudostore/assets/pixel-dex-scanner.png"
 published: 2026-09-03
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "display", "sensor", "pokemon"]
@@ -20,7 +20,7 @@ From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable, buttons, buzze
 
 From this kit: 0.96" SSD1306 OLED, IR obstacle sensor, 3D-printed Pokédex case.
 
-<img src="/sudostore/assets/pixel-dex-scanner.jpg" alt="Pixel Dex Scanner with OLED display and IR sensor" />
+<img src="/sudostore/assets/pixel-dex-scanner.png" alt="Pixel Dex Scanner with OLED display and IR sensor" />
 
 ## Step 1: Wire the OLED (I2C)
 
