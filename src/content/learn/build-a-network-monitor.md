@@ -1,301 +1,216 @@
 ---
 title: "Build a Network Monitor"
-description: "Desktop device showing internet health with LEDs and OLED. Pings servers, shows latency and uptime."
+description: "Desk device showing internet health with LEDs and OLED."
+image: "/assets/network-monitor.jpg"
 published: 2026-09-10
 level: "beginner"
-tags: ["diy-kit", "beginner", "esp32", "network", "wifi", "ping"]
+tags: ["diy-kit", "beginner", "esp32", "network", "wifi"]
 faqs:
   - q: "Which servers does it ping?"
     a: "Configurable. Default pings Google DNS (8.8.8.8), Cloudflare (1.1.1.1) and your router."
   - q: "How often does it check?"
-    a: "Every 30 seconds by default. Change the interval in the code."
-  - q: "Can I ping my own servers?"
-    a: "Yes. Add any hostname or IP address to the ping list."
+    a: "Every 30 seconds. Change the number in the code."
+  - q: "Can I add more LEDs?"
+    a: "Yes. More LEDs = more servers monitored."
 ---
+
+## What you'll build
+
+A small device that sits on your desk and tells you at a glance whether your internet is working, how fast it is, and which sites are down. Three LEDs: green for good, amber for slow, red for down.
+
+> **Before you start:** Think about the last time your internet went down. How did you find out? Probably by noticing something didn't work. Your monitor will tell you instantly — before you even open a browser.
+
+> **🤔 Design challenge:** What colour would YOU use for "slow but working"? Green means fast, red means down. What about somewhere in between? Pick a colour and explain why in 2 sentences.
 
 ## What you need
 
-From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable.
+| Part | What it does | ~Price |
+|------|-------------|--------|
+| ESP32 dev board | The brain | R80 |
+| 3x LEDs (green, amber, red) | Status indicators | R10 |
+| 0.96" OLED display | Shows latency numbers | R60 |
+| Breadboard + wires | Connections | R60 |
+| 3x 220Ω resistors | Limit LED current | R10 |
+| USB-C cable | Power | R15 |
 
-From this kit: 3x LEDs (green, amber, red), 0.96" OLED, 3D-printed case.
+> **💡 The resistor matters:** LEDs without resistors draw too much current and burn out quickly. Use 220Ω resistors for each LED. If you can't find them, any resistor between 100Ω and 470Ω works.
 
-## Step 1: Wire the LEDs
+## Step 1: Understand the concept
 
-Each LED connects a GPIO pin to GND. The ESP32 uses internal pullup resistors and `digitalWrite(LED_PIN, LOW)` to turn an LED on (active-low):
-
-```
-   LED Wiring (three LEDs):
-   ┌───────────────────────────────────────────────┐
-   │                                                       │
-   │  ESP32 GPIO 2  ──── [R] ──── GND (green = good)  │
-   │  ESP32 GPIO 3  ──── [Y] ──── GND (amber = slow)  │
-   │  ESP32 GPIO 4  ──── [R] ──── GND (red = down)    │
-   │                                                       │
-   │  Note: LOW = ON (active-low, using pullup)          │
-   └───────────────────────────────────────────────┘
-
-   Each LED on breadboard:
-   ┌─────────────────────────────────────────┐
-   │  - - - - - - - - - - - - - - - - - - -  │ ← GND rail
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · [LED1]· · · · [LED2]· · · · ·  │ ← 3 LEDs
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · [LED3]· · · · · · · · · · · ·  │ ← 3 LEDs
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  + + + + + + + + + + + + + + + + + + +  │ ← +5V (unused)
-   │  - - - - - - - - - - - - - - - - - - -  │ ← GND
-   └─────────────────────────────────────────┘
-
-   Pin mapping:
-   ┌────────────┬────────────┐
-   │ LED Colour │ ESP32 Pin  │
-   ├────────────┼────────────┤
-   │ Green (good)│ GPIO 2    │
-   │ Amber (slow)│ GPIO 3    │
-   │ Red (down)  │ GPIO 4    │
-   │ All GND     │ GND        │
-   └────────────┴────────────┘
-```
-
-## Step 2: Wire the OLED display
-
-Standard I2C connection:
+Your ESP32 will:
+1. Connect to WiFi
+2. Ping 3 websites every 30 seconds
+3. Show results on LEDs and OLED
 
 ```
-   ┌─────────────────────────────────────────┐
-   │                                         │
-   │  ESP32                                 │
-   │  ┌──────────────────────────────────┐  │
-   │  │  3.3V ────────┬───────────────│  │
-   │  │  GND  ────────┼───────────────│  │
-   │  │  GPIO 21 ─────┤─── SDA         │  │
-   │  │  GPIO 22 ─────┤─── SCL         │  │
-   │  └───────────────┴───────────────┘  │
-   └─────────────────────────────────────────┘
-
-   Pin mapping:
-   ┌────────────┬────────────┐
-   │ OLED Pin   │ ESP32 Pin  │
-   ├────────────┼────────────┤
-   │ VCC        │ 3.3V       │
-   │ GND        │ GND        │
-   │ SDA        │ GPIO 21    │
-   │ SCL        │ GPIO 22    │
-   └────────────┴────────────┘
+  ┌──────────────┐
+  │  ESP32        │
+  │  - Connects to WiFi      │
+  │  - Pings 3 servers       │
+  │  - Updates LEDs          │
+  │  - Updates OLED display  │
+  └──────────────┘
 ```
 
-## Step 3: Full breadboard layout
+> **🤔 What does "ping" mean?** It's when your computer sends a tiny message to a server and waits for a reply. The time it takes to get the reply is the "latency" or "ping time". Lower = faster.
+
+## Step 2: Wire the LEDs
+
+Each LED needs a resistor. The ESP32 detects button presses when they connect to GND:
 
 ```
-   ┌──────────────────────────────────────────┐
-   │  + + + + + + + + + + + + + + + + + + +  │ ← 3.3V (OLED)
-   │  - - - - - - - - - - - - - - - - - - -  │ ← GND (all GND)
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · [SDA]─[SCL]─ · · · · · · · ·  │ ← OLED
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · [GREEN][AMBER][RED]· · · · · ·  │ ← LEDs (active LOW)
-   │  · · ·  GPIO2  GPIO3 GPIO4 · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  + + + + + + + + + + + + + + + + + + +  │ ← 3.3V
-   │  - - - - - - - - - - - - - - - - - - -  │ ← GND
-   └──────────────────────────────────────────┘
+  Green LED     Amber LED      Red LED
+    ┌             ┌             ┌
+    │             │             │
+  [LED]        [LED]         [LED]
+  ─┤─           ─┤─           ─┤─
+    │             │             │
+   GPIO2        GPIO3        GPIO4
+    │             │             │
+   [220Ω]       [220Ω]       [220Ω]
+    │             │             │
+  ──┴── GND     ──┴── GND     ──┴── GND
 ```
 
-## Step 4: Install libraries
+> **⚠️ Important:** The ESP32 uses **active-low** for LEDs. This means `digitalWrite(pin, LOW)` turns the LED ON, and `digitalWrite(pin, HIGH)` turns it OFF. It's confusing at first but it saves current.
 
-1. **Sketch → Include Library → Manage Libraries**
-2. Search and install: **Adafruit SSD1306**
-3. Search and install: **Adafruit GFX Library**
+> **🤔 Can you wire these without a breadboard?** Yes — twist the wires together and use heat shrink or tape. But a breadboard makes it easier to change later.
 
-## Step 5: Ping function
+## Step 3: Wire the OLED
 
-The ESP32 can ping hosts natively in newer Arduino core versions:
+Same I2C connections as every other project:
+
+```
+  ESP32 → OLED
+  3.3V → VCC
+  GND  → GND
+  GPIO 21 → SDA
+  GPIO 22 → SCL
+```
+
+## Step 4: The main code
 
 ```cpp
 #include <WiFi.h>
 
-bool pingHost(const char* host, int timeout = 2000) {
-  // Use the WiFi library's ping capability
-  // Available in ESP32 Arduino Core 2.0.0+
-  int result = WiFi.ping((uint8_t*)host, timeout);
-  return result >= 0; // returns round-trip time in ms, or -1 if failed
-}
+const char* ssid = "YOUR_WIFI";
+const char* password = "YOUR_PASSWORD";
 
-int getLatency(const char* host) {
-  int result = WiFi.ping((uint8_t*)host, 2000);
-  return result; // milliseconds, or -1
-}
-```
-
-If `WiFi.ping` is not available on your core version, use a raw socket approach:
-
-```cpp
-#include <arpa/inet.h>
-#include <sys/socket.h>
-
-bool pingHost(const char* ip, int timeout_ms = 2000) {
-  int sock = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
-  if (sock < 0) return false;
-
-  struct sockaddr_in dest;
-  dest.sin_family = AF_INET;
-  inet_pton(AF_INET, ip, &dest.sin_addr);
-
-  // Send ICMP echo request (simplified)
-  // In practice, use a raw socket with proper ICMP packet
-  // This requires elevated privileges on some systems
-
-  close(sock);
-  return true; // placeholder
-}
-```
-
-**Result:** `pingHost("8.8.8.8")` returns `true` if Google DNS responds, `false` if it doesn't.
-
-## Step 6: Monitor logic
-
-```cpp
 #define GOOD_PIN 2
 #define SLOW_PIN 3
 #define DOWN_PIN 4
 
 const char* hosts[] = {"8.8.8.8", "1.1.1.1", "192.168.1.1"};
 const int NUM_HOSTS = 3;
-int latencies[NUM_HOSTS] = {0};
-bool statuses[NUM_HOSTS] = {false};
-
-void checkAllHosts() {
-  bool anyDown = false;
-  bool anySlow = false;
-
-  for (int i = 0; i < NUM_HOSTS; i++) {
-    int latency = getLatency(hosts[i]);
-    latencies[i] = latency;
-
-    if (latency < 0) {
-      statuses[i] = false; // DOWN
-      anyDown = true;
-    } else if (latency > 200) {
-      statuses[i] = true; // SLOW (connected but slow)
-      anySlow = true;
-    } else {
-      statuses[i] = true; // GOOD
-    }
-  }
-
-  // Update LEDs
-  digitalWrite(GOOD_PIN, !anyDown && !anySlow ? LOW : HIGH); // on when all good
-  digitalWrite(SLOW_PIN, anySlow ? LOW : HIGH); // on when slow
-  digitalWrite(DOWN_PIN, anyDown ? LOW : HIGH); // on when something is down
-}
-```
-
-## Step 7: Display on OLED
-
-```cpp
-void displayStatus() {
-  display.clearDisplay();
-
-  display.setTextSize(1);
-  display.setCursor(0, 0);
-  display.println("Network Monitor");
-
-  for (int i = 0; i < NUM_HOSTS; i++) {
-    display.setCursor(0, 10 + i * 16);
-    display.print(hosts[i]);
-    display.print(" ");
-
-    if (!statuses[i] || latencies[i] < 0) {
-      display.println("DOWN");
-    } else if (latencies[i] > 200) {
-      display.print("SLOW ");
-      display.print(latencies[i]);
-      display.println("ms");
-    } else {
-      display.print("OK ");
-      display.print(latencies[i]);
-      display.println("ms");
-    }
-  }
-
-  display.setCursor(0, 60);
-  display.println("-- uptime --");
-  display.display();
-}
-```
-
-## Step 8: Main loop
-
-```cpp
-unsigned long lastCheck = 0;
 
 void setup() {
-  WiFi.begin("YOUR_SSID", "YOUR_PASSWORD");
-  while (WiFi.status() != WL_CONNECTED) delay(500);
-
+  Serial.begin(115200);
   pinMode(GOOD_PIN, INPUT_PULLUP);
   pinMode(SLOW_PIN, INPUT_PULLUP);
   pinMode(DOWN_PIN, INPUT_PULLUP);
 
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
-  display.clearDisplay();
-  display.println("Starting...");
-  display.display();
-  delay(1000);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+  }
+  Serial.println("Connected! IP: " + WiFi.localIP().toString());
+}
+
+void pingAll() {
+  for (int i = 0; i < NUM_HOSTS; i++) {
+    int latency = WiFi.ping((uint8_t*)hosts[i], 2000);
+    Serial.print(hosts[i]);
+    if (latency < 0) {
+      Serial.println(" DOWN");
+    } else if (latency > 200) {
+      Serial.println(" SLOW: " + String(latency) + "ms");
+    } else {
+      Serial.println(" OK: " + String(latency) + "ms");
+    }
+  }
+}
+
+void updateLEDs(bool anyDown, bool anySlow) {
+  // Active-low: LOW = ON
+  digitalWrite(GOOD_PIN, (anyDown || anySlow) ? HIGH : LOW);
+  digitalWrite(SLOW_PIN, anySlow ? LOW : HIGH);
+  digitalWrite(DOWN_PIN, anyDown ? LOW : HIGH);
 }
 
 void loop() {
-  if (millis() - lastCheck > 30000) { // every 30 seconds
-    checkAllHosts();
-    displayStatus();
+  pingAll();
+
+  // Check again
+  bool anyDown = false;
+  bool anySlow = false;
+
+  for (int i = 0; i < NUM_HOSTS; i++) {
+    int latency = WiFi.ping((uint8_t*)hosts[i], 2000);
+    if (latency < 0) anyDown = true;
+    else if (latency > 200) anySlow = true;
   }
+
+  updateLEDs(anyDown, anySlow);
+  delay(30000); // wait 30 seconds
 }
 ```
 
-**Result:** The device pings your servers every 30 seconds. LEDs show status (green = good, amber = slow, red = down). OLED shows latency numbers.
+### What each part does:
+- **`WiFi.ping()`** — sends a ping and returns the round-trip time in milliseconds, or -1 if it failed
+- **`INPUT_PULLUP`** — the pin reads HIGH normally, LOW when button (or in this case, when we set it LOW intentionally for active-low LEDs)
+- **`delay(30000)`** — 30 seconds in milliseconds
 
-## Step 9: Assemble the monitor
+> **🤔 What happens when you ping your router (192.168.1.1)?** It should be very fast (<10ms). If it's down, your WiFi itself is having problems!
 
+> **💡 Try this:** Unplug your router's internet cable (but leave WiFi on). Ping your router — it's still there. Ping Google — it fails. The red LED should light up for Google, green for your router. This is exactly what network monitors do in real data centres!
+
+## Step 5: Add the display
+
+```cpp
+void displayStatus(int* latencies, bool* statuses) {
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.println("Network Status");
+
+  for (int i = 0; i < NUM_HOSTS; i++) {
+    display.setCursor(0, 12 + i * 16);
+    display.print(hosts[i]);
+    display.print(" ");
+
+    if (!statuses[i]) {
+      display.println("DOWN");
+    } else if (latencies[i] > 200) {
+      display.print("SLOW ");
+      display.println(latencies[i]);
+    } else {
+      display.print("OK ");
+      display.println(latencies[i]);
+    }
+  }
+  display.display();
+}
 ```
-   Network Monitor Assembly:
-   ┌─────────────────────────────────────────┐
-   │                                         │
-   │  ┌─────────────────────────────────┐  │
-   │  │    3D-PRINTED CASE            │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │  ● ● ●  LEDs           │   │  │ ← Green, Amber, Red
-   │  │  │  (status indicators)    │   │  │
-   │  │  └─────────────────────────┘   │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │      OLED DISPLAY       │   │  │ ← Status and latency
-   │  │  └─────────────────────────┘   │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │  ESP32 (inside)         │   │  │
-   │  │  └─────────────────────────┘   │  │
-   │  └─────────────────────────────────┘  │
-   │                     ↓ USB-C             │
-   └─────────────────────────────────────────┘
-```
 
-1. Mount the three LEDs at the top of the case (with coloured covers)
-2. Mount the OLED below the LEDs
-3. Place the ESP32 inside
-4. Wire everything up
-5. Close the case, power via USB-C
+## Step 6: Assemble it
 
-## Customise it
+1. Mount LEDs at the top of the case (with coloured covers)
+2. Mount OLED below the LEDs
+3. Place ESP32 inside
+4. Route USB-C out the back
 
-- Add more hosts to the ping list
-- Show historical latency graphs on the OLED
-- Add a buzzer that sounds when something goes down
-- Display your public IP address
-- Connect to MQTT for home automation integration
+## Troubleshooting
+
+**LEDs always on?**
+- Check that you're using `INPUT_PULLUP` mode
+- Check your wiring matches the diagram — LEDs connect to GND through the pin
+
+**WiFi won't connect?**
+- Double-check your SSID and password
+- Make sure your ESP32 supports the WiFi band (2.4GHz only)
+
+**ping() doesn't work?**
+- The ESP32 core must be 2.0.0+. Check your Arduino IDE board version
+- Some boards need `#include <WiFi.h>` and `#include <WiFiUdp.h>`
 
 ## What's next?
 

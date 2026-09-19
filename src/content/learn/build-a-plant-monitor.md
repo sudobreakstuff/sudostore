@@ -1,130 +1,67 @@
 ---
 title: "Build a Plant Monitor"
-description: "Soil moisture sensor, OLED display and watering alerts. Know when your plant needs water."
+description: "Soil moisture sensor, OLED display and watering alerts."
+image: "/assets/plant-monitor.jpg"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "sensor", "plant", "oled"]
 faqs:
-  - q: "How often does it check moisture?"
-    a: "Every 15 minutes by default. Change the delay in the code."
+  - q: "Does the sensor touch the plant?"
+    a: "Yes — you push the probe into the soil next to the roots."
   - q: "Can I monitor multiple plants?"
-    a: "Yes. Add a second sensor and OLED. The code supports up to 4 sensors."
-  - q: "Can it water the plant automatically?"
-    a: "Not in this kit, but you can add a relay and solenoid valve — the code shows how."
+    a: "Yes. Add a second sensor and a second display. The code supports up to 4."
+  - q: "How often does it check?"
+    a: "Every 15 minutes by default. Change the number in the code."
 ---
+
+## What you'll build
+
+A small station that sits next to your plant and tells you when it's thirsty. You'll learn how a moisture sensor works, how to read analog signals, and how to display data.
+
+> **Before you start:** Touch a leaf — does it feel dry or moist? Now stick your finger in the soil. Dry soil feels gritty, wet soil feels smooth and cold. Your sensor works the same way — it measures how easily electricity flows through the soil. More water = better conductor = lower reading.
 
 ## What you need
 
-From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable.
+| Part | What it does | ~Price |
+|------|-------------|--------|
+| ESP32 dev board | The brain | R80 |
+| Capacitive soil moisture sensor | Detects wet or dry soil | R35 |
+| 0.96" OLED display | Shows the moisture level | R60 |
+| Breadboard + wires | Connections | R60 |
+| USB-C cable | Power | R15 |
 
-From this kit: Capacitive soil moisture sensor, 0.96" OLED, 3D-printed pot-station.
+> **💡 Important:** Get a **capacitive** moisture sensor, not a resistive one. Capacitive sensors don't corrode — resistive ones rust in the soil after a few weeks. They look similar but the capacitive one has a smooth white PCB, not exposed metal prongs.
 
-## Step 1: Wire the soil moisture sensor
+## Step 1: Understand the sensor
 
-The capacitive moisture sensor has 3 pins — it works by measuring how much the soil conducts electricity:
-
-```
-   Soil Moisture Sensor
-   ┌───────────────┐
-   │  ┌─────────┐  │
-   │  │   SENSOR│  │
-   │  │  ┌───┐  │  │ ← probe goes into soil
-   │  │  │   │  │  │
-   │  └─────────┘  │
-   │  VCC  GND  AO │
-   └──┬───┬───┬──┘
-      │   │   │
-      │   │   └──── A0 (ESP32 analog input)
-      │   └──────── GND
-      └──────────── 3.3V
-
-   Pin mapping:
-   ┌────────────┬────────────┐
-   │ Sensor Pin │ ESP32 Pin  │
-   ├────────────┼────────────┤
-   │ VCC        │ 3.3V       │
-   │ GND        │ GND        │
-   │ AO (analog)│ A0         │
-   └────────────┴────────────┘
-
-   Reading: 0 (wet) to 4095 (dry)
-   You'll calibrate this based on your soil.
-```
-
-## Step 2: Wire the OLED display
-
-Same I2C bus as before — share the wires with any other I2C device:
+The moisture sensor has 3 pins: **VCC** (power), **GND** (ground), **AO** (analog output). AO sends a number from 0 to 4095 to the ESP32 based on how wet the soil is.
 
 ```
-   ┌─────────────────────────────────────────┐
-   │                                         │
-   │  ESP32                                 │
-   │  ┌──────────────────────────────────┐  │
-   │  │  3.3V ────────┬───────────────│  │
-   │  │  GND  ────────┼───────────────│  │
-   │  │  GPIO 21 ─────┤─── SDA         │  │
-   │  │  GPIO 22 ─────┤─── SCL         │  │
-   │  └───────────────┴───────────────┘  │
-   │                                         │
-   │  Shared I2C: SDA and SCL both go to:│
-   │  → OLED display                       │
-   │  → Moisture sensor (no SDA/SCL,      │
-   │     uses A0 instead)                  │
-   └─────────────────────────────────────────┘
-
-   Pin mapping:
-   ┌────────────┬────────────┐
-   │ OLED Pin   │ ESP32 Pin  │
-   ├────────────┼────────────┤
-   │ VCC        │ 3.3V       │
-   │ GND        │ GND        │
-   │ SDA        │ GPIO 21    │
-   │ SCL        │ GPIO 22    │
-   └────────────┴────────────┘
+  Wet soil = low number (around 800)
+  Dry soil = high number (around 1500+)
 ```
 
-## Step 3: Full breadboard layout
+> **🤔 Test it now:** Unplug the sensor, stick the probe in a glass of water, then into dry soil. Open the Serial Monitor on your ESP32 (9600 baud). What numbers do you see? Write them down — you'll need them to calibrate your alert level.
+
+## Step 2: Wire it up
+
+The moisture sensor connects to an analog pin (A0), while the OLED uses I2C:
 
 ```
-   ┌──────────────────────────────────────────┐
-   │  + + + + + + + + + + + + + + + + + + +  │ ← 3.3V rail (OLED + sensor VCC)
-   │  - - - - - - - - - - - - - - - - - - -  │ ← GND rail (all GND)
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · [SDA]─[SCL]─ · · · · · · · ·  │ ← OLED
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · [AO]─ · · · · · · · · · · · ·  │ ← Moisture sensor (analog)
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  + + + + + + + + + + + + + + + + + + +  │
-   │  - - - - - - - - - - - - - - - - - - -  │
-   └──────────────────────────────────────────┘
-
-   Moisture sensor on breadboard:
-   ┌──────────────────────────────────────────┐
-   │  + + + + + + + + + + + + + + + + + + +  │ ← 3.3V
-   │  - - - - - - - - - - - - - - - - - - -  │ ← GND
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · [AO]─ · · · ·  │ ← signal
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  · · · · · · · · · · · · · · · · · · ·  │
-   │  + + + + + + + + + + + + + + + + + + +  │
-   │  - - - - - - - - - - - - - - - - - - -  │
-   └──────────────────────────────────────────┘
+  ESP32           Breadboard           Moisture Sensor    OLED
+  ──────           ──────────           ──────────────     ────
+  3.3V  ──────→   + rail     ──────→  VCC              VCC
+  GND   ──────→   - rail     ──────→  GND              GND
+  A0    ──────→   ··· row    ──────→  AO
+  GPIO21──→    [shared SDA wire]──→  SDA
+  GPIO22──→    [shared SCL wire]──→  SCL
 ```
 
-## Step 4: Install libraries
+> **💡 Wire colour reminder:** Red = 3.3V power, Black = GND, Blue = analog signal (AO), Yellow = SDA, Green = SCL.
 
-1. **Sketch → Include Library → Manage Libraries**
-2. Search and install: **Adafruit SSD1306**
-3. Search and install: **Adafruit GFX Library**
+> **🤔 Why does the moisture sensor use A0 but the OLED uses GPIO 21/22?** They use different communication methods. The sensor sends a simple voltage level (analog), while the OLED talks in I2C (digital). They're like different languages — the ESP32 speaks both, so it can handle both at the same time.
 
-No sensor library needed — the moisture sensor reads as a simple analog value.
-
-## Step 5: Read the sensor
+## Step 3: Read the sensor
 
 ```cpp
 void setup() {
@@ -132,143 +69,110 @@ void setup() {
 }
 
 void loop() {
-  int raw = analogRead(A0);
-  float voltage = raw * (3.3 / 4095.0);
+  int raw = analogRead(A0);          // read the sensor (0-4095)
+  int moisture = map(raw, 1500, 800, 0, 100); // convert to percentage
+  moisture = constrain(moisture, 0, 100); // don't go above 100% or below 0%
 
-  // Higher value = drier soil (calibrate for your plant)
-  // Typical: 1500 = dry, 800 = wet
-  int moisture = map(raw, 1500, 800, 0, 100);
-  moisture = constrain(moisture, 0, 100);
-
-  Serial.print("Raw: "); Serial.print(raw);
-  Serial.print(" Moisture: "); Serial.print(moisture);
+  Serial.print("Moisture: ");
+  Serial.print(moisture);
   Serial.println("%");
-
-  delay(5000);
+  delay(2000);
 }
 ```
 
-**Result:** Open Serial Monitor. Insert the probe into dry soil — note the reading. Then water the soil and note the reading. These are your calibration points.
+### What each line does:
+- **`analogRead(A0)`** — reads voltage on pin A0 (0 to 4095)
+- **`map(value, 1500, 800, 0, 100)`** — converts 1500→0% and 800→100%. Any value between scales proportionally
+- **`constrain(...)`** — clamps the number between 0 and 100, just in case
 
-## Step 6: Display on OLED with alerts
+> **🤔 Why `map(raw, 1500, 800, 0, 100)` and not the other way around?** Because dry soil gives a HIGH number (1500) which should be LOW moisture (0%). Wet soil gives a LOW number (800) which should be HIGH moisture (100%). So we're mapping in reverse.
+
+> **💡 Calibration:** Use the numbers you recorded in Step 1. If your dry soil reads 2000, use `map(raw, 2000, 600, 0, 100)` instead. Adjust until it feels right for your plant.
+
+## Step 4: Add the OLED display
+
+Replace the Serial Monitor output with a display:
 
 ```cpp
-#include <Wire.h>
-#include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+Adafruit_SSD1306 display(128, 64, &Wire, -1);
 
-#define SCREEN_W 128
-#define SCREEN_H 64
-Adafruit_SSD1306 display(SCREEN_W, SCREEN_H, &Wire, -1);
-
-void displayMoisture(int moisture, int dryThreshold = 30) {
+void displayMoisture(int moisture) {
   display.clearDisplay();
-
-  display.setTextSize(1);
   display.setCursor(0, 0);
   display.println("Plant Monitor");
 
-  // Moisture bar
+  // Draw a progress bar
   display.drawRect(0, 10, 64, 10, SSD1306_WHITE);
-  int fillWidth = map(moisture, 0, 100, 0, 64);
-  display.fillRect(0, 10, fillWidth, 10, SSD1306_WHITE);
+  int fill = map(moisture, 0, 100, 0, 64);
+  display.fillRect(0, 10, fill, 10, SSD1306_WHITE);
 
-  // Moisture percentage
+  // Show the number
   display.setTextSize(2);
   display.setCursor(0, 28);
   display.print(moisture);
   display.println("%");
 
   // Alert if too dry
-  if (moisture < dryThreshold) {
-    display.setTextSize(1);
+  if (moisture < 30) {
     display.setCursor(0, 50);
     display.println("!! WATER NOW !!");
-    // Blink the alert
-    for (int i = 0; i < 3; i++) {
-      display.display();
-      delay(400);
-      display.clearDisplay();
-      display.setTextSize(1);
-      display.setCursor(0, 0);
-      display.println("Plant Monitor");
-      display.drawRect(0, 10, 64, 10, SSD1306_WHITE);
-      display.fillRect(0, 10, fillWidth, 10, SSD1306_WHITE);
-      display.setTextSize(2);
-      display.setCursor(0, 28);
-      display.print(moisture);
-      display.println("%");
-      display.display();
-      delay(400);
-    }
   } else {
-    display.setTextSize(1);
     display.setCursor(0, 50);
-    display.println("All good");
+    display.println("All good!");
   }
 
   display.display();
 }
 ```
 
-**Result:** A moisture bar and percentage on the OLED. When dry, it flashes "WATER NOW".
+> **🤔 What does `map(moisture, 0, 100, 0, 64)` do?** It converts the moisture percentage (0-100) to the display width (0-64 pixels). If moisture is 50%, fill 32 pixels — half the bar.
 
-## Step 7: Auto-check loop with timed updates
+> **💡 Try this:** Change `moisture < 30` to `moisture < 50`. Now the alert triggers earlier. Is that better or worse for your plant?
+
+## Step 5: Check automatically
+
+Instead of checking manually, make it check every 15 minutes:
 
 ```cpp
 unsigned long lastCheck = 0;
-const unsigned long CHECK_INTERVAL = 15 * 60 * 1000; // 15 minutes
 
 void loop() {
-  if (millis() - lastCheck > CHECK_INTERVAL) {
+  if (millis() - lastCheck > 15 * 60 * 1000) { // 15 minutes in milliseconds
     lastCheck = millis();
-    int moisture = readMoisture(); // your calibration function
+    int moisture = readMoisture(); // your function
     displayMoisture(moisture);
   }
 }
 ```
 
-## Step 8: Assemble the pot-station
+> **💡 Tip:** 15 minutes is good for most plants. For thirsty plants like ferns, check every 5 minutes. For cacti, every hour is plenty.
 
-```
-   Smart Plant Monitor Assembly:
-   ┌─────────────────────────────────────────┐
-   │                                         │
-   │  ┌─────────────────────────────────┐  │
-   │  │    3D-PRINTED POT-STATION    │  │
-   │  │    (sits next to your plant) │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │      OLED DISPLAY       │   │  │
-   │  │  │      (front-facing)     │   │  │
-   │  │  └─────────────────────────┘   │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │  ESP32 + SENSOR BOARD   │   │  │
-   │  │  │  (inside the station)   │   │  │
-   │  │  └─────────────────────────┘   │  │
-   │  │                                 │  │
-   │  │  [sensor probe sticks out the │  │
-   │  │   side and goes into soil]    │  │
-   │  └─────────────────────────────────┘  │
-   │                     ↓ USB-C             │
-   └─────────────────────────────────────────┘
-```
+## Step 6: Assemble it
 
-1. Mount the OLED into the front slot of the pot-station
-2. Place the ESP32 and sensor board inside
-3. Route the sensor probe through a hole in the side or bottom
-4. Insert the probe into your plant's soil
-5. Power via USB-C (or add a battery pack for portability)
+1. Put the ESP32 and sensor board inside a small box or 3D-printed station
+2. Mount the OLED facing out (you can see it)
+3. Route the moisture probe through a hole in the side
+4. Push the probe into the soil next to your plant's roots
+5. Power via USB-C
 
-## Customise it
+> **🤔 Where should the probe go?** Near the roots, not in direct sunlight. If you have a deep pot, the probe should go in the upper half of the soil where roots are most active.
 
-- Add multiple sensors and multiple OLEDs for a garden display
-- Wire up a water pump with a relay for automatic watering
-- Log data to an SD card over time
-- Add a temperature sensor to track room conditions
-- Push alerts to your phone via WiFi
+## Troubleshooting
+
+**Sensor reads 0% all the time?**
+- Make sure the probe is actually in soil (not in air)
+- Check that AO goes to pin A0 on the ESP32
+
+**Display shows "All good" even when soil is dry?**
+- Your calibration numbers might be swapped
+- Check: dry soil should give a HIGH number (more than 1000)
+- Adjust the `map()` range in your code
+
+**Sensor corrosion after a few weeks?**
+- Make sure you're using a **capacitive** sensor, not resistive
+- Capacitive sensors have a smooth white PCB, no exposed metal
 
 ## What's next?
 
-Build the **DIY Music Visualizer** — add a microphone and LEDs to see your music.
+Build the **Music Visualizer** — add a microphone and LEDs to see your music.

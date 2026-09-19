@@ -1,125 +1,96 @@
 ---
 title: "Build an LED Word Clock"
-description: "Illuminated word clock with WS2812B LEDs behind frosted acrylic. Time displayed in glowing letters."
+description: "Time displayed in glowing letters behind frosted acrylic."
+image: "/assets/word-clock.jpg"
 published: 2026-09-10
 level: "intermediate"
-tags: ["diy-kit", "intermediate", "esp32", "led", "clock", "ws2812b"]
+tags: ["diy-kit", "intermediate", "esp32", "led", "clock"]
 faqs:
   - q: "How accurate is the time?"
-    a: "The RTC module keeps time with about 1 minute per month accuracy. WiFi sync corrects it daily."
-  - q: "Can I change the font?"
-    a: "Yes. The code maps which LEDs form each letter — rearrange them for different layouts."
-  - q: "How bright is it?"
-    a: "Adjustable in the code. For a room, 40-60% brightness is plenty."
+    a: "The RTC module keeps time within about 1 minute per month. WiFi sync fixes this."
+  - q: "Can I change the colour?"
+    a: "Yes. Change the CHSV hue value in the code."
+  - q: "How many LEDs do I need?"
+    a: "About 80 out of a 288-LED strip. The rest can be a decorative border."
 ---
+
+## What you'll build
+
+A beautiful word clock that shows the time in glowing LED letters behind frosted acrylic. It's the kind of project that looks impressive on your shelf and teaches a lot about LEDs and timekeeping.
+
+> **Before you start:** Look at the clock above your desk or on your phone. Notice anything? The time doesn't jump — it smoothly changes from one minute to the next. Your clock will do the same thing, but with light.
+
+> **🤔 Challenge:** Take a piece of paper and write "IT IS TEN FIFTEEN OCLOCK" with spaces between words. This is your LED layout — each word maps to a group of LEDs. Design your own layout if you prefer a different style.
 
 ## What you need
 
-From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable.
+| Part | What it does | ~Price |
+|------|-------------|--------|
+| ESP32 dev board | The brain | R80 |
+| WS2812B LED strip (288 LEDs) | The letters and border | R120 |
+| RTC module (DS3231) | Keeps time (even when powered off) | R45 |
+| Frosted acrylic panel | Diffuses the light | R35 |
+| 3D-printed frame | Holds everything | R50 (filament) |
+| Jumper wires | Connections | R20 |
+| USB-C cable | Power | R15 |
 
-From this kit: WS2812B LED strip (288 LEDs), RTC module, frosted acrylic panel, 3D-printed frame.
+> **💡 The RTC module has a coin cell battery backup. This means it keeps time even when the ESP32 is unplugged. Without it, your clock would reset to 00:00 every time you unplug it.**
 
-## Step 1: Plan the LED layout
+## Step 1: Plan your letter layout
 
-Your word clock is a grid of LEDs behind frosted acrylic. Each letter position maps to specific LEDs. Standard layout:
-
-```
-   Word Clock LED Grid (simplified):
-   ┌───────────────────────────────────────┐
-   │                                        │
-   │   IT IS     TEN   FIVE   TWENTY       │
-   │    ^^^      ^^^   ^^^    ^^^^^        │
-   │   LEDs: 0-6 LEDs:7-9 LED:10-12 LED:13-17│
-   │                                        │
-   │   TEN TWENTY  THREE  FOUR              │
-   │    ^^^^^    ^^^^^   ^^^^  ^^^^        │
-   │   LEDs:18-22 LED:23-27 LED:28-31 LED:32-35│
-   │                                        │
-   │   OCLOCK  ONE  TWO  SIX  EIGHT        │
-   │    ^^^^^  ^^^  ^^^  ^^^  ^^^^^        │
-   │   LEDs:36-42 LED:43-45 LED:46-48 LED:49-51│
-   │                                        │
-   │  [brightness bar] [status LEDs]        │
-   │   LEDs: 52-64  LEDs: 65-72             │
-   │                                        │
-   └───────────────────────────────────────┘
-
-   Total LEDs needed: ~80-90 (out of 288 on the strip)
-   Extra LEDs: use for a decorative border or status bar
-```
-
-## Step 2: Wire the WS2812B LED strip
+Before wiring anything, decide which LEDs light up for each word. A standard layout:
 
 ```
-   WS2812B LED Strip (first ~80 LEDs used)
-   ┌──────────────────────────────────────────────┐
-   │  ● ● ● ● ● ● ● ● ● ● ● ● ● ● ● ● ● ● ●  │
-   │  ↑                                      ↑     │
-   │  DIN (data in)                    unused end  │
-   └──┬───────────────────────────────────────────┘
-      │
-     VCC                                GND
-      │                                  │
-      │                                  │
-   ┌──┼──────────────────────────────────┼──┐
-   │  │                                  │  │
-   │ 5V                               GND   │  ← ESP32 pins
-   │  │                                  │  │
-   └──┼──────────────────────────────────┼──┘
+  IT IS     TEN    FIVE    TWENTY
+  [ ] [ ]   [ ]    [ ]     [ ]
+  0-7       10-13  14-17   18-23
 
-   DIN (green/data wire) ──── GPIO 12 (ESP32)
-   VCC (red/power)          ──── 5V (ESP32)
-   GND (white/ground)       ──── GND (ESP32)
+  TWENTY   THREE   FOUR    ONE
+  [ ]      [ ]     [ ]     [ ]
+  24-28    29-33   34-37   38-41
 
-   Pin mapping:
-   ┌────────────┬────────────┐
-   │ Strip Wire │ ESP32 Pin  │
-   ├────────────┼────────────┤
-   │ DIN (data) │ GPIO 12    │
-   │ VCC (power)│ 5V         │
-   │ GND (ground)│ GND       │
-   └────────────┴────────────┘
+  OCLOCK    ONE    TWO     SIX
+  [ ]       [ ]    [ ]     [ ]
+  42-49    50-53   54-57   58-61
+
+  [brightness bar] [status LEDs]
+  62-79              80+
 ```
+
+> **🤔 Why this order?** It reads top-to-bottom, left-to-right — just like reading. "IT IS TEN FIFTEEN" maps to the top row, and so on. Each bracket number is a group of LEDs that light up together.
+
+> **💡 Try this:** Draw your own layout on paper. Make it simpler (fewer words) or more complex (add days of the week). The code just needs to know which LEDs light up for each word.
+
+## Step 2: Wire the LED strip
+
+```
+  ESP32              WS2812B Strip
+  ──────              ──────────────
+  5V ─────────────→ VCC (red)
+  GND ────────────→ GND (white)
+  GPIO 12 ───────→ DIN (green)
+```
+
+> **⚠️ Power note:** 80 LEDs at full white draw about 800mA. The ESP32's 5V pin can supply about 500mA. For 80 LEDs, it should work but use a separate 5V supply if you add more LEDs or want all-white display.
 
 ## Step 3: Wire the RTC module
 
-The RTC keeps time even when power is off (battery backed up):
+The RTC uses I2C — the same two wires as the OLED (if you add one later):
 
 ```
-   RTC Module (DS3231 or similar)
-   ┌───────────────┐
-   │  ┌─────────┐  │
-   │  │   RTC   │  │
-   │  │         │  │
-   │  └─────────┘  │
-   │  VCC GND SDA SCL│
-   └──┬──┬──┬──┬──┘
-      │  │  │  │
-      │  │  │  └──── GPIO 22
-      │  │  └──────── GPIO 21
-      │  └──────────── GND
-      └──────────────── 3.3V
-
-   Shares I2C bus with BME280 (if you added one in that guide).
-   Pin mapping:
-   ┌────────────┬────────────┐
-   │ RTC Pin    │ ESP32 Pin  │
-   ├────────────┼────────────┤
-   │ VCC        │ 3.3V       │
-   │ GND        │ GND        │
-   │ SDA        │ GPIO 21    │
-   │ SCL        │ GPIO 22    │
-   └────────────┴────────────┘
+  ESP32          RTC Module
+  ──────          ──────────
+  3.3V ──────────→ VCC
+  GND  ──────────→ GND
+  GPIO 21 ───────→ SDA
+  GPIO 22 ───────→ SCL
 ```
 
-## Step 4: Install libraries
+> **🤔 What is a RTC?** Real Time Clock — a small chip that keeps track of time, even when your main board is off. It has a tiny battery (like a watch battery) that keeps it running. The DS3231 is accurate to ±2 ppm — about 1 minute per month.
 
-1. **Sketch → Include Library → Manage Libraries**
-2. Search and install: **FastLED**
-3. Search and install: **RTClib**
-4. (Optional) **Adafruit SSD1306** — for a small status display
+## Step 4: First light test
 
-## Step 5: First light test
+Before worrying about what time it is, make sure the LEDs work:
 
 ```cpp
 #include <FastLED.h>
@@ -131,13 +102,14 @@ CRGB leds[NUM_LEDS];
 
 void setup() {
   FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
-  FastLED.setBrightness(60);
-  fill_solid(leds, NUM_LEDS, CRGB::Black);
-  FastLED.show();
-  delay(500);
+  FastLED.setBrightness(60); // 60% brightness (comfortable for indoors)
+
+  // Turn all LEDs green for 2 seconds
   fill_solid(leds, NUM_LEDS, CRGB::Green);
   FastLED.show();
-  delay(1000);
+  delay(2000);
+
+  // Turn them off
   fill_solid(leds, NUM_LEDS, CRGB::Black);
   FastLED.show();
 }
@@ -145,118 +117,121 @@ void setup() {
 void loop() {}
 ```
 
-**Result:** All 80 LEDs light up green for one second, then off. If this works, your strip is wired correctly.
+> **🤔 Why `GRB` instead of `RGB`?** WS2812B LEDs expect data in Green-Red-Blue order, not the more intuitive Red-Green-Blue. FastLED handles this with `GRB` in the template. If your colours look wrong (red looks green), try `RGB` instead — some strips use different orderings.
 
-## Step 6: Show the time
+## Step 5: Show the time
 
 ```cpp
 #include <FastLED.h>
 #include <RTClib.h>
 
-#define NUM_LEDS 80
-#define DATA_PIN 12
 RTC_DS3231 rtc;
-CRGB leds[NUM_LEDS];
 
+void showTime(int hour, int minute) {
+  fill_solid(leds, NUM_LEDS, CRGB::Black); // start dark
+
+  // This maps LED groups to time words
+  // Hour LEDs (simplified example):
+  if (hour == 1 || hour == 13) { // 1 OCLOCK
+    for (int i = 38; i <= 41; i++) leds[i] = CRGB::Green;
+  } else if (hour == 2) {
+    for (int i = 54; i <= 57; i++) leds[i] = CRGB::Green;
+  }
+  // ... (more hours)
+
+  // Minute LEDs (simplified):
+  if (minute < 5) {
+    // "IT IS" and the hour
+  } else if (minute < 10) {
+    // "FIVE PAST"
+  } else if (minute < 15) {
+    // "TEN PAST"
+  } else if (minute < 20) {
+    // "QUARTER PAST"
+  }
+  // ... (more minute groups)
+
+  FastLED.show();
+}
+```
+
+### What this does:
+- Starts with all LEDs off (black)
+- Lights up specific LED groups based on the hour and minute
+- Calls `FastLED.show()` to actually display the pattern
+
+> **🤔 This is the hardest part.** Mapping each minute to the right word group is tedious but straightforward. Copy the layout from Step 1 into your code and assign LED numbers to each word group. Start with just "IT IS" and one hour — get that working, then add more.
+
+## Step 6: Full clock code (simplified)
+
+```cpp
 void setup() {
   FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
   FastLED.setBrightness(60);
   rtc.begin();
 }
 
-void showTime(int hour, int minute) {
-  fill_solid(leds, NUM_LEDS, CRGB::Black);
-
-  // This is simplified — real code maps each LED
-  // to a letter position in your word grid
-  int pos = (hour % 12) * 4 + (minute / 15);
-  if (pos < NUM_LEDS) {
-    leds[pos] = CRGB::Green;
-  }
-
-  FastLED.show();
-}
-
 void loop() {
   DateTime now = rtc.now();
   showTime(now.hour(), now.minute());
+
+  // Sync time from WiFi every hour (optional)
+  if (now.minute() == 0) {
+    // Code to set RTC from WiFi time
+  }
+
   delay(10000); // update every 10 seconds
 }
 ```
 
-**Result:** The time is shown as a pattern of green LEDs.
-
-## Step 7: Build the letter grid
-
-The full version maps specific LEDs to specific letters:
+## Step 7: Assemble it
 
 ```
-   Word Clock Layout Diagram:
-   ┌─────────────────────────────────────────────────┐
-   │                                                    │
-   │  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────────┐         │
-   │  │ IT  │  │ IS  │  │ TEN │  │ FIVE    │         │
-   │  │LEDs │  │LEDs │  │LEDs │  │ LEDs    │         │
-   │  │0-5  │  │6-9  │  │10-13│  │ 14-17   │         │
-   │  └─────┘  └─────┘  └─────┘  └─────────┘         │
-   │                                                    │
-   │  ┌──────────┐ ┌────────┐ ┌────┐ ┌────────┐       │
-   │  │  TWENTY  │ │ THREE  │ │FOUR│ │  ONE   │       │
-   │  │  LEDs    │ │ LEDs   │ │LEDS│ │ LEDs   │       │
-   │  │  18-22   │ │ 23-27  │ │28-31│ │ 32-35 │       │
-   │  └──────────┘ └────────┘ └────┘ └────────┘       │
-   │                                                    │
-   │  ┌───────┐  ┌────┐ ┌────┐ ┌───────┐  ┌─────┐   │
-   │  │OCLOCK │  │ TWO│ │ FIVE│ │ EIGHT │  │SIX  │   │
-   │  │ 36-42 │  │43-45│ │46-49│ │ 50-54 │  │55-57│   │
-   │  └───────┘  └────┘ └────┘ └───────┘  └─────┘   │
-   │                                                    │
-   └────────────────────────────────────────────────────┘
+  ┌─────────────────────────────────────────┐
+  │                                         │
+  │  ┌─────────────────────────────────┐   │
+  │  │      3D-PRINTED FRAME           │   │
+  │  │                                   │   │
+  │  │  ┌─────────────────────────┐    │   │
+  │  │  │   FROSTED ACRYLIC       │    │   │
+  │  │  │   (light diffuser)      │    │   │
+  │  │  └─────────────────────────┘    │   │
+  │  │                                   │   │
+  │  │  ┌─────────────────────────┐    │   │
+  │  │  │   LED STRIP             │    │   │
+  │  │  │   (glued inside back)    │    │   │
+  │  │  └─────────────────────────┘    │   │
+  │  │                                   │   │
+  │  │  ┌─────────────────────────┐    │   │
+  │  │  │   ESP32 + RTC           │    │   │
+  │  │  └─────────────────────────┘    │   │
+  │  └─────────────────────────────────┘   │
+  │                  ↓ USB-C                │
+  └─────────────────────────────────────────┘
 ```
 
-## Step 8: Assemble the clock
+1. Glue the LED strip inside the back panel (facing forward)
+2. Place the frosted acrylic in front of the LEDs (this makes the light even, not individual dots)
+3. Mount the ESP32 and RTC inside the back section
+4. Close the frame
 
-```
-   LED Word Clock Assembly:
-   ┌─────────────────────────────────────────┐
-   │                                         │
-   │  ┌─────────────────────────────────┐  │
-   │  │         3D-PRINTED FRAME        │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │   FROSTED ACRYLIC       │   │  │
-   │  │  │   (light-diffusing      │   │  │
-   │  │  │    front panel)         │   │  │
-   │  │  └─────────────────────────┘   │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │   LED STRIP (glued to   │   │  │
-   │  │  │   inside back panel)    │   │  │
-   │  │  └─────────────────────────┘   │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │  ESP32 + RTC            │   │  │
-   │  │  │  (controls everything)  │   │  │
-   │  │  └─────────────────────────┘   │  │
-   │  │                                 │  │
-   │  └─────────────────────────────────┘  │
-   │                     ↓ USB-C             │
-   └─────────────────────────────────────────┘
-```
+> **💡 The frosted acrylic is what makes it look professional.** Without it, you'd see individual LED dots. With it, the light blends into smooth glowing letters. You can frost acrylic yourself by spraying it with frosted glass spray paint.
 
-1. Glue the LED strip inside the back panel of the frame, facing forward
-2. Place the frosted acrylic panel in front — it diffuses the light
-3. Mount the ESP32 and RTC in the back section
-4. Wire everything up
-5. Close the frame, power via USB-C
+## Troubleshooting
 
-## Customise it
+**LEDs don't light up?**
+- Check DIN → GPIO 12 (not 5V or GND)
+- Check FastLED is installed
+- Try reducing brightness to 30 (some strips need less power)
 
-- Change colour themes — blue at night, white during day
-- Add a brightness sensor for auto-dimming
-- Display the date or a message
-- Make it react to music (sound module)
+**Time is wrong after power off?**
+- Check the RTC battery (CR2032 coin cell)
+- Some modules don't ship with a battery — check the product listing
+
+**Letters show in wrong positions?**
+- Your LED numbering might not match the layout
+- Number the LEDs physically: LED 0 is the first one after DIN. Mark them with tape while testing.
 
 ## What's next?
 
-Build the **Custom Game Controller** — your next input device project.
+Build the **DIY Weather Station** — the first project in the DIY collection.

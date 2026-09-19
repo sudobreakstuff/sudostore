@@ -44,6 +44,7 @@ const learn = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    image: z.string().optional(),
     published: z.coerce.date(),
     level: z.enum(["beginner", "intermediate", "advanced"]).default("beginner"),
     tags: z.array(z.string()).default([]),

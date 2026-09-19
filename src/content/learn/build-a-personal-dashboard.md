@@ -1,82 +1,62 @@
 ---
 title: "Build a Personal Dashboard"
-description: "ESP32 display showing your data from the web — weather, GitHub, calendar, crypto."
+description: "ESP32 display showing weather, crypto and GitHub stats."
+image: "/assets/personal-dashboard.jpg"
 published: 2026-09-10
 level: "intermediate"
-tags: ["diy-kit", "intermediate", "esp32", "api", "dashboard", "iot"]
+tags: ["diy-kit", "intermediate", "esp32", "api", "dashboard"]
 faqs:
-  - q: "Which APIs work out of the box?"
-    a: "OpenWeatherMap, GitHub, Bitcoin price. You can add any REST API."
-  - q: "How does it connect to WiFi?"
-    a: "Standard WiFi. Configure SSID and password in the code."
-  - q: "Can I add my own data?"
-    a: "Yes. The configuration guide explains how to add any API endpoint."
+  - q: "What APIs work?"
+    a: "OpenWeatherMap (free tier), CoinGecko (free), GitHub (free). You can add any REST API."
+  - q: "Does it need WiFi?"
+    a: "Yes. It fetches data from the internet every 5 minutes."
+  - q: "Can I show my own data?"
+    a: "Yes. Add any API endpoint to the code."
 ---
+
+## What you'll build
+
+A small device that sits on your desk and shows you data from the internet — weather, cryptocurrency prices, GitHub stats — all on one screen. You decide what it shows.
+
+> **Before you start:** Go to your phone and look at the weather app. How does it know the weather? It asks a server somewhere. Your device will do the same thing — ask a server, get the answer, show it on screen.
+
+> **🤔 Design challenge:** If you could show ANY 3 things on this tiny screen, what would they be? Weather, stocks, calendar, traffic, something else? Write down your 3 ideas before you start.
 
 ## What you need
 
-From the **Starter Pack**: ESP32, breadboard, wires, USB-C cable.
+| Part | What it does | ~Price |
+|------|-------------|--------|
+| ESP32 dev board | The brain | R80 |
+| 0.96" OLED display | Shows your data | R60 |
+| Jumper wires | Connections | R20 |
+| USB-C cable | Power | R15 |
 
-From this kit: 0.96" OLED, 3D-printed case.
+> **💡 No extra sensors needed!** This project uses existing APIs on the internet — it doesn't measure anything physical.
 
-## Step 1: Understand the architecture
-
-```
-   Dashboard Architecture:
-   ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-   │   ESP32       │────→│  HTTPS       │────→│  REST API    │
-   │  (client)     │     │  Client      │     │  (weather,   │
-   │               │     │  (WiFi)      │     │   github,    │
-   │  ┌─────────┐│     │              │     │   crypto)    │
-   │  │ WiFi    ││     └──────────────┘     └──────────────┘
-   │  │ connect ││
-   │  └─────────┘│                    ↓
-   │              │          ┌──────────────────┐
-   │              │          │  JSON RESPONSE    │
-   │              │          │  (parse in code)  │
-   │              │          └────────┬──────────┘
-   │              │                   │
-   │              │          ┌────────▼──────────┐
-   │              │────→   │  OLED DISPLAY      │
-   │              │        │  (show data)       │
-   └──────────────┘        └──────────────────────┘
-
-   Cycle every 5 minutes:
-   1. Fetch API data (JSON)
-   2. Parse relevant values
-   3. Display on OLED
-   4. Wait 5 minutes
-   5. Repeat
-```
-
-## Step 2: Wire the OLED display
-
-Standard I2C connection (same as all the other guides):
+## Step 1: Understand the flow
 
 ```
-   ┌─────────────────────────────────────────┐
-   │                                         │
-   │  ESP32                                 │
-   │  ┌──────────────────────────────────┐  │
-   │  │  3.3V ────────┬───────────────│  │
-   │  │  GND  ────────┼───────────────│  │
-   │  │  GPIO 21 ─────┤─── SDA         │  │
-   │  │  GPIO 22 ─────┤─── SCL         │  │
-   │  └───────────────┴───────────────┘  │
-   │                                         │
-   │  Pin mapping:                          │
-   │  ┌────────────┬────────────┐           │
-   │  │ OLED Pin   │ ESP32 Pin  │           │
-   │  ├────────────┼────────────┤           │
-   │  │ VCC        │ 3.3V       │           │
-   │  │ GND        │ GND        │           │
-   │  │ SDA        │ GPIO 21    │           │
-   │  │ SCL        │ GPIO 22    │           │
-   │  └────────────┴────────────┘           │
-   └─────────────────────────────────────────┘
+  ┌──────────┐     ┌──────────┐     ┌──────────────┐
+  │  ESP32    │────→│  WiFi    │────→│  API Server   │
+  │          │     │          │     │               │
+  │          │     │          │←────│  JSON response │
+  └──────────┘     └──────────┘     └──────────────┘
+         │
+         ↓
+    Parse JSON → Show on OLED
 ```
 
-## Step 3: WiFi connection
+Every 5 minutes, the ESP32:
+1. Connects to WiFi
+2. Asks a server for data
+3. Gets back a JSON response (structured text)
+4. Extracts the important numbers
+5. Shows them on the OLED
+6. Goes to sleep for 5 minutes
+
+> **🤔 What is JSON?** It looks like text but it's structured data. Example: `{"temperature": 24}` means there's a field called "temperature" with the value 24. Your ESP32 reads this text and understands the structure.
+
+## Step 2: Connect WiFi
 
 ```cpp
 #include <WiFi.h>
@@ -84,113 +64,121 @@ Standard I2C connection (same as all the other guides):
 const char* ssid = "YOUR_WIFI_NAME";
 const char* password = "YOUR_WIFI_PASSWORD";
 
-void connectWiFi() {
+void setup() {
+  Serial.begin(115200);
   WiFi.begin(ssid, password);
 
   Serial.print("Connecting");
-  int attempts = 0;
-  while (WiFi.status() != WL_CONNECTED && attempts < 40) {
+  while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
-    attempts++;
   }
-
-  if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("\nConnected!");
-    Serial.print("IP: "); Serial.println(WiFi.localIP());
-  } else {
-    Serial.println("\nFailed to connect.");
-  }
+  Serial.println("\nConnected! IP: " + WiFi.localIP().toString());
 }
 ```
 
-## Step 4: Fetch data from an API
+> **🤔 What happens at `WiFi.begin(ssid, password)`?** The ESP32 creates a WiFi connection request. Your router sees the request and asks for the password. If the password is correct, the ESP32 joins your network and gets an IP address (like 192.168.1.42) — a number that identifies it on your network.
+
+> **💡 Test it:** After uploading, open Serial Monitor (115200 baud). You should see "Connecting..." then dots while it connects, then "Connected!" with an IP address.
+
+## Step 3: Fetch data from an API
+
+APIs (Application Programming Interfaces) are how different computer programs talk to each other. The weather API is like a waiter — you order ("give me weather for London"), and it serves ("temperature: 24°C").
 
 ```cpp
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 
-// Fetch weather from OpenWeatherMap (free tier)
-String fetchWeather() {
+float getTemperature() {
   HTTPClient http;
   http.begin("https://api.openweathermap.org/data/2.5/weather?q=Johannesburg&appid=YOUR_API_KEY&units=metric");
-  int httpCode = http.GET();
 
+  int httpCode = http.GET();
   String result = "";
-  if (httpCode == 200) {
+
+  if (httpCode == 200) { // 200 means success
     result = http.getString();
   }
-  http.end();
-  return result;
+
+  http.end(); // close the connection
+  return result; // returns JSON like {"main":{"temp":24.5}}
 }
+```
 
-// Parse and return temperature
-float getTemperature() {
-  String json = fetchWeather();
-  if (json == "") return -999;
+### What each line does:
+- **`http.begin(url)`** — sets up the connection to the API URL
+- **`http.GET()`** — sends the request and returns the HTTP status code (200 = OK, 404 = not found, etc.)
+- **`http.getString()`** — gets the response body as text
+- **`http.end()`** — closes the connection (important! Don't leak connections)
 
+> **🤔 How do I get an API key?** Go to [openweathermap.org](https://openweathermap.org/api), sign up for free, and create a "free" API key. It looks like a long string: `abc123def456...`. Copy it into the URL above where it says `YOUR_API_KEY`.
+
+## Step 4: Parse the JSON
+
+JSON is just text — you need to extract the specific numbers you want:
+
+```cpp
+float parseTemperature(String json) {
   StaticJsonDocument<1024> doc;
   DeserializationError error = deserializeJson(doc, json);
+
   if (error) {
-    Serial.print("JSON parse failed: ");
+    Serial.print("Parse failed: ");
     Serial.println(error.c_str());
     return -999;
   }
 
-  return doc["main"]["temp"];
+  return doc["main"]["temp"]; // Navigate the JSON structure
 }
 ```
 
-## Step 5: Fetch multiple APIs
+> **🤔 What does `doc["main"]["temp"]` mean?** It walks through the JSON like folders: first go into the "main" folder, then find "temp" inside it. For the JSON `{"main": {"temp": 24.5}}`, this returns 24.5.
+
+## Step 5: Multiple APIs
 
 ```cpp
-// Fetch crypto price (CoinGecko, no API key needed)
 float getBitcoinPrice() {
   HTTPClient http;
+  // CoinGecko doesn't require an API key!
   http.begin("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=zar");
-  int httpCode = http.GET();
-  String result = "";
-  if (httpCode == 200) {
-    result = http.getString();
-  }
+  http.GET();
+  String result = http.getString();
   http.end();
 
   StaticJsonDocument<512> doc;
   deserializeJson(doc, result);
-  return doc["bitcoin"]["zar"];
+  return doc["bitcoin"]["zar"]; // e.g., 1200000 (ZAR)
 }
 
-// Fetch GitHub stars for any repo
 int getGitHubStars(const char* owner, const char* repo) {
   HTTPClient http;
   String url = "https://api.github.com/repos/" + String(owner) + "/" + String(repo);
   http.begin(url);
-  http.addHeader("User-Agent", "sudostore-dashboard");
-  int httpCode = http.GET();
-  String result = "";
-  if (httpCode == 200) {
-    result = http.getString();
-  }
+  http.addHeader("User-Agent", "sudostore-dashboard"); // GitHub requires this
+  http.GET();
+  String result = http.getString();
   http.end();
 
   StaticJsonDocument<512> doc;
   deserializeJson(doc, result);
-  return doc["stargazers_count"];
+  return doc["stargazers_count"]; // e.g., 42
 }
 ```
 
-## Step 6: Display on OLED
+> **💡 More free APIs to try:**
+> - Random number: `https://api.randomnumberapi.com/v1/random?min=1&max=100`
+> - Joke: `https://official-joke-api.appspot.com/random_joke`
+> - Space fact: `http://api.nasa.gov/planetary/apod?api_key=DEMO_KEY`
+
+## Step 6: Display everything
 
 ```cpp
-void displayDashboard(float temp, float btcPrice, int ghStars) {
+void displayDashboard(float temp, float btc, int ghStars) {
   display.clearDisplay();
-  display.setTextSize(1);
-
-  // Header
   display.setCursor(0, 0);
   display.println("My Dashboard");
 
-  // Separator
+  // Divider line
   for (int i = 0; i < 128; i++) {
     display.drawPixel(i, 10, SSD1306_WHITE);
   }
@@ -211,48 +199,27 @@ void displayDashboard(float temp, float btcPrice, int ghStars) {
   display.println("BTC:");
   display.setCursor(0, 48);
   display.print("R");
-  display.println((int)btcPrice);
+  display.println((int)btc);
 
   // GitHub
   display.setCursor(0, 58);
-  display.print("GH: ");
+  display.print("GH Stars: ");
   display.println(ghStars);
 
   display.display();
 }
 ```
 
-## Step 7: Full dashboard code
+## Step 7: Put it all together
 
 ```cpp
-#include <WiFi.h>
-#include <HTTPClient.h>
-#include <ArduinoJson.h>
-#include <Adafruit_SSD1306.h>
-#include <Adafruit_GFX.h>
-
-#define SCREEN_W 128
-#define SCREEN_H 64
-
-const char* ssid = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
-
-Adafruit_SSD1306 display(SCREEN_W, SCREEN_H, &Wire, -1);
-
-unsigned long lastFetch = 0;
-const unsigned long FETCH_INTERVAL = 5 * 60 * 1000; // 5 minutes
-
-void setup() {
-  Serial.begin(115200);
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
-  connectWiFi();
-}
-
 void loop() {
-  if (millis() - lastFetch > FETCH_INTERVAL) {
+  static unsigned long lastFetch = 0;
+
+  if (millis() - lastFetch > 5 * 60 * 1000) { // 5 minutes
     lastFetch = millis();
 
-    float temp = getTemperature();
+    float temp = parseTemperature(getTemperature());
     float btc = getBitcoinPrice();
     int stars = getGitHubStars("sudobreakstuff", "sudostore");
 
@@ -261,39 +228,20 @@ void loop() {
 }
 ```
 
-## Step 8: Assemble the dashboard
+## Troubleshooting
 
-```
-   Personal Dashboard Assembly:
-   ┌─────────────────────────────────────────┐
-   │                                         │
-   │  ┌─────────────────────────────────┐  │
-   │  │    3D-PRINTED CASE            │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │      OLED DISPLAY       │   │  │
-   │  │  │  (weather, crypto, GH)  │   │  │
-   │  │  └─────────────────────────┘   │  │
-   │  │                                 │  │
-   │  │  ┌─────────────────────────┐   │  │
-   │  │  │  ESP32 (inside)         │   │  │
-   │  │  └─────────────────────────┘   │  │
-   │  └─────────────────────────────────┘  │
-   │                     ↓ USB-C             │
-   └─────────────────────────────────────────┘
-```
+**OLED shows "Error" for weather?**
+- Check your API key is correct in the URL
+- Verify you have WiFi connection (check Serial Monitor)
+- Open the API URL in your browser — does it return JSON or an error?
 
-1. Mount the OLED into the case front
-2. Place the ESP32 inside, wire up
-3. Close the case, power via USB-C
+**"Parse failed" in Serial Monitor?**
+- The API might have changed its response format
+- Open the URL in a browser and check the JSON structure
+- Adjust the `doc["..."]["..."]` paths
 
-## Customise it
-
-- Add a button to cycle between different data views
-- Display calendar events via Google API
-- Show Reddit feed headlines
-- Display smart home sensor readings
-- Add a second OLED for multiple data streams
+**Device disconnects from WiFi?**
+- Add WiFi reconnect code: `if (WiFi.status() != WL_CONNECTED) WiFi.begin(ssid, password);`
 
 ## What's next?
 

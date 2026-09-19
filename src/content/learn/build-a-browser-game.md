@@ -1,69 +1,45 @@
 ---
 title: "Build a Browser Game"
-description: "HTML5 Canvas game built from scratch with JavaScript, deployed to Cloudflare Pages for free."
+description: "HTML5 canvas game built from scratch with JavaScript."
+image: "/assets/browser-game.png"
 published: 2026-09-10
 level: "beginner"
-tags: ["diy-kit", "beginner", "javascript", "canvas", "game", "html5"]
+tags: ["diy-kit", "beginner", "javascript", "canvas", "game"]
 faqs:
   - q: "What game do you build?"
-    a: "A side-scroller where you jump over obstacles, collect coins and avoid enemies."
+    a: "A side-scroller where you jump over obstacles and collect coins."
   - q: "Do I need a server?"
-    a: "No. Cloudflare Pages hosts it as static files, no backend needed."
-  - q: "Can I change the game?"
-    a: "Everything is explained. Add levels, power-ups, new characters — it's your code."
+    a: "No. It runs entirely in the browser."
+  - q: "Can I put it online?"
+    a: "Yes. Cloudflare Pages hosts it free."
 ---
+
+## What you'll build
+
+A real browser game — no engines, no frameworks, just HTML, CSS and your own code. You'll learn how games work at the most fundamental level: draw a frame, update everything, draw the next frame, repeat.
+
+> **Before you start:** Think about the oldest video games you know — Pong, Snake, Pac-Man. They all do the same thing your game will do: update the game state 60 times per second and redraw the screen each time. That's it.
+
+> **🤔 Challenge:** Open the developer tools on any browser (F12), go to the Console, and type `console.log(60 * 16)`. This is how long each frame takes at 60fps. Why is it not exactly 16? Because screens don't refresh at exactly the same speed your code runs.
 
 ## What you need
 
-No physical hardware. Just a computer with:
-
-- A code editor (VS Code recommended)
+**No physical hardware at all!** Just:
+- A code editor (VS Code recommended, free)
 - A web browser (Chrome, Firefox, Edge)
-- A free Cloudflare Pages account (or any static hosting)
-- Git (optional, for deploying)
+- Curiosity and patience
 
-## Step 1: Understand the game loop
+> **💡 First time coding?** Don't worry. Every programmer started here. Type the code exactly as shown, and you'll have a working game in 30 minutes.
 
-Every game has a loop that runs 60 times per second:
+## Step 1: Set up your project
 
-```
-   Game Loop:
-   ┌─────────────────────────────────────┐
-   │                                     │
-   │  1. READ INPUT                      │
-   │     (keyboard, mouse, touch)        │
-   │             │                       │
-   │             ▼                       │
-   │  2. UPDATE WORLD                    │
-   │     (move player, gravity,         │
-   │      collisions, spawn enemies)    │
-   │             │                       │
-   │             ▼                       │
-   │  3. DRAW FRAME                    │
-   │     (clear canvas, draw all        │
-   │      objects, HUD, score)         │
-   │             │                       │
-   │             ▼                       │
-   │  4. WAIT ~16ms                      │
-   │     (to hit 60fps)                │
-   │             │                       │
-   │             └──────→ (back to 1)   │
-   └─────────────────────────────────────┘
-```
-
-## Step 2: Set up the project
-
-Create a folder called `my-game` and these files:
+Create a folder called `my-game`. Inside, create 3 files:
 
 ```
-   my-game/
-   ├── index.html     ← loads the game
-   ├── style.css      ← styles the page
-   ├── game.js        ← all game logic
-   └── assets/        ← images and sounds (optional)
-       ├── player.png
-       ├── obstacle.png
-       └── coin.png
+  my-game/
+  ├── index.html     ← loads everything
+  ├── style.css      ← makes it look nice
+  └── game.js        ← all the logic
 ```
 
 **index.html:**
@@ -81,21 +57,35 @@ Create a folder called `my-game` and these files:
 </html>
 ```
 
+> **🤔 What is `<canvas>`?** It's an HTML element that gives you a blank drawing area. Your JavaScript code draws shapes, text and images onto it — frame by frame.
+
 **style.css:**
 ```css
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #0a0a14; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-canvas { border: 2px solid #3da9ff; border-radius: 4px; }
+body {
+  background: #0a0a14;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+canvas {
+  border: 2px solid #3da9ff;
+  border-radius: 4px;
+}
 ```
 
-## Step 3: The canvas and game state
+> **🤔 What does each CSS line do?** `margin: 0` removes default spacing. `display: flex` centres the canvas on screen. `height: 100vh` makes the body fill the whole screen. Try changing `#0a0a14` to `#1a1a1a` — what changes?
+
+## Step 2: The canvas and game state
 
 ```javascript
 // game.js
 const canvas = document.getElementById('game');
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d');  // 2D drawing context
 
-// Game state
+// This object holds EVERYTHING about your game
 const state = {
   player: { x: 50, y: 300, width: 30, height: 40, vy: 0, jumping: false },
   obstacles: [],
@@ -106,230 +96,150 @@ const state = {
   keys: {}
 };
 
-// Read keyboard input
 document.addEventListener('keydown', (e) => state.keys[e.code] = true);
 document.addEventListener('keyup', (e) => state.keys[e.code] = false);
 ```
 
-**Result:** The game canvas is set up and we can track the player, obstacles, coins and keyboard input.
+### What each line does:
+- **`getContext('2d')`** — gives you drawing tools (lines, rectangles, circles)
+- **`state.player`** — stores position (x, y), size (width, height), velocity (vy) and state (jumping)
+- **`state.keys`** — which keys are currently pressed
+- **`addEventListener('keydown')`** — runs when you press a key
 
-## Step 4: Player physics
+> **🤔 Why store everything in one object?** Because it's easier to pass one variable to functions instead of 10 separate ones. It also makes saving/loading game state easy — just save the object!
+
+> **💡 Try this:** Change the canvas size in HTML from `800, 400` to `400, 300`. The game will be smaller but the code stays the same. Try `1200, 600` — everything stretches.
+
+## Step 3: Player physics
 
 ```javascript
 function updatePlayer() {
   const p = state.player;
 
-  // Gravity
+  // Gravity pulls you down
   p.vy += 0.5;
+
+  // Movement: add velocity to position
   p.y += p.vy;
 
-  // Ground collision
+  // Ground collision — stop falling at the ground
   if (p.y + p.height > 360) {
     p.y = 360 - p.height;
     p.vy = 0;
     p.jumping = false;
   }
 
-  // Jump (only when on ground)
+  // Jump only when on the ground
   if (state.keys['Space'] && !p.jumping) {
-    p.vy = -12;
+    p.vy = -12; // negative = up
     p.jumping = true;
   }
 }
 
 function drawPlayer() {
   const p = state.player;
-  ctx.fillStyle = '#3da9ff';
+  ctx.fillStyle = '#3da9ff'; // blue
   ctx.fillRect(p.x, p.y, p.width, p.height);
+
   // Eyes
-  ctx.fillStyle = '#0a0a14';
+  ctx.fillStyle = '#0a0a14'; // dark
   ctx.fillRect(p.x + 8, p.y + 8, 6, 6);
   ctx.fillRect(p.x + 18, p.y + 8, 6, 6);
 }
 ```
 
-**Result:** The player falls with gravity, stands on the ground and jumps with the space bar.
+### What each line does:
+- **`p.vy += 0.5`** — gravity adds downward velocity each frame (50% faster each second)
+- **`p.y += p.vy`** — position changes by velocity each frame
+- **`p.vy = -12`** — jumping gives upward velocity (negative = up in computer graphics)
+- **`ctx.fillRect(x, y, w, h)`** — draws a filled rectangle at position (x,y) with width w and height h
 
-## Step 5: Spawn and move obstacles
+> **🤔 Why is gravity 0.5?** It's a game feel number, not real physics. Try 0.3 — the player falls slower and floats more. Try 1.0 — it falls like a rock. Game feel is all about tweaking numbers.
+
+> **💡 Try this:** Change gravity to 0.3 and jump velocity to -15. Does the player jump higher and fall slower? Now try gravity 1.0 — the player drops like a stone.
+
+## Step 4: Obstacles and collision
 
 ```javascript
 function spawnObstacle() {
-  if (Math.random() < 0.02) { // 2% chance per frame
-    state.obstacles.push({
-      x: 800,
-      y: 360 - 30,
-      width: 25,
-      height: 30
-    });
+  // 2% chance per frame = about one obstacle every 2 seconds at 60fps
+  if (Math.random() < 0.02) {
+    state.obstacles.push({ x: 800, y: 360 - 30, width: 25, height: 30 });
   }
 }
 
-function updateObstacles() {
-  for (let i = state.obstacles.length - 1; i >= 0; i--) {
-    const obs = state.obstacles[i];
-    obs.x -= state.speed;
-
-    // Remove off-screen
-    if (obs.x + obs.width < 0) {
-      state.obstacles.splice(i, 1);
-      state.score += 10;
-    }
-  }
-}
-
-function drawObstacles() {
-  ctx.fillStyle = '#ff2b2b';
-  state.obstacles.forEach(obs => {
-    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-  });
-}
-```
-
-**Result:** Red obstacles spawn on the right, move left, and award 10 points each when dodged.
-
-## Step 6: Collision detection
-
-```javascript
 function checkCollisions() {
   const p = state.player;
   for (const obs of state.obstacles) {
+    // Check if two rectangles overlap
     if (p.x < obs.x + obs.width &&
         p.x + p.width > obs.x &&
         p.y < obs.y + obs.height &&
         p.y + p.height > obs.y) {
-      return true; // collision!
+      return true;
     }
   }
   return false;
 }
 ```
 
-Add to the game loop:
+> **🤔 How does rectangle collision work?** Two rectangles overlap if: the left edge of one is left of the right edge of the other, AND the right edge of one is right of the left edge of the other. Both horizontal AND vertical overlap must be true — that's why there are 4 checks.
 
-```javascript
-function gameOver() {
-  ctx.fillStyle = 'rgba(10, 10, 20, 0.7)';
-  ctx.fillRect(0, 0, 800, 400);
-  ctx.fillStyle = '#ff2b2b';
-  ctx.font = '48px monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('GAME OVER', 400, 190);
-  ctx.fillStyle = '#3da9ff';
-  ctx.font = '24px monospace';
-  ctx.fillText(`Score: ${state.score}`, 400, 240);
-  ctx.fillText('Press R to restart', 400, 290);
-
-  if (state.keys['KeyR']) restartGame();
-}
-
-function restartGame() {
-  state.player = { x: 50, y: 300, width: 30, height: 40, vy: 0, jumping: false };
-  state.obstacles = [];
-  state.coins = [];
-  state.score = 0;
-  state.speed = 5;
-  state.frame = 0;
-}
-```
-
-**Result:** Hitting an obstacle ends the game with a "GAME OVER" screen. Press R to restart.
-
-## Step 7: Coin collection
-
-```javascript
-function spawnCoins() {
-  if (Math.random() < 0.01) {
-    state.coins.push({
-      x: 800,
-      y: 360 - 40 - Math.random() * 100, // various heights
-      width: 20,
-      height: 20
-    });
-  }
-}
-
-function updateCoins() {
-  for (let i = state.coins.length - 1; i >= 0; i--) {
-    state.coins[i].x -= state.speed;
-    if (state.coins[i].x + state.coins[i].width < 0) {
-      state.coins.splice(i, 1);
-    }
-  }
-}
-
-function checkCoinCollision() {
-  const p = state.player;
-  for (let i = state.coins.length - 1; i >= 0; i--) {
-    const c = state.coins[i];
-    if (p.x < c.x + c.width && p.x + p.width > c.x &&
-        p.y < c.y + c.height && p.y + p.height > c.y) {
-      state.coins.splice(i, 1);
-      state.score += 5;
-    }
-  }
-}
-
-function drawCoins() {
-  ctx.fillStyle = '#f0f4ff';
-  state.coins.forEach(c => {
-    ctx.fillRect(c.x, c.y, c.width, c.height);
-  });
-}
-```
-
-## Step 8: Draw everything — the full loop
+## Step 5: The game loop
 
 ```javascript
 function gameLoop() {
+  // 1. Clear the screen
   ctx.clearRect(0, 0, 800, 400);
 
-  // Background
+  // 2. Draw background
   ctx.fillStyle = '#0a1628';
   ctx.fillRect(0, 0, 800, 400);
 
-  // Ground
+  // 3. Draw ground
   ctx.fillStyle = '#ff2b2b';
   ctx.fillRect(0, 360, 800, 40);
 
-  // Spawn
+  // 4. Spawn
   spawnObstacles();
   spawnCoins();
 
-  // Update
+  // 5. Update everything
   updatePlayer();
   updateObstacles();
   updateCoins();
 
-  // Draw
+  // 6. Draw everything (order matters!)
   drawObstacles();
   drawCoins();
   drawPlayer();
 
-  // HUD
+  // 7. Show score
   ctx.fillStyle = '#3da9ff';
   ctx.font = '20px monospace';
-  ctx.textAlign = 'left';
   ctx.fillText(`Score: ${state.score}`, 10, 30);
-  ctx.fillText(`Speed: ${state.speed.toFixed(1)}`, 10, 55);
 
-  // Collision check
+  // 8. Check collisions
   if (checkCollisions()) {
     gameOver();
   } else {
     checkCoinCollision();
     state.frame++;
-    if (state.frame % 300 === 0) state.speed += 0.2; // get harder
+    if (state.frame % 300 === 0) state.speed += 0.2;
   }
 
+  // 9. Repeat (this is what makes it a game)
   requestAnimationFrame(gameLoop);
 }
 
 gameLoop();
 ```
 
-**Result:** A working side-scroller with jumping, obstacles, coins, scoring and increasing difficulty.
+> **🤔 Why `requestAnimationFrame(gameLoop)`?** It tells the browser "call me again when you're ready to draw the next frame". The browser tries to do this 60 times per second. It's smoother than `setInterval` because the browser can adjust timing.
 
-## Step 9: Deploy to Cloudflare Pages
+> **💡 You did it!** If you see a blue square on a screen with a red ground, and you can press Space to jump — you have a working game! Everything else is just adding features.
+
+## Step 6: Add it online
 
 ```bash
 # Install Wrangler (Cloudflare CLI)
@@ -338,19 +248,11 @@ npm install -g wrangler
 # Log in to Cloudflare
 wrangler login
 
-# Create the Pages project
+# Deploy!
 wrangler pages deploy ./my-game
 ```
 
-**Result:** Your game is live at `https://my-game-abc123.pages.dev`.
-
-## Step 10: Customise it
-
-- Add sprite art — replace rectangles with images
-- Add sound effects — use the Web Audio API
-- Add levels — increase speed and spawn rate
-- Add power-ups — shields, slow-mo, double jump
-- Save high scores — use localStorage
+Your game is now live at a URL like `https://my-game-abc123.pages.dev`. Share it with anyone — they can play it in their browser, no downloads needed.
 
 ## What's next?
 

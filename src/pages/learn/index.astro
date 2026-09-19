@@ -55,9 +55,19 @@ const levelStyles: Record<string, string> = {
           <a
             href={`${BASE}learn/${post.id}/`}
             data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(" ")} ${post.data.level}`.toLowerCase()}
-            class="group flex flex-col gap-3 rounded-lg border border-edge bg-panel p-6 transition-colors hover:border-neon/60"
+            class="group flex flex-col gap-3 rounded-lg border border-edge bg-panel overflow-hidden transition-colors hover:border-neon/60"
           >
-            <div class="flex items-center justify-between">
+            {post.data.image ? (
+              <div class="aspect-video w-full overflow-hidden bg-night">
+                <img
+                  src={post.data.image}
+                  alt={post.data.title}
+                  class="h-full w-full object-cover transition-transform group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+            ) : null}
+            <div class="flex items-center justify-between px-6 pt-4">
               <span class={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs ${levelStyles[post.data.level] ?? levelStyles.beginner}`}>
                 {post.data.level}
               </span>
@@ -65,15 +75,17 @@ const levelStyles: Record<string, string> = {
                 {post.data.published.toLocaleDateString("en-ZA", { year: "numeric", month: "short", day: "numeric" })}
               </time>
             </div>
-            <h2 class="font-display text-lg font-semibold leading-snug text-ink group-hover:text-neon">{post.data.title}</h2>
-            <p class="text-sm leading-relaxed text-ink-dim line-clamp-3">{post.data.description}</p>
-            {post.data.tags.length > 0 && (
-              <div class="mt-auto flex flex-wrap gap-1.5 pt-2">
-                {post.data.tags.map((tag) => (
-                  <span class="rounded border border-edge bg-night px-2 py-0.5 font-mono text-xs text-ink-faint">#{tag}</span>
-                ))}
-              </div>
-            )}
+            <div class="flex flex-col gap-2 px-6 pb-6 pt-4">
+              <h2 class="font-display text-lg font-semibold leading-snug text-ink group-hover:text-neon">{post.data.title}</h2>
+              <p class="text-sm leading-relaxed text-ink-dim line-clamp-3">{post.data.description}</p>
+              {post.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-1.5">
+                  {post.data.tags.map((tag) => (
+                    <span class="rounded border border-edge bg-night px-2 py-0.5 font-mono text-xs text-ink-faint">#{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
           </a>
         ))}
       </div>

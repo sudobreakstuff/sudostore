@@ -1,112 +1,114 @@
 ---
 title: "Build a Web Scraper & Alert System"
-description: "Monitor any website, get notified when it changes — via WhatsApp or email."
+description: "Monitor any website, get notified when it changes."
+image: "/assets/web-scraper.jpg"
 published: 2026-09-10
 level: "intermediate"
-tags: ["diy-kit", "intermediate", "python", "scraping", "alerts", "automation"]
+tags: ["diy-kit", "intermediate", "python", "scraping", "alerts"]
 faqs:
   - q: "What computer do I need?"
     a: "A Raspberry Pi or any Linux computer. Even an old laptop works."
   - q: "Can I monitor multiple sites?"
     a: "Yes. The config file supports a list of URLs."
-  - q: "How do I get WhatsApp notifications?"
-    a: "Use the WhatsApp Business API or a service like Twilio. The guide covers setup."
+  - q: "Does it run forever?"
+    a: "Yes. Set it up with a cron job and it runs every 15 minutes."
 ---
+
+## What you'll build
+
+A program that watches any website for changes and alerts you. When a price drops, a product comes back in stock, or a news article appears — you'll know about it before your friends do.
+
+> **Before you start:** Think about something you check every day — a store for a restock, a job site for new listings, a news site for breaking stories. What if a little robot checked it for you every 15 minutes and texted you when something changed? That's exactly what you're building.
+
+> **🤔 Challenge:** Find one website you want to monitor. Open it in your browser. Where does the information you care about appear? Is it in the price tag, the date, a status label? Identifying this is half the job.
 
 ## What you need
 
-From the **Starter Pack**: nothing physical — this is a software project. You need:
-
-- A Linux computer (Raspberry Pi, old laptop, or even a Docker container)
-- Python 3.7+
+**No starter kits, no physical hardware!** Just:
+- A Linux computer (Raspberry Pi, old laptop, or even a free cloud instance)
+- Python 3.7+ (most Linux systems already have it)
 - Internet connection
+- Patience for the first run (it takes 10 minutes to set up)
 
-From this kit: nothing physical — all software.
+> **💡 Don't have Linux?** You can use Windows with [WSL](https://learn.microsoft.com/en-us/windows/wsl/) (Windows Subsystem for Linux) or install Python directly. The guide works on any system with Python 3.
 
-## Step 1: Understand the architecture
+## Step 1: Understand the concept
+
+Your scraper does 4 things:
+1. **Download** the web page HTML
+2. **Extract** just the part you care about (using CSS selectors)
+3. **Compare** this version with the last version
+4. **Alert** you if anything changed
 
 ```
-   Web Scraper Architecture:
-   ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-   │  SCHEDULER   │────→│  SCRAPER      │────→│  DIFF ENGINE  │
-   │  (runs every │     │  (downloads   │     │  (compares    │
-   │   N minutes) │     │   HTML)       │     │   old vs new) │
-   └──────────────┘     └──────────────┘     └──────┬───────┘
-                                                    │
-                                          ┌──────────▼──────────┐
-                                          │  NOTIFICATION       │
-                                          │  ENGINE             │
-                                          │  (WhatsApp/email)  │
-                                          └──────────────────────┘
-
-   What happens:
-   1. Scheduler wakes up the scraper every N minutes
-   2. Scraper downloads the HTML from the target URL
-   3. Diff engine compares current HTML with previous version
-   4. If different → notification engine alerts you
-   5. Save current HTML as "previous" for next run
+  Every 15 minutes:
+  ┌──────────────┐
+  │ Download HTML │
+  └──────┬───────┘
+         ↓
+  ┌──────────────┐
+  │ Extract data  │ ← Use CSS selectors (like .price, #stock)
+  └──────┬───────┘
+         ↓
+  ┌──────────────┐
+  │ Compare with  │
+  │ last version  │
+  └──────┬───────┘
+         ↓
+  ┌──────────────┐
+  │ Changed?      │
+  │ YES → Alert!  │
+  │ NO → Wait...  │
+  └──────────────┘
 ```
 
-## Step 2: Install dependencies
+> **🤔 Why not download the whole page?** Most web pages are 500KB+ with ads, tracking and styling. If you just extract the price (say 20 bytes), comparison is instant and uses almost no bandwidth.
+
+## Step 2: Install Python tools
+
+Open a terminal and type these commands one at a time:
 
 ```bash
 # Create a project folder
 mkdir web-monitor && cd web-monitor
 
-# Create a Python virtual environment
+# Create a virtual environment (isolated Python installation)
 python3 -m venv venv
+
+# Activate it (Linux/Mac)
 source venv/bin/activate
 
-# Install dependencies
+# Install the tools you need
 pip install requests beautifulsoup4 python-dotenv
 ```
 
-**Result:** All dependencies installed in a virtual environment.
+### What each command does:
+- **`mkdir web-monitor`** — creates a folder for your project
+- **`python3 -m venv venv`** — creates an isolated Python environment (so your system Python stays clean)
+- **`source venv/bin/activate`** — activates the virtual environment (your terminal prompt will change to show `(venv)`)
+- **`pip install ...`** — installs Python packages (like apps for Python)
 
-## Step 3: Project structure
+> **🤔 Why a virtual environment?** Without one, if you install something for one project, it might break another project. Virtual environments keep everything separate. Think of it like having separate toolboxes for each project.
 
-```
-   web-monitor/
-   ├── config.yaml       ← what to monitor
-   ├── .env              ← API keys (not committed)
-   ├── scraper.py        ← main script
-   ├── monitor.py        ← orchestrator
-   └── history/          ← saved snapshots
-       ├── example.com_20260910_1400.html
-       └── example.com_20260910_1430.html
-```
+> **💡 Test it:** Type `python` in your terminal. If you see `>>>`, you're in Python. Type `print("hello")` — if it prints "hello", Python works. Type `exit()` to leave Python and return to your normal terminal.
 
-**config.yaml:**
-```yaml
-sites:
-  - name: "Product Page"
-    url: "https://example.com/product/123"
-    selector: ".price"    # only watch this part of the page
-    alert: "whatsapp"     # how to notify
+## Step 3: Write the scraper
 
-  - name: "News Page"
-    url: "https://example.com/news"
-    selector: "body"      # watch the whole page
-    alert: "email"
-```
-
-## Step 4: The scraper
+Create a file called `scraper.py` and paste this code:
 
 ```python
-# scraper.py
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 import hashlib
-import json
 import os
 from pathlib import Path
 
 HISTORY_DIR = Path("history")
 HISTORY_DIR.mkdir(exist_ok=True)
 
-def get_snapshot_url(url: str, selector: str) -> str:
-    """Download the page and extract the target element."""
+def scrape(url, selector="body"):
+    """Download a page and extract the target element."""
     response = requests.get(url, timeout=30, headers={
         "User-Agent": "Mozilla/5.0 (Web Monitor)"
     })
@@ -122,113 +124,75 @@ def get_snapshot_url(url: str, selector: str) -> str:
 
     return content
 
-def get_hash(content: str) -> str:
-    """Get a hash of the content for change detection."""
-    return hashlib.sha256(content.encode()).hexdigest()
+def has_changed(site_name, content):
+    """Check if the content changed since last time."""
+    content_hash = hashlib.sha256(content.encode()).hexdigest()
 
-def save_snapshot(site_name: str, content: str):
-    """Save current snapshot with timestamp."""
+    # Find previous snapshots for this site
+    files = sorted(HISTORY_DIR.glob(f"{site_name}_*.html"))
+    if len(files) >= 2:
+        with open(files[-2], 'r') as f:
+            previous = f.read()
+        previous_hash = hashlib.sha256(previous.encode()).hexdigest()
+        return content_hash != previous_hash
+
+    return True  # First time checking — consider it "changed"
+
+def save_snapshot(site_name, content):
+    """Save the current version with a timestamp."""
     now = datetime.now()
     filename = f"{site_name}_{now.strftime('%Y%m%d_%H%M')}.html"
     filepath = HISTORY_DIR / filename
     with open(filepath, 'w') as f:
         f.write(content)
-    return filepath
-
-def get_last_snapshot(site_name: str) -> str | None:
-    """Find the most recent snapshot for this site."""
-    files = sorted(HISTORY_DIR.glob(f"{site_name}_*.html"))
-    if len(files) >= 2:
-        with open(files[-2], 'r') as f:
-            return f.read()
-    return None
-
-def check_site(site: dict) -> dict:
-    """Check a single site for changes."""
-    name = site["name"]
-    url = site["url"]
-    selector = site.get("selector", "body")
-
-    current = get_snapshot_url(url, selector)
-    current_hash = get_hash(current)
-
-    last_hash = None
-    last_content = get_last_snapshot(name)
-    if last_content:
-        last_hash = get_hash(last_content)
-
-    changed = current_hash != last_hash
-
-    return {
-        "name": name,
-        "url": url,
-        "changed": changed,
-        "current_hash": current_hash,
-        "last_hash": last_hash,
-        "content": current
-    }
 ```
 
-**Result:** The scraper can download a page, extract the target content and detect changes by comparing hashes.
+### What each part does:
+- **`requests.get(url)`** — downloads the web page (like your browser does)
+- **`BeautifulSoup(text, "html.parser")`** — turns HTML into something Python can search through
+- **`soup.select_one(".price")`** — finds the FIRST element with class "price" (like CSS selectors in developer tools)
+- **`hashlib.sha256()`** — creates a unique fingerprint (hash) of the content. If the content changes, the hash changes too.
 
-## Step 5: Notifications
+> **🤔 How do I know what CSS selector to use?** Right-click the element on the webpage → "Inspect" → look at the HTML. The `class="price"` part means the selector is `.price`. The `id="stock"` part means the selector is `#stock`.
 
-```python
-# notifications.py
-import smtplib
-from email.mime.text import MIMEText
-import requests as http_requests
-from dotenv import load_dotenv
-import os
+> **💡 Try this:** Open a product page in your browser. Right-click the price → Inspect. Look for `class` or `id`. Try that selector in the code. If it returns "NOT FOUND", try a different one.
 
-load_dotenv()
+## Step 4: Set up notifications
 
-def send_email(subject: str, body: str):
-    """Send an email alert."""
-    msg = MIMEText(body)
-    msg["Subject"] = subject
-    msg["From"] = os.getenv("EMAIL_FROM")
-    msg["To"] = os.getenv("EMAIL_TO")
+Create `.env` (this file stores secrets — never share it):
 
-    with smtplib.SMTP(os.getenv("SMTP_HOST"), int(os.getenv("SMTP_PORT"))) as server:
-        server.starttls()
-        server.login(os.getenv("SMTP_USER"), os.getenv("SMTP_PASS"))
-        server.send_message(msg)
+```
+# Email alerts
+EMAIL_FROM=your_email@gmail.com
+EMAIL_TO=your_email@gmail.com
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your_email@gmail.com
+SMTP_PASS=your_app_password
 
-def send_whatsapp(message: str):
-    """Send a WhatsApp message via Twilio."""
-    account_sid = os.getenv("TWILIO_SID")
-    auth_token = os.getenv("TWILIO_TOKEN")
-    from_number = os.getenv("TWILIO_FROM")
-    to_number = os.getenv("TWILIO_TO")
-
-    if not all([account_sid, auth_token, from_number, to_number]):
-        print("Twilio not configured, skipping WhatsApp")
-        return
-
-    url = f"https://api.twilio.com/2010-04-01/Accounts/{account_sid}/Messages.json"
-    http_requests.post(url, data={
-        "To": to_number,
-        "From": from_number,
-        "Body": message,
-    }, auth=(account_sid, auth_token))
+# WhatsApp alerts (Twilio)
+TWILIO_SID=ACxxxxxxxxxxxxx
+TWILIO_TOKEN=your_twilio_token
+TWILIO_FROM=+1234567890
+TWILIO_TO=+2782xxxxxxx
 ```
 
-## Step 6: The monitor (orchestrator)
+> **🤔 Twilio?** Twilio is a service that sends SMS/WhatsApp messages via API. You can use their free trial (sends ~100 messages). For WhatsApp, you need the WhatsApp Business API. For personal projects, email alerts are easier to set up.
+
+> **💡 Gmail setup:** You need an "App Password" for Gmail, not your normal password. Go to Google Account → Security → App Passwords → Generate one for "Mail".
+
+## Step 5: Run it
+
+Create `monitor.py`:
 
 ```python
-# monitor.py
-import time
 from scraper import check_site
 from notifications import send_email, send_whatsapp
 import yaml
 
-def load_config():
-    with open("config.yaml") as f:
-        return yaml.safe_load(f)
-
 def run_checks():
-    config = load_config()
+    with open("config.yaml") as f:
+        config = yaml.safe_load(f)
 
     for site in config["sites"]:
         print(f"Checking: {site['name']}...")
@@ -236,17 +200,11 @@ def run_checks():
 
         if result["changed"]:
             print(f"  → CHANGE DETECTED!")
-
             message = f"ALERT: {site['name']} changed!\nURL: {site['url']}"
-
             if site.get("alert") == "whatsapp":
                 send_whatsapp(message)
             elif site.get("alert") == "email":
                 send_email(f"Change: {site['name']}", message)
-
-            # Save the new snapshot
-            from scraper import save_snapshot
-            save_snapshot(site["name"], result["content"])
         else:
             print(f"  → No change")
 
@@ -254,55 +212,40 @@ if __name__ == "__main__":
     run_checks()
 ```
 
-**Result:** Run `python monitor.py` — it checks every site in config.yaml, alerts you when something changes, and saves history.
+Run it:
+```bash
+python monitor.py
+```
 
-## Step 7: Automate with a cron job
+> **🎉 You just built a website monitor!** It checks your site, detects changes, and sends alerts.
+
+## Step 6: Automate it
+
+Make it run every 15 minutes without you doing anything:
 
 ```bash
-# Open crontab
+# Open your cron schedule editor
 crontab -e
 
-# Run every 15 minutes
+# Add this line (adjust the path):
 */15 * * * * cd /home/pi/web-monitor && venv/bin/python monitor.py >> monitor.log 2>&1
 ```
 
-**Result:** The scraper runs every 15 minutes without you doing anything.
+## Troubleshooting
 
-## Step 8: Assemble (it's software!)
+**"Module not found" errors?**
+- Make sure you activated the virtual environment: `source venv/bin/activate`
+- Or use the full path: `venv/bin/python monitor.py`
 
-```
-   Web Scraper Setup:
-   ┌─────────────────────────────────────────┐
-   │                                         │
-   │  ┌─────────────────────────────────┐  │
-   │  │    Your Linux Computer        │  │
-   │  │                                 │  │
-   │  │  venv/   config.yaml          │  │
-   │  │  monitor.py  .env             │  │
-   │  │  scraper.py  notifications.py  │  │
-   │  │  history/  monitor.log        │  │
-   │  │                                 │  │
-   │  └─────────────────────────────────┘  │
-   │                     ↓ cron runs       │
-   │                     every 15 min     │
-   └─────────────────────────────────────────┘
-```
+**Scraper returns "NOT FOUND"?**
+- The selector is wrong — use browser DevTools to find the right one
+- Some sites block bots — add `headers={"User-Agent": "Mozilla/5.0"}` (already in the code)
 
-1. Create the project folder and virtual environment
-2. Install dependencies
-3. Configure `config.yaml` with your target sites
-4. Set up API keys in `.env` (WhatsApp or email)
-5. Set up the cron job
-6. Done — it runs forever
-
-## Customise it
-
-- Monitor prices on your favourite stores
-- Track job listings for specific roles
-- Watch for new content on your favourite blogs
-- Add Discord notifications instead of WhatsApp
-- Store history in a database instead of files
+**"Connection timed out"?**
+- Check your internet connection
+- The target site might be down or blocking your IP
+- Try adding a longer timeout: `timeout=60`
 
 ## What's next?
 
-Build the **Pomodoro Timer** — your first hardware timer project.
+Build the **Digital Pet** — your first hardware project.
