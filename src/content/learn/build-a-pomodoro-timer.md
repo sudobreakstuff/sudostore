@@ -1,7 +1,7 @@
 ---
 title: "Build a Pomodoro Timer"
 description: "Physical button timer for focused work sessions with OLED display and buzzer."
-image: "/sudostore/assets/pomodoro-timer.jpg"
+image: "/sudostore/assets/build-a-pomodoro-timer.jpg"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "timer", "focus", "oled"]

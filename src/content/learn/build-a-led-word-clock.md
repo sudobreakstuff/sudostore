@@ -1,7 +1,7 @@
 ---
 title: "Build an LED Word Clock"
 description: "Time displayed in glowing letters behind frosted acrylic."
-image: "/sudostore/assets/word-clock.jpg"
+image: "/sudostore/assets/build-a-led-word-clock.jpg"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "led", "clock"]

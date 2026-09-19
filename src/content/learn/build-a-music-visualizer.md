@@ -1,7 +1,7 @@
 ---
 title: "Build a Music Visualizer"
 description: "Reactive LED strip driven by microphone and ESP32."
-image: "/sudostore/assets/music-visualizer.jpg"
+image: "/sudostore/assets/build-a-music-visualizer.jpg"
 published: 2026-09-10
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "audio", "led"]

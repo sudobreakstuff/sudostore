@@ -1,7 +1,7 @@
 ---
 title: "Build a Plant Monitor"
 description: "Soil moisture sensor, OLED display and watering alerts."
-image: "/sudostore/assets/plant-monitor.jpg"
+image: "/sudostore/assets/build-a-plant-monitor.jpg"
 published: 2026-09-10
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "sensor", "plant", "oled"]

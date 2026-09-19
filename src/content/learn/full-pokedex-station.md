@@ -1,7 +1,7 @@
 ---
 title: "Full Pokédex Station: Combo Build Guide"
 description: "Combine the Pixel Dex Scanner and Pokéball Signal Tower into one unit — OLED screen + LED ring in a complete interactive Pokédex."
-image: "/sudostore/assets/full-pokedex-station.png"
+image: "/sudostore/assets/full-pokedex-station.jpg"
 published: 2026-09-03
 level: "intermediate"
 tags: ["diy-kit", "combo", "esp32", "display", "led", "pokemon"]

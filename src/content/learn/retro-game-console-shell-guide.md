@@ -1,7 +1,7 @@
 ---
 title: "Retro Game Console Shell: Build & Play Your Own Games"
 description: "Code Pong, Snake, and Breakout on an OLED screen inside a 3D-printed Game Boy shell. The ultimate beginner project."
-image: "/sudostore/assets/retro-game-console-shell.png"
+image: "/sudostore/assets/retro-game-console-shell.jpg"
 published: 2026-09-03
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "gaming", "retro", "oled"]

@@ -1,7 +1,7 @@
 ---
 title: "Pokéball Signal Tower: LED Patterns & WiFi Alerts"
 description: "Build a Pokéball-shaped LED ring that displays patterns, responds to WiFi notifications, and looks incredible on your desk."
-image: "/sudostore/assets/pokeball-signal-tower.png"
+image: "/sudostore/assets/pokeball-signal-tower.jpg"
 published: 2026-09-03
 level: "beginner"
 tags: ["diy-kit", "beginner", "esp32", "led", "pokemon", "wifi"]

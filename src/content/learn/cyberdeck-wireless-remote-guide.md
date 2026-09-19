@@ -1,7 +1,7 @@
 ---
 title: "Cyberdeck Wireless Remote: Home Automation Guide"
 description: "Build a relay controller and LED strip driver in a cyberpunk case. Control lights from your phone, build HTTP APIs, learn home automation."
-image: "/sudostore/assets/cyberdeck-wireless-remote.png"
+image: "/sudostore/assets/cyberdeck-wireless-remote.jpg"
 published: 2026-09-03
 level: "intermediate"
 tags: ["diy-kit", "intermediate", "esp32", "relay", "led", "home-automation"]
